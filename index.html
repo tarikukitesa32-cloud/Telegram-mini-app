@@ -4,202 +4,188 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bota Solutions</title>
-    <link rel="stylesheet" href="style.css?v=6">
+    <link rel="stylesheet" href="style.css?v=10">
 </head>
 <body>
 
     <div class="app-container">
-
-        <!-- PHASE 1: WELCOME SCREEN -->
-        <div id="welcomePhase" class="phase-container">
-            <h1 style="color: #FFB800; font-size: 28px; margin-bottom: 10px;" class="main-title">Welcome to Bota Solutions App</h1>
-            <p style="color: #8da19c; margin-bottom: 30px;" class="subtitle">Professional Telegram Mini App</p>
-            <button id="startBtn" class="tg-btn">Get Started</button>
-        </div>
-
-        <!-- PHASE 2: LANGUAGE SELECTION -->
-        <div id="languagePhase" class="phase-container hidden">
-            <h2 style="margin-bottom: 20px;">Select Language / ቋንቋ ይምረጡ</h2>
-            <select id="langSelect" class="tg-input">
-                <option value="om">Afaan Oromoo</option>
-                <option value="am">አማርኛ (Amharic)</option>
-                <option value="en">English</option>
-            </select>
-            <button id="langBtn" class="tg-btn">Next</button>
-        </div>
-
-        <!-- PHASE 3: LOGIN SCREEN -->
-        <div id="loginPhase" class="phase-container hidden">
-            <h2 style="margin-bottom: 20px;">Login</h2>
-            <input type="tel" id="phoneInput" class="tg-input" placeholder="Phone Number" required>
-            <button id="loginBtn" class="tg-btn">Login</button>
-        </div>
-
-        <!-- PHASE 4: HOME DASHBOARD TAB -->
-        <div id="homePhase" class="phase-container dynamic-tab hidden">
-            <!-- Premium Phone Card -->
-            <div class="premium-card">
-                <div class="premium-icon-box">📞</div>
-                <div class="premium-card-text">
-                    <p>User Phone Number</p>
-                    <h3 id="displayPhone">0911325430</h3>
+        <!-- Top App Bar with User Profile Name & Language -->
+        <div class="app-header">
+            <div class="header-user">
+                <div class="header-badge">🏆</div>
+                <div>
+                    <h4 id="headerUserName">Getachew Fikadu</h4>
+                    <span style="font-size: 11px; color: #8da19c;">Premium User</span>
                 </div>
             </div>
-
-            <!-- Balance Card -->
-            <div class="balance-section">
-                <p>Available Balance</p>
-                <h2>0.00 ETB</h2>
-            </div>
-
-            <div style="background: #071a15; padding: 20px; border-radius: 16px; border: 1px solid #11382d;">
-                <h3 id="homeWelcomeTitle" style="color: #FFB800; margin-bottom: 8px;">Welcome to Home Dashboard</h3>
-                <p id="homeWelcomeSub" style="color: #8da19c; font-size: 14px;">You are on the main page.</p>
-            </div>
-
-            <!-- Copyright Footer -->
-            <div class="app-footer">
-                © 2026 <span>Bota Solutions</span>. All Rights Reserved.<br>
-                Designed & Developed by <span>Tariku Kitesa</span>
+            <div class="header-actions">
+                <select id="langSelect" class="mini-lang-select">
+                    <option value="en">English</option>
+                    <option value="am">አማርኛ</option>
+                    <option value="om">Afaan Oromoo</option>
+                </select>
+                <button class="icon-btn">🔔</button>
             </div>
         </div>
 
-        <!-- PHASE 4: AUCTION / BIDS TAB -->
-        <div id="bidPhase" class="phase-container dynamic-tab hidden">
-            
-            <!-- Terms & Conditions Section (How it works) -->
-            <div class="how-low-info">
-                <h3>HowLow Auction Platform</h3>
-                <h4>Bid Low! Win Big!</h4>
-                <p>HOWLOW is a Lowest Unique Bid Auction where the participant who submits the lowest unique bid wins. For instance, if ETB 1.00 is submitted twice, ETB 2.00 once, ETB 3.00 twice, and ETB 4.00 once, the lowest unique bid is ETB 2.00, so it wins!</p>
+        <!-- 1. HOME TAB (Products Promotion & Countdown) -->
+        <div id="homePhase" class="phase-container dynamic-tab">
+            <div class="product-promo-card">
+                <div class="promo-image-wrapper">
+                    <span class="featured-badge">🔥 Featured</span>
+                    <div class="star-rating">⭐⭐⭐⭐⭐</div>
+                    <!-- BYD Yuan UP Car Image -->
+                    <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?w=500" alt="BYD Yuan UP" class="promo-img">
+                </div>
                 
-                <div class="terms-checkbox-container">
-                    <input type="checkbox" id="acceptTermsCheckbox">
-                    <label for="acceptTermsCheckbox">I agree to the Terms and Conditions / በሕግና ደንቦቹ እስማማለሁ</label>
-                </div>
-            </div>
-
-            <h3 style="margin: 15px 0 10px 0; color: #FFB800; text-align: left;">Featured Items</h3>
-
-            <!-- Samsung Card (Exactly like Image) -->
-            <div class="hl-card">
-                <div class="hl-image-area">
-                    <span class="hl-live-badge">🔨 Live</span>
-                    <img src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=400" alt="Samsung Galaxy A17" class="hl-product-img">
-                    <span class="hl-views">👁️ 11.9K</span>
-                    <button class="hl-fav-btn">⭐</button>
-                </div>
-
-                <div class="hl-details">
-                    <h2 class="hl-title">Samsung Galaxy A17 Smartphone | 128GB Storage, 6GB RAM</h2>
+                <div class="promo-details">
+                    <h2 class="promo-title">BYD Yuan UP</h2>
+                    <p class="promo-subtitle">Time Grey Edition</p>
                     
-                    <div class="hl-divider"></div>
-                    
-                    <div class="hl-fee-row">
-                        <div class="hl-fee-box">
-                            <span class="hl-fee-label">Bid Service Fee</span>
-                            <span class="hl-fee-val">50.00 Br</span>
+                    <p class="countdown-label">TIME REMAINING</p>
+                    <div class="countdown-grid">
+                        <div class="time-box"><span id="daysBox">09</span><label>DAYS</label></div>
+                        <span class="time-colon">:</span>
+                        <div class="time-box"><span id="hoursBox">10</span><label>HRS</label></div>
+                        <span class="time-colon">:</span>
+                        <div class="time-box"><span id="minsBox">09</span><label>MIN</label></div>
+                        <span class="time-colon">:</span>
+                        <div class="time-box"><span id="secsBox">50</span><label>SEC</label></div>
+                    </div>
+
+                    <div class="progress-container">
+                        <div class="progress-text">
+                            <span>1,676 sold</span>
+                            <span style="color: #00ffaa;">48% filled</span>
                         </div>
-                        <div class="hl-win-badge">
-                            Bid Low! Win Big! 🏆
+                        <div class="progress-bar"><div class="progress-fill" style="width: 48%;"></div></div>
+                        <p class="tickets-left">1,824 tickets remaining</p>
+                    </div>
+
+                    <div class="action-row">
+                        <div class="participants-box">
+                            <span class="part-icon">👥</span>
+                            <div>
+                                <label>PARTICIPANTS</label>
+                                <h3>1,676</h3>
+                            </div>
                         </div>
+                        <button id="homeBuyTicketBtn" class="buy-ticket-btn">Buy Ticket</button>
                     </div>
-
-                    <div class="hl-divider"></div>
-
-                    <div class="hl-timer-row">
-                        <span class="hl-timer" id="hlTimerText">7d : 18h : 8m : 2s</span>
-                        <span class="hl-bids-count">1.1K bids</span>
-                    </div>
-
-                    <!-- Stepper Counter -->
-                    <div class="hl-stepper">
-                        <button id="stepMinus" class="step-btn">−</button>
-                        <input type="number" id="hlBidAmount" class="step-input" value="1.00" step="0.01">
-                        <button id="stepPlus" class="step-btn">+</button>
-                    </div>
-
-                    <button id="hlSubmitBidBtn" class="hl-submit-btn">Submit a Bid Amount</button>
                 </div>
-            </div>
-
-            <!-- Copyright Footer -->
-            <div class="app-footer">
-                © 2026 <span>Bota Solutions</span>. All Rights Reserved.<br>
-                Designed & Developed by <span>Tariku Kitesa</span>
             </div>
         </div>
 
-        <!-- PHASE 4: TICKETS TAB -->
+        <!-- 2. TICKETS TAB (1-100 Customer Random Selection & Status counters) -->
         <div id="ticketPhase" class="phase-container dynamic-tab hidden">
-            <h2 id="ticketTitle" style="margin-bottom: 20px; color: #FFB800;">Available Tickets</h2>
-            <div class="ticket-list">
-                <div class="ticket-card">
-                    <div class="ticket-details">
-                        <h3>Standard Ticket</h3>
-                        <p>Valid for 1 Entry</p>
-                    </div>
-                    <button class="buy-now-btn">50 ETB</button>
+            <h2 class="section-title">My Tickets</h2>
+            <p class="section-subtitle">Track your lottery entries</p>
+
+            <div class="search-box-row">
+                <input type="tel" id="ticketPhoneSearch" class="search-input" value="251978893232" placeholder="Enter phone number">
+                <button class="search-btn">🔍 Search</button>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card active-card">
+                    <h3 id="countActive">1</h3>
+                    <p>Active</p>
                 </div>
-                <div class="ticket-card">
-                    <div class="ticket-details">
-                        <h3>VIP Ticket</h3>
-                        <p>Premium Entry & Lounge</p>
-                    </div>
-                    <button class="buy-now-btn">150 ETB</button>
+                <div class="stat-card pending-card">
+                    <h3 id="countPending">0</h3>
+                    <p>Pending</p>
+                </div>
+                <div class="stat-card rejected-card">
+                    <h3 id="countRejected">0</h3>
+                    <p>Rejected</p>
+                </div>
+                <div class="stat-card total-card">
+                    <h3 id="countTotal">1</h3>
+                    <p>Total</p>
                 </div>
             </div>
 
-            <!-- Copyright Footer -->
-            <div class="app-footer">
-                © 2026 <span>Bota Solutions</span>. All Rights Reserved.<br>
-                Designed & Developed by <span>Tariku Kitesa</span>
+            <!-- Random 1-100 Number Selection Grid -->
+            <div class="number-selection-section">
+                <h3>Select Your Lucky Ticket Number (1 - 100)</h3>
+                <p style="font-size:12px; color:#8da19c; margin-bottom:10px;">Pick a number or click random</p>
+                <button id="randomPickBtn" class="random-btn">🎲 Random Selection</button>
+                
+                <div class="numbers-grid" id="numbersGrid100">
+                    <!-- 1 to 100 generated by JS -->
+                </div>
             </div>
         </div>
 
-        <!-- PHASE 4: PROFILE TAB -->
+        <!-- 3. WINNERS LIST TAB -->
+        <div id="winnersPhase" class="phase-container dynamic-tab hidden">
+            <h2 class="section-title">Latest Winners 🏆</h2>
+            <p class="section-subtitle">Real-time lucky winners circle</p>
+
+            <div class="winners-list-container">
+                <div class="winner-item">
+                    <div class="winner-avatar">👤</div>
+                    <div class="winner-info">
+                        <h4>Bekele Zewdu</h4>
+                        <p>Phone: 251911****43</p>
+                    </div>
+                    <div class="winner-prize">Won BYD Car</div>
+                </div>
+                <div class="winner-item">
+                    <div class="winner-avatar">👤</div>
+                    <div class="winner-info">
+                        <h4>Chaltu Abera</h4>
+                        <p>Phone: 251920****12</p>
+                    </div>
+                    <div class="winner-prize">Won iPhone 15</div>
+                </div>
+                <div class="no-more-winners">No more winners announced yet for this week.</div>
+            </div>
+        </div>
+
+        <!-- 4. PROFILE TAB (Photo, Phone No, Copyright) -->
         <div id="profilePhase" class="phase-container dynamic-tab hidden">
-            <h2 id="profileTitle" style="margin-bottom: 20px; color: #FFB800;">My Profile</h2>
+            <h2 class="section-title">User Profile</h2>
             
-            <div class="profile-avatar-container">
-                <img src="https://via.placeholder.com/150" id="profileImage" class="profile-img" alt="Profile">
+            <div class="profile-card-new">
+                <div class="profile-avatar-large">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" alt="Customer Photo" class="user-photo-img">
+                </div>
+                <h3 style="margin-top: 10px; color:#FFB800;">Getachew Fikadu Jirata</h3>
             </div>
 
-            <div class="premium-card">
-                <div class="premium-icon-box">👤</div>
-                <div class="premium-card-text">
-                    <p>Phone Number</p>
-                    <h3 id="profilePhoneVal">0911325430</h3>
+            <!-- Phone Number Presentation Box -->
+            <div class="phone-display-box">
+                <div class="phone-icon-circle">📞</div>
+                <div class="phone-meta">
+                    <span>User Phone Number</span>
+                    <h2 id="profilePhoneVal">251978893232</h2>
                 </div>
             </div>
 
-            <div style="background: #071a15; padding: 15px; border-radius: 16px; border: 1px solid #11382d; text-align: left; margin-bottom: 25px;">
-                <p style="margin-bottom: 8px; color: #8da19c;">Language: <strong id="profileLangVal" style="color: #fff;">English</strong></p>
-                <p style="color: #8da19c;">App Version: <strong style="color: #fff;">v1.0.0</strong></p>
-            </div>
+            <button id="logoutBtn" class="logout-btn-new">Logout</button>
 
-            <button id="logoutBtn" class="tg-btn" style="background: #d9534f; color: white;">Logout</button>
-
-            <!-- Copyright Footer -->
-            <div class="app-footer">
-                © 2026 <span>Bota Solutions</span>. All Rights Reserved.<br>
-                Designed & Developed by <span>Tariku Kitesa</span>
+            <!-- Copyright and Developer info exactly requested -->
+            <div class="profile-footer-copyright">
+                © 2026 <span>Getachew Fikadu Jirata</span>. All Rights Reserved. <br>
+                | Designed & Developed by <span style="color:#FFB800;">Qaroo Soft</span>
             </div>
         </div>
 
-        <!-- FIXED BOTTOM NAVIGATION BAR -->
-        <div id="navBar" class="bottom-nav hidden">
+        <!-- BOTTOM NAVIGATION BAR (Home, Tickets, Winners, Profile) -->
+        <div id="navBar" class="bottom-nav">
             <div id="navHome" class="nav-item active">
                 <span class="icon">🏠</span>
                 Home
             </div>
-            <div id="navBid" class="nav-item">
-                <span class="icon">📈</span>
-                Bids
-            </div>
             <div id="navTicket" class="nav-item">
                 <span class="icon">🎫</span>
                 Tickets
+            </div>
+            <div id="navWinners" class="nav-item">
+                <span class="icon">🏆</span>
+                Winners
             </div>
             <div id="navProfile" class="nav-item">
                 <span class="icon">👤</span>
@@ -209,6 +195,6 @@
 
     </div>
 
-    <script src="script.js?v=6"></script>
+    <script src="script.js?v=10"></script>
 </body>
 </html>
