@@ -35,17 +35,64 @@
             <button id="loginBtn" class="tg-btn">Login</button>
         </div>
 
-        <!-- Phase 4: Home / Main Content -->
-        <div id="homePhase" class="phase-container hidden">
-            <h2>Welcome to Home Dashboard</h2>
-            <p>በደህና መጡ! ዋናው ገጽ ላይ ነዎት።</p>
+        <!-- Phase 4: Home / Main Dashboard View -->
+        <div id="homePhase" class="phase-container hidden dynamic-tab">
+            <div class="user-card">
+                <div class="user-avatar">👤</div>
+                <div class="user-info">
+                    <h3 id="displayPhone">+251 9...</h3>
+                    <p id="userStatus">Status: Verified Member</p>
+                </div>
+            </div>
+            
+            <div class="balance-section">
+                <p>Available Balance</p>
+                <h2>0.00 ETB</h2>
+            </div>
+
+            <div class="welcome-banner">
+                <h2 id="homeWelcomeTitle">Welcome to Home Dashboard</h2>
+                <p id="homeWelcomeSub">You are on the main page.</p>
+            </div>
+        </div>
+
+        <!-- Phase 4.2: Buy Ticket View -->
+        <div id="ticketPhase" class="phase-container hidden dynamic-tab">
+            <h2 id="ticketTitle">Available Tickets</h2>
+            <div class="ticket-list">
+                <div class="ticket-card">
+                    <div class="ticket-details">
+                        <h3>Standard Ticket</h3>
+                        <p>Valid for 1 Entry</p>
+                    </div>
+                    <button class="buy-now-btn">50 ETB</button>
+                </div>
+                <div class="ticket-card">
+                    <div class="ticket-details">
+                        <h3>VIP Ticket</h3>
+                        <p>Premium Entry & Lounge</p>
+                    </div>
+                    <button class="buy-now-btn">150 ETB</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase 4.3: Profile View -->
+        <div id="profilePhase" class="phase-container hidden dynamic-tab">
+            <h2 id="profileTitle">My Profile</h2>
+            <div class="profile-list">
+                <div class="profile-item"><span>Phone:</span> <span id="profilePhoneVal">---</span></div>
+                <div class="profile-item"><span>Language:</span> <span id="profileLangVal">English</span></div>
+                <div class="profile-item"><span>App Version:</span> <span>v1.0.0</span></div>
+            </div>
+            <button id="logoutBtn" class="tg-btn" style="margin-top: 30px; background-color: #d9534f;">Logout</button>
         </div>
 
         <!-- Bottom Navigation Bar -->
         <div id="navBar" class="bottom-nav hidden">
-            <div class="nav-item active"><span class="icon">🏠</span> Home</div>
-            <div class="nav-item"><span class="icon">🎫</span> Buy Ticket</div>
-            <div class="nav-item"><span class="icon">👤</span> Profile</div>
+            <div id="navHome" class="nav-item active"><span class="icon">🏠</span><span class="nav-text">Home</span></div>
+            <div id="navTicket" class="nav-item"><span class="icon">🎫</span><span class="nav-text">Buy Ticket</span></div>
+            <div id="navProfile" class="nav-item"><span class="icon">👤</span><span class="nav-text">Profile</span></div>
         </div>
 
     </div>
