@@ -34,7 +34,8 @@ const translations = {
         alertPhone: "Please enter your phone number!",
         ticketTitle: "Available Tickets",
         profileTitle: "My Profile",
-        statusText: "Status: Verified Member"
+        statusText: "Status: Verified Member",
+        payAlert: "Redirecting to Chapa Secure Payment for "
     },
     am: {
         welcomeTitle: "ወደ ቦታ ሶሉሽንስ አፕ እንኳን በደህና መጡ",
@@ -50,7 +51,8 @@ const translations = {
         alertPhone: "እባክዎ መጀመሪያ የስልክ ቁጥር ያስገቡ!",
         ticketTitle: "የሚገኙ ቲኬቶች",
         profileTitle: "የእኔ መገለጫ",
-        statusText: "ደረጃ፡ የተረጋገጠ አባል"
+        statusText: "ደረጃ፡ የተረጋገጠ አባል",
+        payAlert: "ደህንነቱ ወደተጠበቀው የቻፓ ክፍያ ገጽ በመሸጋገር ላይ ለ "
     },
     om: {
         welcomeTitle: "Baga Garasitti Nagaan Dhuftan",
@@ -66,11 +68,13 @@ const translations = {
         alertPhone: "Maaloo dura lakkoofsa bilbilaa keessan galchaa!",
         ticketTitle: "Tikkitoota Jiran",
         profileTitle: "Profaayili Kiyya",
-        statusText: "Sadarkaa: Miseensa Mirkanaaye"
+        statusText: "Sadarkaa: Miseensa Mirkanaaye",
+        payAlert: "Gara fuula kaffaltii Chapa tti cehaa jira map "
     }
 };
 
 let currentLang = 'en';
+let userPhoneNumber = "";
 
 // "Get Started" -> ቋንቋ ገጽ
 startBtn.addEventListener('click', () => {
@@ -94,6 +98,8 @@ loginBtn.addEventListener('click', () => {
         return;
     }
     
+    userPhoneNumber = phone;
+    
     // ዳታዎችን በየቦታው ማሳየት
     document.getElementById('displayPhone').innerText = phone;
     document.getElementById('profilePhoneVal').innerText = phone;
@@ -111,17 +117,14 @@ navTicket.addEventListener('click', () => showTab('ticket'));
 navProfile.addEventListener('click', () => showTab('profile'));
 
 function showTab(tabName) {
-    // መጀመሪያ ሁሉንም ታቦች ደብቅ
     homePhase.classList.add('hidden');
     ticketPhase.classList.add('hidden');
     profilePhase.classList.add('hidden');
     
-    // የሜኑ ከለሮችን አጥፋ
     navHome.classList.remove('active');
     navTicket.classList.remove('active');
     navProfile.classList.remove('active');
     
-    // የተመረጠውን ብቻ አሳይ
     if (tabName === 'home') {
         homePhase.classList.remove('hidden');
         navHome.classList.add('active');
@@ -156,10 +159,31 @@ function applyTranslations() {
     document.getElementById('phoneInput').placeholder = data.phonePlaceholder;
     loginBtn.innerText = data.loginBtn;
     
-    // አዳዲስ የትርጉም ክፍሎች
     document.getElementById('homeWelcomeTitle').innerText = data.homeTitle;
     document.getElementById('homeWelcomeSub').innerText = data.homeSub;
     document.getElementById('ticketTitle').innerText = data.ticketTitle;
     document.getElementById('profileTitle').innerText = data.profileTitle;
     document.getElementById('userStatus').innerText = data.statusText;
 }
+
+// ==========================================
+// PHASE 5: CHAPA INTEGRATION (ክፍያ መቆጣጠሪያ)
+// ==========================================
+document.addEventListener('click', function(e) {
+    if(e.target && e.target.classList.contains('buy-now-btn')) {
+        const amount = e.target.innerText; // '50 ETB' ወይም '150 ETB'
+        alert(translations[currentLang].payAlert + amount);
+        
+        // ማሳሰቢያ፡ እውነተኛ የቻፓ API የኋሊት መስመር (Backend) ሰርቨር ይፈልጋል።
+        // ለሙከራ ያህል ተጠቃሚውን ወደ ቻፓ ማሳያ (Demo Checkout) ሊንክ በቀጥታ እንልከዋለን።
+        
+        const cleanAmount = amount.replace(' ETB', '');
+        const tx_ref = "bota-sol-" + Date.now();
+        
+        // እውነተኛ የቻፓ ሊንክ ለመስራት ስትፈልግ ይህንን በሰርቨርህ API ትተካዋለህ
+        const chapaDemoUrl = `https://checkout.chapa.co/checkout/payment-link`; 
+        
+        // ለጊዜው ወደ ቻፓ ዋና ድረገጽ ወይም መክፈያ አስመስለን እንልከዋለን
+        window.location.href = `https://chapa.co`; 
+    }
+});
