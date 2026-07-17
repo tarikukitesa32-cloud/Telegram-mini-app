@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bota Solutions</title>
-    <link rel="stylesheet" href="style.css?v=4">
+    <link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
 
@@ -64,6 +64,72 @@
             </div>
         </div>
 
+        <!-- PHASE 4: AUCTION / BIDS TAB -->
+        <div id="bidPhase" class="phase-container dynamic-tab hidden">
+            
+            <!-- Terms & Conditions Section (How it works) -->
+            <div class="how-low-info">
+                <h3>HowLow Auction Platform</h3>
+                <h4>Bid Low! Win Big!</h4>
+                <p>HOWLOW is a Lowest Unique Bid Auction where the participant who submits the lowest unique bid wins. For instance, if ETB 1.00 is submitted twice, ETB 2.00 once, ETB 3.00 twice, and ETB 4.00 once, the lowest unique bid is ETB 2.00, so it wins!</p>
+                
+                <div class="terms-checkbox-container">
+                    <input type="checkbox" id="acceptTermsCheckbox">
+                    <label for="acceptTermsCheckbox">I agree to the Terms and Conditions / በሕግና ደንቦቹ እስማማለሁ</label>
+                </div>
+            </div>
+
+            <h3 style="margin: 15px 0 10px 0; color: #FFB800; text-align: left;">Featured Items</h3>
+
+            <!-- Samsung Card (Exactly like Image) -->
+            <div class="hl-card">
+                <div class="hl-image-area">
+                    <span class="hl-live-badge">🔨 Live</span>
+                    <img src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=400" alt="Samsung Galaxy A17" class="hl-product-img">
+                    <span class="hl-views">👁️ 11.9K</span>
+                    <button class="hl-fav-btn">⭐</button>
+                </div>
+
+                <div class="hl-details">
+                    <h2 class="hl-title">Samsung Galaxy A17 Smartphone | 128GB Storage, 6GB RAM</h2>
+                    
+                    <div class="hl-divider"></div>
+                    
+                    <div class="hl-fee-row">
+                        <div class="hl-fee-box">
+                            <span class="hl-fee-label">Bid Service Fee</span>
+                            <span class="hl-fee-val">50.00 Br</span>
+                        </div>
+                        <div class="hl-win-badge">
+                            Bid Low! Win Big! 🏆
+                        </div>
+                    </div>
+
+                    <div class="hl-divider"></div>
+
+                    <div class="hl-timer-row">
+                        <span class="hl-timer" id="hlTimerText">7d : 18h : 8m : 2s</span>
+                        <span class="hl-bids-count">1.1K bids</span>
+                    </div>
+
+                    <!-- Stepper Counter -->
+                    <div class="hl-stepper">
+                        <button id="stepMinus" class="step-btn">−</button>
+                        <input type="number" id="hlBidAmount" class="step-input" value="1.00" step="0.01">
+                        <button id="stepPlus" class="step-btn">+</button>
+                    </div>
+
+                    <button id="hlSubmitBidBtn" class="hl-submit-btn">Submit a Bid Amount</button>
+                </div>
+            </div>
+
+            <!-- Copyright Footer -->
+            <div class="app-footer">
+                © 2026 <span>Bota Solutions</span>. All Rights Reserved.<br>
+                Designed & Developed by <span>Tariku Kitesa</span>
+            </div>
+        </div>
+
         <!-- PHASE 4: TICKETS TAB -->
         <div id="ticketPhase" class="phase-container dynamic-tab hidden">
             <h2 id="ticketTitle" style="margin-bottom: 20px; color: #FFB800;">Available Tickets</h2>
@@ -95,12 +161,10 @@
         <div id="profilePhase" class="phase-container dynamic-tab hidden">
             <h2 id="profileTitle" style="margin-bottom: 20px; color: #FFB800;">My Profile</h2>
             
-            <!-- Profile Photo Placeholder -->
             <div class="profile-avatar-container">
                 <img src="https://via.placeholder.com/150" id="profileImage" class="profile-img" alt="Profile">
             </div>
 
-            <!-- Premium Card for Profile Phone -->
             <div class="premium-card">
                 <div class="premium-icon-box">👤</div>
                 <div class="premium-card-text">
@@ -129,6 +193,10 @@
                 <span class="icon">🏠</span>
                 Home
             </div>
+            <div id="navBid" class="nav-item">
+                <span class="icon">📈</span>
+                Bids
+            </div>
             <div id="navTicket" class="nav-item">
                 <span class="icon">🎫</span>
                 Tickets
@@ -141,6 +209,6 @@
 
     </div>
 
-    <script src="script.js?v=4"></script>
+    <script src="script.js?v=6"></script>
 </body>
 </html>
