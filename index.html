@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bota Solutions - Telegram Mini App</title>
-    <!-- የ Cache ችግርን ለመከላከል ?v=2 ተጨምሯል -->
-    <link rel="stylesheet" href="style.css?v=2">
+    <title>Bota Solutions</title>
+    <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
 
@@ -13,14 +12,14 @@
 
         <!-- PHASE 1: WELCOME SCREEN -->
         <div id="welcomePhase" class="phase-container">
-            <h1 class="main-title">Welcome to Bota Solutions App</h1>
-            <p class="subtitle">Professional Telegram Mini App</p>
+            <h1 style="color: #FFB800; font-size: 28px; margin-bottom: 10px;" class="main-title">Welcome to Bota Solutions App</h1>
+            <p style="color: #8da19c; margin-bottom: 30px;" class="subtitle">Professional Telegram Mini App</p>
             <button id="startBtn" class="tg-btn">Get Started</button>
         </div>
 
         <!-- PHASE 2: LANGUAGE SELECTION -->
         <div id="languagePhase" class="phase-container hidden">
-            <h2>Select Language / ቋንቋ ይምረጡ</h2>
+            <h2 style="margin-bottom: 20px;">Select Language / ቋንቋ ይምረጡ</h2>
             <select id="langSelect" class="tg-input">
                 <option value="en">English</option>
                 <option value="am">አማርኛ (Amharic)</option>
@@ -31,19 +30,19 @@
 
         <!-- PHASE 3: LOGIN SCREEN -->
         <div id="loginPhase" class="phase-container hidden">
-            <h2>Login</h2>
+            <h2 style="margin-bottom: 20px;">Login</h2>
             <input type="tel" id="phoneInput" class="tg-input" placeholder="Phone Number" required>
             <button id="loginBtn" class="tg-btn">Login</button>
         </div>
 
         <!-- PHASE 4: HOME DASHBOARD TAB -->
         <div id="homePhase" class="phase-container dynamic-tab hidden">
-            <!-- User Info Card -->
-            <div class="user-card">
-                <div class="user-avatar">👤</div>
-                <div class="user-info">
-                    <h3 id="displayPhone">0900000000</h3>
-                    <p id="userStatus">Status: Verified Member</p>
+            <!-- Premium Phone Card -->
+            <div class="premium-card">
+                <div class="premium-icon-box">📞</div>
+                <div class="premium-card-text">
+                    <p>User Phone Number</p>
+                    <h3 id="displayPhone">0911325430</h3>
                 </div>
             </div>
 
@@ -53,23 +52,27 @@
                 <h2>0.00 ETB</h2>
             </div>
 
-            <!-- Welcome Text -->
-            <div class="welcome-banner">
-                <h2 id="homeWelcomeTitle" style="margin-bottom: 10px;">Welcome to Home Dashboard</h2>
-                <p id="homeWelcomeSub">You are on the main page.</p>
+            <div style="background: #071a15; padding: 20px; border-radius: 16px; border: 1px solid #11382d;">
+                <h3 id="homeWelcomeTitle" style="color: #FFB800; margin-bottom: 8px;">Welcome to Home Dashboard</h3>
+                <p id="homeWelcomeSub" style="color: #8da19c; font-size: 14px;">You are on the main page.</p>
+            </div>
+
+            <!-- Copyright Footer -->
+            <div class="app-footer">
+                © 2026 <span>Bota Solutions</span>. All Rights Reserved.<br>
+                Designed & Developed by <span>Tariku Kitesa</span>
             </div>
         </div>
 
         <!-- PHASE 4: TICKETS TAB -->
         <div id="ticketPhase" class="phase-container dynamic-tab hidden">
-            <h2 id="ticketTitle">Available Tickets</h2>
+            <h2 id="ticketTitle" style="margin-bottom: 20px; color: #FFB800;">Available Tickets</h2>
             <div class="ticket-list">
                 <div class="ticket-card">
                     <div class="ticket-details">
                         <h3>Standard Ticket</h3>
                         <p>Valid for 1 Entry</p>
                     </div>
-                    <!-- አዝራሩ እንዲሰራ ክላስ ተስተካክሏል -->
                     <button class="buy-now-btn">50 ETB</button>
                 </div>
                 <div class="ticket-card">
@@ -80,29 +83,47 @@
                     <button class="buy-now-btn">150 ETB</button>
                 </div>
             </div>
+
+            <!-- Copyright Footer -->
+            <div class="app-footer">
+                © 2026 <span>Bota Solutions</span>. All Rights Reserved.<br>
+                Designed & Developed by <span>Tariku Kitesa</span>
+            </div>
         </div>
 
         <!-- PHASE 4: PROFILE TAB -->
         <div id="profilePhase" class="phase-container dynamic-tab hidden">
-            <h2 id="profileTitle">My Profile</h2>
-            <div class="profile-list">
-                <div class="profile-item">
-                    <span>Phone:</span>
-                    <span id="profilePhoneVal">-</span>
-                </div>
-                <div class="profile-item">
-                    <span>Language:</span>
-                    <span id="profileLangVal">-</span>
-                </div>
-                <div class="profile-item">
-                    <span>App Version:</span>
-                    <span>v1.0.0</span>
+            <h2 id="profileTitle" style="margin-bottom: 20px; color: #FFB800;">My Profile</h2>
+            
+            <!-- Profile Photo Placeholder -->
+            <div class="profile-avatar-container">
+                <img src="https://via.placeholder.com/150" id="profileImage" class="profile-img" alt="Profile">
+            </div>
+
+            <!-- Premium Card for Profile Phone -->
+            <div class="premium-card">
+                <div class="premium-icon-box">👤</div>
+                <div class="premium-card-text">
+                    <p>Phone Number</p>
+                    <h3 id="profilePhoneVal">0911325430</h3>
                 </div>
             </div>
-            <button id="logoutBtn" class="tg-btn" style="background-color: #d9534f; margin-top: 30px; box-shadow: 0 4px 15px rgba(217, 83, 79, 0.3);">Logout</button>
+
+            <div style="background: #071a15; padding: 15px; border-radius: 16px; border: 1px solid #11382d; text-align: left; margin-bottom: 25px;">
+                <p style="margin-bottom: 8px; color: #8da19c;">Language: <strong id="profileLangVal" style="color: #fff;">English</strong></p>
+                <p style="color: #8da19c;">App Version: <strong style="color: #fff;">v1.0.0</strong></p>
+            </div>
+
+            <button id="logoutBtn" class="tg-btn" style="background: #d9534f; color: white;">Logout</button>
+
+            <!-- Copyright Footer -->
+            <div class="app-footer">
+                © 2026 <span>Bota Solutions</span>. All Rights Reserved.<br>
+                Designed & Developed by <span>Tariku Kitesa</span>
+            </div>
         </div>
 
-        <!-- PHASE 4: FIXED BOTTOM NAVIGATION BAR -->
+        <!-- FIXED BOTTOM NAVIGATION BAR -->
         <div id="navBar" class="bottom-nav hidden">
             <div id="navHome" class="nav-item active">
                 <span class="icon">🏠</span>
@@ -110,7 +131,7 @@
             </div>
             <div id="navTicket" class="nav-item">
                 <span class="icon">🎫</span>
-                Buy Ticket
+                Tickets
             </div>
             <div id="navProfile" class="nav-item">
                 <span class="icon">👤</span>
@@ -120,7 +141,6 @@
 
     </div>
 
-    <!-- የ Cache ችግርን ለመከላከል ?v=2 ተጨምሯል -->
-    <script src="script.js?v=2"></script>
+    <script src="script.js?v=3"></script>
 </body>
 </html>
