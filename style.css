@@ -2,11 +2,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
 }
 
 body {
-    background: linear-gradient(135deg, #134B42 0%, #0a2924 100%);
+    background-color: #000000; /* ሙሉ ጥቁር ዳራ */
     color: #ffffff;
     display: flex;
     justify-content: center;
@@ -21,28 +21,80 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 16px;
     position: relative;
-    padding-bottom: 70px; /* ለሜኑው ቦታ ለመተው */
+    padding-bottom: 90px; 
+    background-color: #0b0b0b; /* ለስላሳ ጥቁር */
 }
 
+/* Header Area (ልክ እንደ አዲሱ ፎቶ) */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.brand-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand-logo {
+    background: linear-gradient(135deg, #FFB800 0%, #CC9300 100%);
+    color: #000;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(255, 184, 0, 0.3);
+}
+
+.brand-name {
+    color: #FFB800;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.2;
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.lang-selector {
+    background: #121212;
+    border: 1px solid #222;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    outline: none;
+}
+
+/* Containers */
 .phase-container {
     width: 100%;
     text-align: center;
-    margin: auto 0; /* በመሃል እንዲሆን */
-    animation: fadeIn 0.3s ease-in-out;
+    margin: auto 0;
+    animation: fadeIn 0.25s ease-in-out;
 }
 
-/* ለዳሽቦርድ ገጾች ማሸብለያ */
 .dynamic-tab {
-    height: calc(100vh - 90px);
+    height: calc(100vh - 140px);
     overflow-y: auto;
     width: 100%;
-    margin-top: 10px;
-    padding-bottom: 20px;
+    padding-bottom: 30px;
 }
 
-/* የScrollbar ምልክትን ለመደበቅ */
 .dynamic-tab::-webkit-scrollbar {
     width: 0px;
 }
@@ -51,208 +103,152 @@ body {
     display: none !important;
 }
 
-.main-title {
-    color: #CA763A;
-    font-size: 28px;
-    margin-bottom: 15px;
-    font-weight: 700;
-}
-
-.subtitle {
-    color: #a4b3b0;
-    margin-bottom: 40px;
-}
-
-h2 {
-    font-size: 22px;
-    margin-bottom: 25px;
-    color: #CA763A;
-}
-
+/* Premium Buttons & Inputs */
 .tg-input {
     width: 100%;
-    padding: 15px;
+    padding: 16px;
     border-radius: 12px;
-    border: 1px solid #1c3d38;
-    background-color: #1a3833;
+    border: 1px solid #222;
+    background-color: #121212;
     color: #fff;
     font-size: 16px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     outline: none;
+    transition: 0.3s;
+}
+
+.tg-input:focus {
+    border-color: #FFB800;
 }
 
 .tg-btn {
     width: 100%;
-    background-color: #CA763A;
-    color: white;
+    background: linear-gradient(135deg, #FFB800 0%, #E6A400 100%);
+    color: #000000;
     border: none;
-    padding: 15px;
+    padding: 16px;
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 700;
     border-radius: 12px;
     cursor: pointer;
     transition: 0.2s;
-    box-shadow: 0 4px 15px rgba(202, 118, 58, 0.3);
 }
 
 .tg-btn:active {
     transform: scale(0.98);
 }
 
-/* User Profile Card */
+/* Premium Phone Card */
 .user-card {
-    background: rgba(26, 56, 51, 0.6);
-    border: 1px solid #1c3d38;
-    padding: 15px;
-    border-radius: 15px;
+    background: linear-gradient(135deg, #06261d 0%, #02120e 100%);
+    border: 1px solid #0d473a;
+    padding: 20px;
+    border-radius: 20px;
     display: flex;
     align-items: center;
-    text-align: left;
+    gap: 15px;
     margin-bottom: 20px;
-    width: 100%;
+    text-align: left;
 }
 
-.user-avatar {
-    font-size: 30px;
-    background: #CA763A;
-    padding: 10px;
-    border-radius: 50%;
-    margin-right: 15px;
-    width: 55px;
-    height: 55px;
+.phone-icon-box {
+    background: #FFB800;
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.user-info h3 {
-    font-size: 16px;
-    color: #fff;
+    font-size: 24px;
 }
 
 .user-info p {
+    color: #888;
     font-size: 13px;
-    color: #a4b3b0;
+    margin-bottom: 4px;
 }
 
-/* Balance Card */
-.balance-section {
-    background: linear-gradient(135deg, #CA763A 0%, #a65b26 100%);
-    padding: 25px;
-    border-radius: 15px;
-    margin-bottom: 25px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    width: 100%;
-}
-
-.balance-section p {
-    font-size: 14px;
-    color: #fceee6;
-    margin-bottom: 5px;
-}
-
-.balance-section h2 {
-    font-size: 32px;
+.user-info h3 {
+    font-size: 22px;
     color: #fff;
-    margin-bottom: 0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
-.welcome-banner {
-    margin-top: 20px;
-}
-
-.welcome-banner p {
-    color: #a4b3b0;
-}
-
-/* Ticket Styling */
-.ticket-list, .profile-list {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.ticket-card {
-    background: #1a3833;
-    border: 1px solid #1c3d38;
-    padding: 18px;
-    border-radius: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* Business Item Cards (ዕቁብ / ጨረታ) */
+.business-card {
+    background: #121212;
+    border: 1px solid #1a1a1a;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 20px;
     text-align: left;
 }
 
-.ticket-details h3 {
-    color: #fff;
-    margin-bottom: 5px;
-}
-
-.ticket-details p {
-    color: #a4b3b0;
-    font-size: 13px;
-}
-
-.buy-now-btn {
-    background: #CA763A;
-    color: #fff;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 10px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-/* Profile List Styling */
-.profile-item {
-    background: #1a3833;
-    padding: 15px;
-    border-radius: 12px;
+.business-img-placeholder {
+    width: 100%;
+    height: 180px;
+    background: linear-gradient(45deg, #111, #222);
     display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid #1c3d38;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
 }
 
-.profile-item span:first-child {
-    color: #a4b3b0;
+.business-details {
+    padding: 16px;
 }
 
-/* በቋሚነት ከታች የሚቀመጥ ሜኑ (Fixed Bottom Navigation) */
+.business-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+}
+
+.business-meta {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 15px;
+}
+
+/* Navigation Bar (ልክ እንደ ፎቶው የከበበ ዲዛይን) */
 .bottom-nav {
     position: fixed;
-    bottom: 0;
+    bottom: 12px;
     left: 50%;
     transform: translateX(-50%);
-    width: 100%;
-    max-width: 420px;
-    background-color: #0d211e;
-    border-top: 1px solid #1c3d38;
+    width: calc(100% - 32px);
+    max-width: 388px;
+    background-color: #121212;
+    border: 1px solid #1a1a1a;
+    border-radius: 16px;
     display: flex;
     justify-content: space-around;
-    padding: 12px 0;
+    padding: 10px 0;
     z-index: 999;
 }
 
 .nav-item {
-    color: #728c88;
+    color: #666;
     font-size: 12px;
     cursor: pointer;
     text-align: center;
     transition: 0.2s;
+    flex: 1;
 }
 
 .nav-item.active {
-    color: #CA763A;
+    color: #FFB800;
 }
 
 .nav-item .icon {
     display: block;
     font-size: 20px;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
+    from { opacity: 0; transform: translateY(5px); }
     to { opacity: 1; transform: translateY(0); }
 }
