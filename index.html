@@ -3,61 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bota Solutions App</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Bota Solutions - Telegram Mini App</title>
+    <!-- የ Cache ችግርን ለመከላከል ?v=2 ተጨምሯል -->
+    <link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
 
     <div class="app-container">
-        
-        <!-- Phase 1: Welcome Screen -->
+
+        <!-- PHASE 1: WELCOME SCREEN -->
         <div id="welcomePhase" class="phase-container">
             <h1 class="main-title">Welcome to Bota Solutions App</h1>
             <p class="subtitle">Professional Telegram Mini App</p>
             <button id="startBtn" class="tg-btn">Get Started</button>
         </div>
 
-        <!-- Phase 2: Language Selection -->
+        <!-- PHASE 2: LANGUAGE SELECTION -->
         <div id="languagePhase" class="phase-container hidden">
             <h2>Select Language / ቋንቋ ይምረጡ</h2>
             <select id="langSelect" class="tg-input">
                 <option value="en">English</option>
-                <option value="am">አማርኛ</option>
+                <option value="am">አማርኛ (Amharic)</option>
                 <option value="om">Afaan Oromoo</option>
             </select>
             <button id="langBtn" class="tg-btn">Next</button>
         </div>
 
-        <!-- Phase 3: Login Section -->
+        <!-- PHASE 3: LOGIN SCREEN -->
         <div id="loginPhase" class="phase-container hidden">
             <h2>Login</h2>
-            <input type="tel" id="phoneInput" class="tg-input" placeholder="Phone Number">
+            <input type="tel" id="phoneInput" class="tg-input" placeholder="Phone Number" required>
             <button id="loginBtn" class="tg-btn">Login</button>
         </div>
 
-        <!-- Phase 4: Home / Main Dashboard View -->
-        <div id="homePhase" class="phase-container hidden dynamic-tab">
+        <!-- PHASE 4: HOME DASHBOARD TAB -->
+        <div id="homePhase" class="phase-container dynamic-tab hidden">
+            <!-- User Info Card -->
             <div class="user-card">
                 <div class="user-avatar">👤</div>
                 <div class="user-info">
-                    <h3 id="displayPhone">+251 9...</h3>
+                    <h3 id="displayPhone">0900000000</h3>
                     <p id="userStatus">Status: Verified Member</p>
                 </div>
             </div>
-            
+
+            <!-- Balance Card -->
             <div class="balance-section">
                 <p>Available Balance</p>
                 <h2>0.00 ETB</h2>
             </div>
 
+            <!-- Welcome Text -->
             <div class="welcome-banner">
-                <h2 id="homeWelcomeTitle">Welcome to Home Dashboard</h2>
+                <h2 id="homeWelcomeTitle" style="margin-bottom: 10px;">Welcome to Home Dashboard</h2>
                 <p id="homeWelcomeSub">You are on the main page.</p>
             </div>
         </div>
 
-        <!-- Phase 4.2: Buy Ticket View -->
-        <div id="ticketPhase" class="phase-container hidden dynamic-tab">
+        <!-- PHASE 4: TICKETS TAB -->
+        <div id="ticketPhase" class="phase-container dynamic-tab hidden">
             <h2 id="ticketTitle">Available Tickets</h2>
             <div class="ticket-list">
                 <div class="ticket-card">
@@ -65,6 +69,7 @@
                         <h3>Standard Ticket</h3>
                         <p>Valid for 1 Entry</p>
                     </div>
+                    <!-- አዝራሩ እንዲሰራ ክላስ ተስተካክሏል -->
                     <button class="buy-now-btn">50 ETB</button>
                 </div>
                 <div class="ticket-card">
@@ -77,26 +82,45 @@
             </div>
         </div>
 
-        <!-- Phase 4.3: Profile View -->
-        <div id="profilePhase" class="phase-container hidden dynamic-tab">
+        <!-- PHASE 4: PROFILE TAB -->
+        <div id="profilePhase" class="phase-container dynamic-tab hidden">
             <h2 id="profileTitle">My Profile</h2>
             <div class="profile-list">
-                <div class="profile-item"><span>Phone:</span> <span id="profilePhoneVal">---</span></div>
-                <div class="profile-item"><span>Language:</span> <span id="profileLangVal">English</span></div>
-                <div class="profile-item"><span>App Version:</span> <span>v1.0.0</span></div>
+                <div class="profile-item">
+                    <span>Phone:</span>
+                    <span id="profilePhoneVal">-</span>
+                </div>
+                <div class="profile-item">
+                    <span>Language:</span>
+                    <span id="profileLangVal">-</span>
+                </div>
+                <div class="profile-item">
+                    <span>App Version:</span>
+                    <span>v1.0.0</span>
+                </div>
             </div>
-            <button id="logoutBtn" class="tg-btn" style="margin-top: 30px; background-color: #d9534f;">Logout</button>
+            <button id="logoutBtn" class="tg-btn" style="background-color: #d9534f; margin-top: 30px; box-shadow: 0 4px 15px rgba(217, 83, 79, 0.3);">Logout</button>
         </div>
 
-        <!-- Bottom Navigation Bar -->
+        <!-- PHASE 4: FIXED BOTTOM NAVIGATION BAR -->
         <div id="navBar" class="bottom-nav hidden">
-            <div id="navHome" class="nav-item active"><span class="icon">🏠</span><span class="nav-text">Home</span></div>
-            <div id="navTicket" class="nav-item"><span class="icon">🎫</span><span class="nav-text">Buy Ticket</span></div>
-            <div id="navProfile" class="nav-item"><span class="icon">👤</span><span class="nav-text">Profile</span></div>
+            <div id="navHome" class="nav-item active">
+                <span class="icon">🏠</span>
+                Home
+            </div>
+            <div id="navTicket" class="nav-item">
+                <span class="icon">🎫</span>
+                Buy Ticket
+            </div>
+            <div id="navProfile" class="nav-item">
+                <span class="icon">👤</span>
+                Profile
+            </div>
         </div>
 
     </div>
 
-    <script src="script.js"></script>
+    <!-- የ Cache ችግርን ለመከላከል ?v=2 ተጨምሯል -->
+    <script src="script.js?v=2"></script>
 </body>
 </html>
