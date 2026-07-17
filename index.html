@@ -4,42 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bota Solutions App</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div class="container">
+    <div class="app-container">
+        
+        <!-- Phase 1: Welcome Screen -->
+        <div id="welcomePhase" class="phase-container">
+            <h1 class="main-title">Welcome to Bota Solutions App</h1>
+            <p class="subtitle">Professional Telegram Mini App</p>
+            <button id="startBtn" class="tg-btn">Get Started</button>
+        </div>
 
-    <h1>Welcome to Bota Solutions App</h1>
+        <!-- Phase 2: Language Selection -->
+        <div id="languagePhase" class="phase-container hidden">
+            <h2>Select Language / ቋንቋ ይምረጡ</h2>
+            <select id="langSelect" class="tg-input">
+                <option value="en">English</option>
+                <option value="am">አማርኛ</option>
+                <option value="om">Afaan Oromoo</option>
+            </select>
+            <button id="langBtn" class="tg-btn">Next</button>
+        </div>
 
-    <p>Professional Telegram Mini App</p>
+        <!-- Phase 3: Login Section -->
+        <div id="loginPhase" class="phase-container hidden">
+            <h2>Login</h2>
+            <input type="tel" id="phoneInput" class="tg-input" placeholder="Phone Number">
+            <button id="loginBtn" class="tg-btn">Login</button>
+        </div>
 
-    <select>
-        <option>English</option>
-        <option>አማርኛ</option>
-        <option>Afaan Oromo</option>
-    </select>
+        <!-- Phase 4: Home / Main Content -->
+        <div id="homePhase" class="phase-container hidden">
+            <h2>Welcome to Home Dashboard</h2>
+            <p>በደህና መጡ! ዋናው ገጽ ላይ ነዎት።</p>
+        </div>
 
-    <br><br>
+        <!-- Bottom Navigation Bar -->
+        <div id="navBar" class="bottom-nav hidden">
+            <div class="nav-item active"><span class="icon">🏠</span> Home</div>
+            <div class="nav-item"><span class="icon">🎫</span> Buy Ticket</div>
+            <div class="nav-item"><span class="icon">👤</span> Profile</div>
+        </div>
 
-    <input type="tel" placeholder="Phone Number">
+    </div>
 
-    <br><br>
-
-    <button>Login</button>
-
-</div>
-
-<nav class="bottom-nav">
-    <button>🏠 Home</button>
-    <button>🎫 Buy Ticket</button>
-    <button>👤 Profile</button>
-</nav>
-
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
 </html>
