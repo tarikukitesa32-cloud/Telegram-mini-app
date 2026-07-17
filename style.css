@@ -1,69 +1,124 @@
-body{
-    margin:0;
-    padding:0;
-    font-family:Arial,sans-serif;
-    background:#0f172a;
-    color:white;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
 }
 
-.container{
-    padding:20px;
-    text-align:center;
+body {
+    /* Deep Teal background ከጥቁር አብሮ የተቀላቀለ ለTelegram Dark vibe */
+    background: linear-gradient(135deg, #134B42 0%, #0a2924 100%);
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
 }
 
-h1{
-    color:#38bdf8;
-    margin-top:30px;
+.app-container {
+    width: 100%;
+    max-width: 420px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
 }
 
-p{
-    color:#cbd5e1;
+.phase-container {
+    width: 100%;
+    text-align: center;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
-select,
-input{
-    width:90%;
-    max-width:350px;
-    padding:15px;
-    margin:10px 0;
-    border:none;
-    border-radius:12px;
-    font-size:16px;
+.hidden {
+    display: none !important;
 }
 
-button{
-    width:90%;
-    max-width:350px;
-    padding:15px;
-    background:#38bdf8;
-    color:white;
-    border:none;
-    border-radius:12px;
-    font-size:18px;
-    font-weight:bold;
-    cursor:pointer;
+/* ዋና ርዕስ በ Amber Gold */
+.main-title {
+    color: #CA763A;
+    font-size: 28px;
+    margin-bottom: 15px;
+    font-weight: 700;
 }
 
-button:hover{
-    background:#0284c7;
+.subtitle {
+    color: #a4b3b0;
+    margin-bottom: 40px;
 }
 
-.bottom-nav{
-    position:fixed;
-    bottom:0;
-    left:0;
-    right:0;
-    background:#111827;
-    display:flex;
-    justify-content:space-around;
-    padding:15px;
-    border-top:1px solid #374151;
+h2 {
+    font-size: 22px;
+    margin-bottom: 25px;
+    color: #CA763A;
 }
 
-.bottom-nav button{
-    width:auto;
-    background:none;
-    color:white;
-    font-size:16px;
-    padding:10px;
+/* Telegram Style Inputs */
+.tg-input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #1c3d38;
+    background-color: #1a3833;
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 20px;
+    outline: none;
+}
+
+/* Amber Gold Button */
+.tg-btn {
+    width: 100%;
+    background-color: #CA763A;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+    box-shadow: 0 4px 15px rgba(202, 118, 58, 0.3);
+}
+
+.tg-btn:active {
+    transform: scale(0.98);
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #0d211e;
+    border-top: 1px solid #1c3d38;
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 0;
+}
+
+.nav-item {
+    color: #728c88;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.nav-item.active {
+    color: #CA763A;
+}
+
+.nav-item .icon {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
