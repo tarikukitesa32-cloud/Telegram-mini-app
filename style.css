@@ -1,201 +1,135 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+// DOM Elements
+const welcomePhase = document.getElementById('welcomePhase');
+const languagePhase = document.getElementById('languagePhase');
+const loginPhase = document.getElementById('loginPhase');
+const homePhase = document.getElementById('homePhase');
+const bidPhase = document.getElementById('bidPhase');
+const ticketPhase = document.getElementById('ticketPhase');
+const profilePhase = document.getElementById('profilePhase');
+const navBar = document.getElementById('navBar');
+
+const startBtn = document.getElementById('startBtn');
+const langBtn = document.getElementById('langBtn');
+const loginBtn = document.getElementById('loginBtn');
+const logoutBtn = document.getElementById('logoutBtn');
+
+const hlSubmitBidBtn = document.getElementById('hlSubmitBidBtn');
+const stepMinus = document.getElementById('stepMinus');
+const stepPlus = document.getElementById('stepPlus');
+const hlBidAmount = document.getElementById('hlBidAmount');
+const acceptTermsCheckbox = document.getElementById('acceptTermsCheckbox');
+
+const phoneInput = document.getElementById('phoneInput');
+const displayPhone = document.getElementById('displayPhone');
+const profilePhoneVal = document.getElementById('profilePhoneVal');
+const profileLangVal = document.getElementById('profileLangVal');
+const langSelect = document.getElementById('langSelect');
+
+const navHome = document.getElementById('navHome');
+const navBid = document.getElementById('navBid');
+const navTicket = document.getElementById('navTicket');
+const navProfile = document.getElementById('navProfile');
+
+// Navigation Tabs Array
+const phases = [homePhase, bidPhase, ticketPhase, profilePhase];
+const navItems = [navHome, navBid, navTicket, navProfile];
+
+// 1. Welcome -> Language
+startBtn.addEventListener('click', () => {
+    welcomePhase.classList.add('hidden');
+    languagePhase.classList.remove('hidden');
+});
+
+// 2. Language -> Login
+langBtn.addEventListener('click', () => {
+    languagePhase.classList.add('hidden');
+    loginPhase.classList.remove('hidden');
+});
+
+// 3. Login -> Home Dashboard
+loginBtn.addEventListener('click', () => {
+    const phone = phoneInput.value.trim();
+    if (phone === '') {
+        alert('Please enter your phone number / እባክዎ ስልክ ቁጥር ያስገቡ');
+        return;
+    }
+
+    if(displayPhone) displayPhone.innerText = phone;
+    if(profilePhoneVal) profilePhoneVal.innerText = phone;
+    
+    const selectedLang = langSelect.options[langSelect.selectedIndex].text;
+    if(profileLangVal) profileLangVal.innerText = selectedLang;
+
+    loginPhase.classList.add('hidden');
+    homePhase.classList.remove('hidden');
+    navBar.classList.remove('hidden');
+});
+
+// Stepper Logic (+ and - buttons)
+stepPlus.addEventListener('click', () => {
+    let currentVal = parseFloat(hlBidAmount.value);
+    hlBidAmount.value = (currentVal + 0.05).toFixed(2);
+});
+
+stepMinus.addEventListener('click', () => {
+    let currentVal = parseFloat(hlBidAmount.value);
+    if (currentVal > 0.05) {
+        hlBidAmount.value = (currentVal - 0.05).toFixed(2);
+    }
+});
+
+// Submit Bid Logic with Terms validation
+hlSubmitBidBtn.addEventListener('click', () => {
+    if (!acceptTermsCheckbox.checked) {
+        alert('Please accept the Terms and Conditions first! / እባክዎ መጀመሪያ በሕግና ደንቦቹ መስማማትዎን ያረጋግጡ!');
+        return;
+    }
+
+    const finalBid = hlBidAmount.value;
+    alert(`🎉 Success! Your Lowest Unique Bid of ${finalBid} Br has been submitted!`);
+});
+
+// Tab Switching Logic
+function switchTab(targetPhase, activeNav) {
+    phases.forEach(phase => phase.classList.add('hidden'));
+    navItems.forEach(item => item.classList.remove('active'));
+
+    targetPhase.classList.remove('hidden');
+    activeNav.classList.add('active');
 }
 
-body {
-    background-color: #0b1e1a; /* የድሮው ያማረ ጥቁር አረንጓዴ */
-    color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: hidden;
-}
+navHome.addEventListener('click', () => switchTab(homePhase, navHome));
+navBid.addEventListener('click', () => switchTab(bidPhase, navBid));
+navTicket.addEventListener('click', () => switchTab(ticketPhase, navTicket));
+navProfile.addEventListener('click', () => switchTab(profilePhase, navProfile));
 
-.app-container {
-    width: 100%;
-    max-width: 420px;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    position: relative;
-    padding-bottom: 100px; 
-    background: linear-gradient(180deg, #0a241d 0%, #051410 100%);
-}
+// Logout
+logoutBtn.addEventListener('click', () => {
+    phases.forEach(phase => phase.classList.add('hidden'));
+    navBar.classList.add('hidden');
+    phoneInput.value = '';
+    welcomePhase.classList.remove('hidden');
+});
 
-.phase-container {
-    width: 100%;
-    text-align: center;
-    margin: auto 0;
-    animation: fadeIn 0.25s ease-in-out;
-}
+// Countdown Timer Logic (Exactly matches the 7d countdown)
+setInterval(() => {
+    const timerText = document.getElementById('hlTimerText');
+    if(timerText) {
+        let text = timerText.innerText;
+        let parts = text.match(/\d+/g);
+        if(parts) {
+            let days = parseInt(parts[0]);
+            let hours = parseInt(parts[1]);
+            let minutes = parseInt(parts[2]);
+            let seconds = parseInt(parts[3]);
 
-.dynamic-tab {
-    height: calc(100vh - 140px);
-    overflow-y: auto;
-    width: 100%;
-}
+            seconds--;
+            if(seconds < 0) { seconds = 59; minutes--; }
+            if(minutes < 0) { minutes = 59; hours--; }
+            if(hours < 0) { hours = 23; days--; }
+            if(days < 0) { days = 0; hours = 0; minutes = 0; seconds = 0; }
 
-.dynamic-tab::-webkit-scrollbar {
-    width: 0px;
-}
-
-.hidden {
-    display: none !important;
-}
-
-/* ፎርሞች */
-.tg-input {
-    width: 100%;
-    padding: 16px;
-    border-radius: 12px;
-    border: 1px solid #144034;
-    background-color: #071a15;
-    color: #fff;
-    font-size: 16px;
-    margin-bottom: 15px;
-    outline: none;
-}
-
-.tg-btn {
-    width: 100%;
-    background: linear-gradient(135deg, #FFB800 0%, #E6A400 100%);
-    color: #000000;
-    border: none;
-    padding: 16px;
-    font-size: 16px;
-    font-weight: 700;
-    border-radius: 12px;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(255, 184, 0, 0.2);
-}
-
-/* የጌታቸው አፕ ላይ ያለው አይነት ያማረ ስልክ ካርድ */
-.premium-card {
-    background: linear-gradient(135deg, #0c382b 0%, #061f18 100%);
-    border: 1px solid #145240;
-    padding: 20px;
-    border-radius: 24px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-    text-align: left;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-}
-
-.premium-icon-box {
-    background: #FFB800;
-    width: 54px;
-    height: 54px;
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 26px;
-    box-shadow: 0 4px 12px rgba(255, 184, 0, 0.3);
-}
-
-.premium-card-text p {
-    color: #8da19c;
-    font-size: 13px;
-    margin-bottom: 2px;
-}
-
-.premium-card-text h3 {
-    font-size: 22px;
-    color: #fff;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-}
-
-/* Balance Card */
-.balance-section {
-    background: linear-gradient(135deg, #cc9300 0%, #a37500 100%);
-    padding: 20px;
-    border-radius: 20px;
-    margin-bottom: 25px;
-    box-shadow: 0 4px 15px rgba(204, 147, 0, 0.2);
-}
-.balance-section p { color: #f2f2f2; font-size: 14px; }
-.balance-section h2 { font-size: 32px; font-weight: 800; color: #fff; margin-top: 5px; }
-
-/* የቲኬት ሊስት ዲዛይን */
-.ticket-card {
-    background: #08211a;
-    border: 1px solid #113d31;
-    padding: 16px;
-    border-radius: 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-    text-align: left;
-}
-.ticket-details h3 { font-size: 16px; color: #fff; }
-.ticket-details p { font-size: 13px; color: #6d8c83; }
-.buy-now-btn {
-    background: #FFB800;
-    color: #000;
-    border: none;
-    padding: 10px 18px;
-    font-weight: 700;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-/* Profile Photo Style */
-.profile-avatar-container {
-    margin-bottom: 15px;
-}
-.profile-img {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    border: 3px solid #FFB800;
-    object-fit: cover;
-    box-shadow: 0 4px 15px rgba(255, 184, 0, 0.2);
-}
-
-/* Footer Copyright */
-.app-footer {
-    font-size: 11px;
-    color: #4a635d;
-    text-align: center;
-    margin-top: 25px;
-    line-height: 1.5;
-}
-.app-footer span {
-    color: #FFB800;
-    font-weight: 600;
-}
-
-/* Navigation Bar */
-.bottom-nav {
-    position: fixed;
-    bottom: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: calc(100% - 40px);
-    max-width: 380px;
-    background-color: #061713;
-    border: 1px solid #11382d;
-    border-radius: 20px;
-    display: flex;
-    justify-content: space-around;
-    padding: 12px 0;
-    z-index: 999;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-}
-.nav-item { color: #49635c; font-size: 12px; cursor: pointer; text-align: center; flex: 1; }
-.nav-item.active { color: #FFB800; }
-.nav-item .icon { display: block; font-size: 20px; margin-bottom: 2px; }
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(5px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+            timerText.innerText = `${days}d : ${hours}h : ${minutes}m : ${seconds}s`;
+        }
+    }
+}, 1000);
