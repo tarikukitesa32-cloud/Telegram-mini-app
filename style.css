@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: #000000; /* ሙሉ ጥቁር ዳራ */
+    background-color: #0b1e1a; /* የድሮው ያማረ ጥቁር አረንጓዴ */
     color: #ffffff;
     display: flex;
     justify-content: center;
@@ -21,66 +21,12 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    padding: 16px;
+    padding: 20px;
     position: relative;
-    padding-bottom: 90px; 
-    background-color: #0b0b0b; /* ለስላሳ ጥቁር */
+    padding-bottom: 100px; 
+    background: linear-gradient(180deg, #0a241d 0%, #051410 100%);
 }
 
-/* Header Area (ልክ እንደ አዲሱ ፎቶ) */
-.app-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 5px;
-    margin-bottom: 15px;
-    border-bottom: 1px solid #1a1a1a;
-}
-
-.brand-area {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.brand-logo {
-    background: linear-gradient(135deg, #FFB800 0%, #CC9300 100%);
-    color: #000;
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    font-weight: bold;
-    box-shadow: 0 0 10px rgba(255, 184, 0, 0.3);
-}
-
-.brand-name {
-    color: #FFB800;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 1.2;
-}
-
-.header-controls {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.lang-selector {
-    background: #121212;
-    border: 1px solid #222;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 6px;
-    font-size: 13px;
-    outline: none;
-}
-
-/* Containers */
 .phase-container {
     width: 100%;
     text-align: center;
@@ -92,7 +38,6 @@ body {
     height: calc(100vh - 140px);
     overflow-y: auto;
     width: 100%;
-    padding-bottom: 30px;
 }
 
 .dynamic-tab::-webkit-scrollbar {
@@ -103,22 +48,17 @@ body {
     display: none !important;
 }
 
-/* Premium Buttons & Inputs */
+/* ፎርሞች */
 .tg-input {
     width: 100%;
     padding: 16px;
     border-radius: 12px;
-    border: 1px solid #222;
-    background-color: #121212;
+    border: 1px solid #144034;
+    background-color: #071a15;
     color: #fff;
     font-size: 16px;
     margin-bottom: 15px;
     outline: none;
-    transition: 0.3s;
-}
-
-.tg-input:focus {
-    border-color: #FFB800;
 }
 
 .tg-btn {
@@ -131,122 +71,129 @@ body {
     font-weight: 700;
     border-radius: 12px;
     cursor: pointer;
-    transition: 0.2s;
+    box-shadow: 0 4px 15px rgba(255, 184, 0, 0.2);
 }
 
-.tg-btn:active {
-    transform: scale(0.98);
-}
-
-/* Premium Phone Card */
-.user-card {
-    background: linear-gradient(135deg, #06261d 0%, #02120e 100%);
-    border: 1px solid #0d473a;
+/* የጌታቸው አፕ ላይ ያለው አይነት ያማረ ስልክ ካርድ */
+.premium-card {
+    background: linear-gradient(135deg, #0c382b 0%, #061f18 100%);
+    border: 1px solid #145240;
     padding: 20px;
-    border-radius: 20px;
+    border-radius: 24px;
     display: flex;
     align-items: center;
     gap: 15px;
     margin-bottom: 20px;
     text-align: left;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
 }
 
-.phone-icon-box {
+.premium-icon-box {
     background: #FFB800;
-    width: 50px;
-    height: 50px;
-    border-radius: 14px;
+    width: 54px;
+    height: 54px;
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
+    font-size: 26px;
+    box-shadow: 0 4px 12px rgba(255, 184, 0, 0.3);
 }
 
-.user-info p {
-    color: #888;
+.premium-card-text p {
+    color: #8da19c;
     font-size: 13px;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
 }
 
-.user-info h3 {
+.premium-card-text h3 {
     font-size: 22px;
     color: #fff;
     font-weight: 700;
     letter-spacing: 0.5px;
 }
 
-/* Business Item Cards (ዕቁብ / ጨረታ) */
-.business-card {
-    background: #121212;
-    border: 1px solid #1a1a1a;
+/* Balance Card */
+.balance-section {
+    background: linear-gradient(135deg, #cc9300 0%, #a37500 100%);
+    padding: 20px;
+    border-radius: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(204, 147, 0, 0.2);
+}
+.balance-section p { color: #f2f2f2; font-size: 14px; }
+.balance-section h2 { font-size: 32px; font-weight: 800; color: #fff; margin-top: 5px; }
+
+/* የቲኬት ሊስት ዲዛይን */
+.ticket-card {
+    background: #08211a;
+    border: 1px solid #113d31;
+    padding: 16px;
     border-radius: 16px;
-    overflow: hidden;
-    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
     text-align: left;
 }
-
-.business-img-placeholder {
-    width: 100%;
-    height: 180px;
-    background: linear-gradient(45deg, #111, #222);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 40px;
-}
-
-.business-details {
-    padding: 16px;
-}
-
-.business-title {
-    font-size: 18px;
+.ticket-details h3 { font-size: 16px; color: #fff; }
+.ticket-details p { font-size: 13px; color: #6d8c83; }
+.buy-now-btn {
+    background: #FFB800;
+    color: #000;
+    border: none;
+    padding: 10px 18px;
     font-weight: 700;
-    color: #fff;
-    margin-bottom: 6px;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
-.business-meta {
-    font-size: 13px;
-    color: #888;
+/* Profile Photo Style */
+.profile-avatar-container {
     margin-bottom: 15px;
 }
+.profile-img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 3px solid #FFB800;
+    object-fit: cover;
+    box-shadow: 0 4px 15px rgba(255, 184, 0, 0.2);
+}
 
-/* Navigation Bar (ልክ እንደ ፎቶው የከበበ ዲዛይን) */
+/* Footer Copyright */
+.app-footer {
+    font-size: 11px;
+    color: #4a635d;
+    text-align: center;
+    margin-top: 25px;
+    line-height: 1.5;
+}
+.app-footer span {
+    color: #FFB800;
+    font-weight: 600;
+}
+
+/* Navigation Bar */
 .bottom-nav {
     position: fixed;
-    bottom: 12px;
+    bottom: 15px;
     left: 50%;
     transform: translateX(-50%);
-    width: calc(100% - 32px);
-    max-width: 388px;
-    background-color: #121212;
-    border: 1px solid #1a1a1a;
-    border-radius: 16px;
+    width: calc(100% - 40px);
+    max-width: 380px;
+    background-color: #061713;
+    border: 1px solid #11382d;
+    border-radius: 20px;
     display: flex;
     justify-content: space-around;
-    padding: 10px 0;
+    padding: 12px 0;
     z-index: 999;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
 }
-
-.nav-item {
-    color: #666;
-    font-size: 12px;
-    cursor: pointer;
-    text-align: center;
-    transition: 0.2s;
-    flex: 1;
-}
-
-.nav-item.active {
-    color: #FFB800;
-}
-
-.nav-item .icon {
-    display: block;
-    font-size: 20px;
-    margin-bottom: 2px;
-}
+.nav-item { color: #49635c; font-size: 12px; cursor: pointer; text-align: center; flex: 1; }
+.nav-item.active { color: #FFB800; }
+.nav-item .icon { display: block; font-size: 20px; margin-bottom: 2px; }
 
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(5px); }
