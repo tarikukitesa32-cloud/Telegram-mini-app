@@ -21,23 +21,30 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     padding: 20px;
     position: relative;
+    padding-bottom: 70px; /* ለሜኑው ቦታ ለመተው */
 }
 
 .phase-container {
     width: 100%;
     text-align: center;
+    margin: auto 0; /* በመሃል እንዲሆን */
     animation: fadeIn 0.3s ease-in-out;
 }
 
-/* ለዳሽቦርድ መስተካከያ */
+/* ለዳሽቦርድ ገጾች ማሸብለያ */
 .dynamic-tab {
-    height: 80vh;
+    height: calc(100vh - 90px);
     overflow-y: auto;
-    padding-top: 10px;
+    width: 100%;
+    margin-top: 10px;
+    padding-bottom: 20px;
+}
+
+/* የScrollbar ምልክትን ለመደበቅ */
+.dynamic-tab::-webkit-scrollbar {
+    width: 0px;
 }
 
 .hidden {
@@ -211,17 +218,20 @@ h2 {
     color: #a4b3b0;
 }
 
-/* Bottom Navigation */
+/* በቋሚነት ከታች የሚቀመጥ ሜኑ (Fixed Bottom Navigation) */
 .bottom-nav {
-    position: absolute;
+    position: fixed;
     bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
+    max-width: 420px;
     background-color: #0d211e;
     border-top: 1px solid #1c3d38;
     display: flex;
     justify-content: space-around;
     padding: 12px 0;
-    z-index: 10;
+    z-index: 999;
 }
 
 .nav-item {
