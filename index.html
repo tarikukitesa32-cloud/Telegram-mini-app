@@ -69,16 +69,36 @@
         .app-page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 16px; margin-bottom: 15px; }
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 16px; margin-bottom: 15px; overflow: hidden; }
         
-        /* 🏠 HOME COMPONENTS */
-        .product-img {
-            width: 100%; height: 200px;
-            background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.6) 100%), 
-                        url('https://images.unsplash.com/photo-1589561024260-b6de5a702476?auto=format&fit=crop&w=600&q=80') center center/cover;
-            border-radius: 18px; position: relative;
+        /* 🏠 HOME COMPONENTS - IMPROVED BACKUP IMAGE SYSTEM */
+        .product-img-container {
+            width: 100%;
+            height: 180px;
+            border-radius: 18px;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, #1f2c34 0%, #2a3942 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .badge { position: absolute; top: 12px; left: 12px; background: #128c7e; color: #fff; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: bold; }
+        .product-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        .img-fallback {
+            font-size: 60px;
+            z-index: 0;
+            opacity: 0.7;
+        }
+        .badge { position: absolute; top: 12px; left: 12px; background: #128c7e; color: #fff; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: bold; z-index: 2; }
+        
         .prod-title { font-size: 22px; font-weight: 800; margin-top: 15px; }
         .timer-box { background: linear-gradient(135deg, #0e1e17 0%, #111b21 100%); border: 1px solid rgba(0, 230, 118, 0.15); border-radius: 16px; padding: 14px; margin-top: 15px; }
         .timer-grid { display: flex; align-items: center; gap: 6px; }
@@ -87,11 +107,13 @@
         .qty-box { display: flex; align-items: center; gap: 12px; }
         .qty-btn { background: var(--input-bg); border: none; color: white; font-size: 18px; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         .qty-btn.plus { background: var(--primary); color: black; font-weight: bold; }
+        
         .numbers-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; max-height: 200px; overflow-y: auto; }
         .num-cell { background: var(--input-bg); border: 1px solid var(--border); border-radius: 10px; padding: 12px 0; text-align: center; font-weight: bold; cursor: pointer; color: var(--text); }
         .num-cell.selected { background: var(--primary); color: #000; }
         .num-cell.sold-out { background: rgba(34, 46, 53, 0.3); color: rgba(134, 150, 160, 0.2); text-decoration: line-through; cursor: not-allowed; }
-        .btn-main-action { width: 100%; background: linear-gradient(90deg, #ffb800 0%, #ff9900 100%); color: #000; padding: 16px; border-radius: 16px; font-size: 16px; font-weight: 800; border: none; cursor: pointer; margin-top: 15px; }
+        
+        .btn-main-action { width: 100%; background: linear-gradient(90deg, #ffb800 0%, #ff9900 100%); color: #000; padding: 16px; border-radius: 16px; font-size: 16px; font-weight: 800; border: none; cursor: pointer; margin-top: 5px; }
 
         /* 🎟️ TICKETS PAGE STYLES */
         .ticket-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid var(--border); }
@@ -156,18 +178,26 @@
         <!-- 🏠 1. HOME PAGE VIEW -->
         <div id="pageHome" class="app-page active">
             <div class="card">
-                <div class="product-img"><span class="badge">LIVE</span></div>
+                <!-- 📸 STABLE IMAGE + ICON FALLBACK SYSTEM -->
+                <div class="product-img-container">
+                    <span class="badge">LIVE</span>
+                    <div class="img-fallback">💻</div>
+                    <img src="https://i.imgur.com/KzXgZ4L.png" alt="HP Laptop" onerror="this.style.display='none'">
+                </div>
+                
                 <h2 class="prod-title" id="lblTitle">HP Pavilion Laptop</h2>
                 <p style="color: var(--sub-text); font-size: 14px;">Core i7 • 16GB RAM • 512GB SSD</p>
+                
                 <div class="timer-box">
                     <div style="font-size: 11px; font-weight: 700; color: var(--sub-text);" id="lblTimer">🔥 TIME REMAINING</div>
                     <div class="timer-grid" style="margin-top: 5px;">
                         <div class="t-digit">00</div><div>:</div>
                         <div class="t-digit">00</div><div>:</div>
                         <div class="t-digit">00</div><div>:</div>
-                        <div class="t-digit" id="secs">39</div>
+                        <div class="t-digit" id="secs">53</div>
                     </div>
                 </div>
+                
                 <div class="price-panel">
                     <div>
                         <p style="font-size: 11px; color: var(--sub-text);" id="lblPriceTxt">TICKET PRICE</p>
@@ -180,13 +210,16 @@
                     </div>
                 </div>
             </div>
+            
             <div style="font-size: 16px; font-weight: bold; margin: 15px 5px 10px 5px; display: flex; justify-content: space-between;">
                 <span id="lblSelect">Select Your Number</span>
                 <span style="color: var(--primary);" id="lblPickCount">Pick 1 Number</span>
             </div>
+            
             <div class="card" style="padding: 12px;">
                 <div class="numbers-grid" id="numsGrid"></div>
             </div>
+            
             <button class="btn-main-action" id="lblBuyBtn" onclick="clickBuyAction()">BUY TICKET NOW</button>
         </div>
 
@@ -337,7 +370,7 @@
         function closeModal() { document.getElementById('payModal').style.display = 'none'; resetCells(); }
         function paySuccess() { alert('🎉 Success!'); closeModal(); }
 
-        let secs = 39; setInterval(() => { if(secs <= 0) secs = 60; secs--; document.getElementById('secs').innerText = secs.toString().padStart(2, '0'); }, 1000);
+        let secs = 53; setInterval(() => { if(secs <= 0) secs = 60; secs--; document.getElementById('secs').innerText = secs.toString().padStart(2, '0'); }, 1000);
     </script>
 </body>
 </html>
