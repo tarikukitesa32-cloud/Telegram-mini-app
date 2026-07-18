@@ -1,47 +1,272 @@
-<!-- 📱 BOTA PREMIUM SIGN-IN SCREEN -->
-<div id="gatewayScreen" class="auth-screen">
-    <div class="auth-card">
-        
-        <!-- Top Branding Header -->
-        <div class="bota-top-header">
-            <div class="bota-brand-title">Bota Solutions</div>
-            <div class="bota-lang-dropdown">
-                <select id="authLangSelect">
-                    <option value="en" selected>English ▾</option>
-                    <option value="am">አማርኛ ▾</option>
-                </select>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bota Solutions</title>
+    
+    <!-- 🎨 የ CSS ዲዛይን ክፍል (ስታይል) -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #0b141a; /* የቦታ ጨለማ ባክግራውንድ */
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* 🏆 TOP PREMIUM HEADER */
+        header {
+            background-color: #111b21;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #222e35;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand-logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-logo span {
+            color: #ffb800; /* የወርቃማው ቀለም አክሰንት */
+        }
+
+        .notification-icon {
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* 📦 MAIN CONTENT CONTAINER */
+        .main-container {
+            flex: 1;
+            padding: 20px;
+            padding-bottom: 90px; /* ከታች ባሩ ጋር እንዳይደራረብ */
+            max-width: 500px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* 🚪 APP PAGES (የገጾቹ መታያ መቆጣጠሪያ) */
+        .app-page {
+            display: none;
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        .app-page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 📋 PAGES CARDS STYLES */
+        .page-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .card {
+            background-color: #111b21;
+            border: 1px solid #222e35;
+            border-radius: 14px;
+            padding: 18px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        /* 📱 BOTTOM NAVIGATION BAR */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 500px;
+            background-color: #111b21;
+            border-top: 1px solid #222e35;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #8696a0;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.2s;
+            background: none;
+            border: none;
+            width: 22%;
+            outline: none;
+        }
+
+        .nav-item .icon {
+            font-size: 22px;
+            margin-bottom: 4px;
+        }
+
+        /* Active Nav State */
+        .nav-item.active {
+            color: #ffb800; /* ወርቃማው ቀለም */
+        }
+
+        /* PROFILE */
+        .profile-header {
+            text-align: center;
+            padding: 15px 0 25px 0;
+        }
+        .profile-avatar {
+            font-size: 65px;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 🏆 TOP HEADER -->
+    <header>
+        <div class="brand-logo">Bota<span>Solutions</span></div>
+        <div class="notification-icon">🔔</div>
+    </header>
+
+    <!-- 📦 MAIN PAGES CONTAINER -->
+    <div class="main-container">
+
+        <!-- 🏠 1. HOME PAGE -->
+        <div id="homePage" class="app-page active">
+            <h2 class="page-title">Welcome Back 👋</h2>
+            <div class="card">
+                <h3 style="color: #ffb800; margin-bottom: 8px;">🔥 Hot Campaign</h3>
+                <p style="color: #8696a0; font-size: 14px; line-height: 1.5;">Check out the latest exclusive premium tickets available today. Don't miss your chance!</p>
+            </div>
+            <div class="card">
+                <h3>System Status</h3>
+                <p style="color: #8696a0; font-size: 14px; margin-top: 5px;">All features are active and running securely.</p>
             </div>
         </div>
-        
-        <!-- Welcome Text / Icon -->
-        <div class="bota-welcome-section">
-            <div class="bota-app-icon">🏆</div>
-            <h2 class="login-heading">Welcome to Bota</h2>
-            <p class="welcome-subtitle">Enter your mobile number to check in</p>
-        </div>
-        
-        <!-- Input Form -->
-        <div class="bota-form-group">
-            <label class="input-label">Mobile Number</label>
-            <div class="bota-input-wrapper">
-                <span class="country-code">+251</span>
-                <input type="tel" id="gatePhone" class="bota-input-field" placeholder="911325430" inputmode="numeric">
+
+        <!-- 🎫 2. TICKETS PAGE -->
+        <div id="ticketsPage" class="app-page">
+            <h2 class="page-title">My Tickets</h2>
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h4 style="font-size: 16px;">Premium Ticket #8921</h4>
+                        <p style="color: #8696a0; font-size: 13px; margin-top: 4px;">Status: Active</p>
+                    </div>
+                    <span style="color: #ffb800; font-weight: bold; font-size: 16px;">100 ETB</span>
+                </div>
+            </div>
+            <div class="card" style="opacity: 0.5;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h4 style="font-size: 16px;">Standard Ticket #7432</h4>
+                        <p style="color: #8696a0; font-size: 13px; margin-top: 4px;">Status: Expired</p>
+                    </div>
+                    <span style="color: #8696a0; font-weight: bold; font-size: 16px;">Free</span>
+                </div>
             </div>
         </div>
-        
-        <!-- Next Button -->
-        <button id="btnGateNext" class="bota-btn-next">Next</button>
-        
-        <!-- Create Account Link -->
-        <div class="bota-register-redirect">
-            Don't have an account? <span id="linkGoToRegister" class="bota-link-gold">Create New Account</span>
+
+        <!-- 🎉 3. WINNERS PAGE -->
+        <div id="winnersPage" class="app-page">
+            <h2 class="page-title">Latest Winners 👑</h2>
+            <div class="card" style="display: flex; gap: 15px; align-items: center;">
+                <div style="font-size: 32px;">🥇</div>
+                <div>
+                    <h4 style="font-size: 16px;">Tariku Kitesa</h4>
+                    <p style="color: #ffb800; font-size: 13px; margin-top: 2px;">Won: Grand Premium Prize</p>
+                </div>
+            </div>
+            <div class="card" style="display: flex; gap: 15px; align-items: center;">
+                <div style="font-size: 32px;">🥈</div>
+                <div>
+                    <h4 style="font-size: 16px;">Alemu Bekele</h4>
+                    <p style="color: #8696a0; font-size: 13px; margin-top: 2px;">Won: 5,000 ETB Wallet Bonus</p>
+                </div>
+            </div>
         </div>
-        
-        <!-- Bottom copyright -->
-        <div class="bota-copyright-text">
-            Terms and Conditions<br>
-            © 2026 Bota Solutions. All rights reserved.
+
+        <!-- 👤 4. PROFILE PAGE -->
+        <div id="profilePage" class="app-page">
+            <div class="profile-header">
+                <div class="profile-avatar">👤</div>
+                <h3 style="font-size: 20px;">Tariku Kitesa</h3>
+                <p style="color: #8696a0; font-size: 14px; margin-top: 4px;">+251 911 32 5430</p>
+            </div>
+            <div class="card" style="cursor: pointer; font-weight: 500;">
+                ⚙️ Account Settings
+            </div>
+            <div class="card" style="cursor: pointer; color: #ff4444; border-color: rgba(255,68,68,0.2); font-weight: 500;">
+                🚪 Log Out / Switch Account
+            </div>
         </div>
-        
+
     </div>
-</div>
+
+    <!-- 📱 BOTTOM NAVIGATION BAR -->
+    <div class="bottom-nav">
+        <button class="nav-item active" onclick="switchPage('homePage', this)">
+            <span class="icon">🏠</span>
+            <span>Home</span>
+        </button>
+        <button class="nav-item" onclick="switchPage('ticketsPage', this)">
+            <span class="icon">🎫</span>
+            <span>Tickets</span>
+        </button>
+        <button class="nav-item" onclick="switchPage('winnersPage', this)">
+            <span class="icon">🎉</span>
+            <span>Winners</span>
+        </button>
+        <button class="nav-item" onclick="switchPage('profilePage', this)">
+            <span class="icon">👤</span>
+            <span>Profile</span>
+        </button>
+    </div>
+
+    <!-- ⚡ የ JAVASCRIPT ክፍል (ገጾቹን በፍጥነት የሚቀያይር) -->
+    <script>
+        function switchPage(pageId, element) {
+            // 1. ሁሉንም ገጾች ደብቅ
+            const pages = document.querySelectorAll('.app-page');
+            pages.forEach(page => page.classList.remove('active'));
+
+            // 2. ከሁሉም በተኖች ላይ የወርቃማ ማብሪያውን ቀለም አጥፋ
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+
+            // 3. የተመረጠውን ገጽ ብቻ አሳይ
+            document.getElementById(pageId).classList.add('active');
+
+            // 4. ለተጫነው በተን ብቻ ወርቃማውን ቀለም ስጠው
+            element.classList.add('active');
+        }
+    </script>
+</body>
+</html>
