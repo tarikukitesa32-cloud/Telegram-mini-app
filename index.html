@@ -29,67 +29,49 @@
             justify-content: center;
             align-items: flex-start;
             min-height: 100vh;
+            padding-bottom: 80px; /* Space for navigation bar */
         }
 
-        /* 🤖 START PAGE & LANGUAGE SELECTION */
+        /* 🤖 WELCOME & LANGUAGE SCREEN */
         .welcome-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--bg); display: flex; flex-direction: column;
             align-items: center; justify-content: center; z-index: 9999;
             padding: 20px;
         }
-
         .glass-card {
-            background: rgba(21, 29, 35, 0.7);
-            backdrop-filter: blur(15px);
-            padding: 40px 30px; border-radius: 30px;
-            text-align: center; border: 1px solid rgba(255, 255, 255, 0.08);
-            width: 100%; max-width: 380px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            background: rgba(21, 29, 35, 0.7); backdrop-filter: blur(15px);
+            padding: 40px 30px; border-radius: 30px; text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.08); width: 100%; max-width: 380px;
         }
-
-        .brand-title { font-size: 32px; font-weight: bold; margin-bottom: 25px; letter-spacing: -0.5px; }
+        .brand-title { font-size: 32px; font-weight: bold; margin-bottom: 25px; }
         .brand-title span { color: var(--primary); }
-
         .btn-start {
             background: linear-gradient(90deg, #ffb800 0%, #ff9900 100%);
             color: #000; padding: 16px 50px; border-radius: 50px;
-            font-weight: 800; font-size: 16px; border: none; cursor: pointer;
-            box-shadow: 0 5px 20px rgba(255, 184, 0, 0.3); transition: transform 0.2s;
+            font-weight: 800; border: none; cursor: pointer;
         }
-        .btn-start:active { transform: scale(0.96); }
-
         .lang-grid { display: none; flex-direction: column; gap: 12px; width: 100%; margin-top: 10px; }
         .btn-lang {
             background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border);
-            color: white; padding: 15px 20px; border-radius: 16px;
-            cursor: pointer; font-size: 15px; font-weight: 600;
+            color: white; padding: 15px 20px; border-radius: 16px; cursor: pointer;
             display: flex; justify-content: space-between; align-items: center;
-            transition: all 0.2s;
         }
-        .btn-lang:active { background: var(--primary); color: #000; border-color: var(--primary); }
 
-        /* 📱 MAIN APP INTERFACE */
-        #mainApp {
-            display: none; width: 100%; max-width: 480px;
-            padding: 15px; padding-bottom: 30px;
-            animation: fadeIn 0.4s ease;
-        }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        header {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 10px 5px 20px 5px;
-        }
+        /* 📱 MAIN APP CONTAINER */
+        #mainApp { display: none; width: 100%; max-width: 480px; padding: 15px; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 10px 5px 20px 5px; }
         .header-logo { font-size: 22px; font-weight: bold; }
         .header-logo span { color: var(--primary); }
 
-        .card {
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: 24px; padding: 16px; margin-bottom: 15px;
-        }
+        /* PAGE VIEWS */
+        .app-page { display: none; animation: fadeIn 0.3s ease; }
+        .app-page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* PRODUCT DISPLAY */
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 16px; margin-bottom: 15px; }
+        
+        /* HOME COMPONENTS */
         .product-img {
             width: 100%; height: 200px;
             background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.6) 100%), 
@@ -97,63 +79,47 @@
             border-radius: 18px; position: relative;
         }
         .badge { position: absolute; top: 12px; left: 12px; background: #128c7e; color: #fff; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: bold; }
-        
         .prod-title { font-size: 22px; font-weight: 800; margin-top: 15px; }
-        .prod-desc { color: var(--sub-text); font-size: 14px; margin-top: 4px; }
-
-        /* TIMER BOX */
-        .timer-box {
-            background: linear-gradient(135deg, #0e1e17 0%, #111b21 100%);
-            border: 1px solid rgba(0, 230, 118, 0.15);
-            border-radius: 16px; padding: 14px; margin-top: 15px;
-        }
-        .timer-label { font-size: 11px; font-weight: 700; color: var(--sub-text); letter-spacing: 1px; margin-bottom: 8px; }
+        .timer-box { background: linear-gradient(135deg, #0e1e17 0%, #111b21 100%); border: 1px solid rgba(0, 230, 118, 0.15); border-radius: 16px; padding: 14px; margin-top: 15px; }
         .timer-grid { display: flex; align-items: center; gap: 6px; }
-        .t-digit { background: var(--input-bg); color: var(--primary); font-size: 18px; font-weight: bold; padding: 6px 10px; border-radius: 8px; min-width: 38px; text-align: center; }
-        .t-colon { color: var(--primary); font-weight: bold; }
-
-        /* QTY & PRICE PANEL */
-        .price-panel {
-            background: rgba(255, 184, 0, 0.02); border: 1px solid var(--border);
-            border-radius: 16px; padding: 15px; margin-top: 15px;
-            display: flex; justify-content: space-between; align-items: center;
-        }
+        .t-digit { background: var(--input-bg); color: var(--primary); font-size: 18px; font-weight: bold; padding: 6px 10px; border-radius: 8px; }
+        .price-panel { background: rgba(255, 184, 0, 0.02); border: 1px solid var(--border); border-radius: 16px; padding: 15px; margin-top: 15px; display: flex; justify-content: space-between; align-items: center; }
         .qty-box { display: flex; align-items: center; gap: 12px; }
         .qty-btn { background: var(--input-bg); border: none; color: white; font-size: 18px; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         .qty-btn.plus { background: var(--primary); color: black; font-weight: bold; }
+        .numbers-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; max-height: 200px; overflow-y: auto; }
+        .num-cell { background: var(--input-bg); border: 1px solid var(--border); border-radius: 10px; padding: 12px 0; text-align: center; font-weight: bold; cursor: pointer; color: var(--text); }
+        .num-cell.selected { background: var(--primary); color: #000; }
+        .num-cell.sold-out { background: rgba(34, 46, 53, 0.3); color: rgba(134, 150, 160, 0.2); text-decoration: line-through; cursor: not-allowed; }
+        .btn-main-action { width: 100%; background: linear-gradient(90deg, #ffb800 0%, #ff9900 100%); color: #000; padding: 16px; border-radius: 16px; font-size: 16px; font-weight: 800; border: none; cursor: pointer; margin-top: 15px; }
 
-        /* NUMBERS SELECTION GRID */
-        .grid-header { font-size: 16px; font-weight: bold; margin: 20px 5px 10px 5px; display: flex; justify-content: space-between; }
-        .numbers-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; max-height: 240px; overflow-y: auto; padding-right: 2px; }
-        .num-cell { background: var(--input-bg); border: 1px solid var(--border); border-radius: 10px; padding: 14px 0; text-align: center; font-weight: bold; font-size: 14px; cursor: pointer; color: var(--text); }
-        .num-cell.selected { background: var(--primary); color: #000; border-color: var(--primary); }
-        .num-cell.sold-out { background: rgba(34, 46, 53, 0.3); color: rgba(134, 150, 160, 0.2); border-color: transparent; cursor: not-allowed; text-decoration: line-through; }
+        /* 🎟️ MY TICKETS PAGE STYLES */
+        .ticket-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid var(--border); }
+        .tkt-badge { background: var(--input-bg); padding: 5px 10px; border-radius: 6px; color: var(--primary); font-weight: bold; }
 
-        /* NEW FIXED ACTION BUTTON */
-        .action-container {
-            margin-top: 20px;
-            padding: 0 5px;
+        /* 👤 PROFILE PAGE STYLES */
+        .profile-header { text-align: center; padding: 20px 0; }
+        .avatar { width: 80px; height: 80px; background: var(--input-bg); border-radius: 50%; margin: 0 auto 10px auto; display: flex; align-items: center; justify-content: center; font-size: 35px; border: 2px solid var(--primary); }
+        .profile-menu-item { display: flex; justify-content: space-between; padding: 16px; border-bottom: 1px solid var(--border); cursor: pointer; }
+
+        /* 🧭 BOTTOM NAVIGATION BAR */
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 100%; max-width: 480px; height: 70px;
+            background: #101a20; border-top: 1px solid var(--border);
+            display: flex; justify-content: space-around; align-items: center;
+            z-index: 999; box-shadow: 0 -5px 20px rgba(0,0,0,0.4);
         }
-        .btn-main-action {
-            width: 100%;
-            background: linear-gradient(90deg, #ffb800 0%, #ff9900 100%);
-            color: #000;
-            padding: 16px;
-            border-radius: 16px;
-            font-size: 16px;
-            font-weight: 800;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 5px 25px rgba(255, 184, 0, 0.25);
-            transition: all 0.2s;
-        }
-        .btn-main-action:active { transform: scale(0.98); opacity: 0.9; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; color: var(--sub-text); cursor: pointer; font-size: 12px; font-weight: 600; text-decoration: none; }
+        .nav-item .icon { font-size: 22px; margin-bottom: 4px; transition: transform 0.2s; }
+        .nav-item.active { color: var(--primary); }
+        .nav-item.active .icon { transform: translateY(-2px); }
 
-        /* MODAL GATEWAY */
+        /* MODAL */
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 99999; display: none; align-items: center; justify-content: center; padding: 20px; }
         .modal-card { background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 25px; width: 100%; max-width: 360px; text-align: center; }
-        .btn-pay { width: 100%; padding: 14px; border-radius: 12px; font-size: 15px; font-weight: bold; border: none; cursor: pointer; background: var(--primary); color: #000; margin-top: 15px; }
-        .btn-close { width: 100%; padding: 12px; border-radius: 12px; font-size: 14px; background: transparent; border: 1px solid var(--border); color: var(--sub-text); margin-top: 8px; cursor: pointer; }
+        .btn-pay { width: 100%; padding: 14px; border-radius: 12px; background: var(--primary); color: #000; border: none; font-weight: bold; margin-top: 15px; cursor: pointer; }
+        .btn-close { width: 100%; padding: 12px; border-radius: 12px; background: transparent; border: 1px solid var(--border); color: var(--sub-text); margin-top: 8px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -163,11 +129,9 @@
         <div class="glass-card">
             <div class="brand-title">Bota<span>Solutions</span></div>
             <button class="btn-start" id="startBtn" onclick="onStartClicked()">START / ጀምር</button>
-            
             <div id="langContainer" class="lang-grid">
                 <button class="btn-lang" onclick="enterApp('amharic')"><span>አማርኛ (Amharic)</span> <span>🇪🇹</span></button>
                 <button class="btn-lang" onclick="enterApp('english')"><span>English</span> <span>🇬🇧</span></button>
-                <button class="btn-lang" onclick="enterApp('oromo')"><span>Afan Oromo</span> <span>🇪🇹</span></button>
             </div>
         </div>
     </div>
@@ -179,173 +143,157 @@
             <div style="font-size: 20px;">🔔</div>
         </header>
 
-        <!-- PRODUCT CAMPAIGN -->
-        <div class="card">
-            <div class="product-img"><span class="badge">LIVE</span></div>
-            <h2 class="prod-title" id="lblTitle">HP Pavilion Laptop</h2>
-            <p class="prod-desc">Core i7 • 16GB RAM • 512GB SSD</p>
-
-            <!-- TIMEOUT TIMER -->
-            <div class="timer-box">
-                <div class="timer-label" id="lblTimer">🔥 TIME REMAINING</div>
-                <div class="timer-grid">
-                    <div class="t-digit" id="days">00</div><div class="t-colon">:</div>
-                    <div class="t-digit" id="hours">00</div><div class="t-colon">:</div>
-                    <div class="t-digit" id="mins">00</div><div class="t-colon">:</div>
-                    <div class="t-digit" id="secs">39</div>
+        <!-- 🏠 HOME PAGE VIEW -->
+        <div id="pageHome" class="app-page active">
+            <div class="card">
+                <div class="product-img"><span class="badge">LIVE</span></div>
+                <h2 class="prod-title" id="lblTitle">HP Pavilion Laptop</h2>
+                <p style="color: var(--sub-text); font-size: 14px;">Core i7 • 16GB RAM • 512GB SSD</p>
+                <div class="timer-box">
+                    <div style="font-size: 11px; font-weight: 700; color: var(--sub-text);" id="lblTimer">🔥 TIME REMAINING</div>
+                    <div class="timer-grid" style="margin-top: 5px;">
+                        <div class="t-digit">00</div><div>:</div>
+                        <div class="t-digit">00</div><div>:</div>
+                        <div class="t-digit">00</div><div>:</div>
+                        <div class="t-digit" id="secs">39</div>
+                    </div>
+                </div>
+                <div class="price-panel">
+                    <div>
+                        <p style="font-size: 11px; color: var(--sub-text);" id="lblPriceTxt">TICKET PRICE</p>
+                        <h3 style="font-size: 20px; color: var(--primary);" id="priceDisplay">100 Birr</h3>
+                    </div>
+                    <div class="qty-box">
+                        <button class="qty-btn" onclick="updateQty(-1)">-</button>
+                        <span style="font-size: 18px; font-weight: bold;" id="qtyDisplay">1</span>
+                        <button class="qty-btn plus" onclick="updateQty(1)">+</button>
+                    </div>
                 </div>
             </div>
+            <div style="font-size: 16px; font-weight: bold; margin: 15px 5px 10px 5px; display: flex; justify-content: space-between;">
+                <span id="lblSelect">Select Your Number</span>
+                <span style="color: var(--primary);" id="lblPickCount">Pick 1 Number</span>
+            </div>
+            <div class="card" style="padding: 12px;">
+                <div class="numbers-grid" id="numsGrid"></div>
+            </div>
+            <button class="btn-main-action" id="lblBuyBtn" onclick="clickBuyAction()">BUY TICKET NOW</button>
+        </div>
 
-            <!-- PRICE & QTY PANEL -->
-            <div class="price-panel">
-                <div>
-                    <p style="font-size: 11px; color: var(--sub-text); font-weight: bold;" id="lblPriceTxt">TICKET PRICE</p>
-                    <h3 style="font-size: 20px; color: var(--primary); font-weight: 800;" id="priceDisplay">100 Birr</h3>
+        <!-- 🎟️ MY TICKETS PAGE VIEW -->
+        <div id="pageTickets" class="app-page">
+            <h2 style="margin-bottom: 15px;" id="navTickets">My Tickets</h2>
+            <div class="card" style="padding: 5px;">
+                <div class="ticket-item">
+                    <div>
+                        <h4 style="font-size: 15px;">HP Pavilion Laptop</h4>
+                        <p style="font-size: 12px; color: var(--sub-text);">Status: Active Draw</p>
+                    </div>
+                    <span class="tkt-badge">#24</span>
                 </div>
-                <div class="qty-box">
-                    <button class="qty-btn" onclick="updateQty(-1)">-</button>
-                    <span style="font-size: 18px; font-weight: bold; min-width: 15px; text-align: center;" id="qtyDisplay">1</span>
-                    <button class="qty-btn plus" onclick="updateQty(1)">+</button>
+                <div class="ticket-item">
+                    <div>
+                        <h4 style="font-size: 15px;">iPhone 15 Pro Max</h4>
+                        <p style="font-size: 12px; color: var(--green);">Winner: Lucky #08</p>
+                    </div>
+                    <span class="tkt-badge" style="background: rgba(0,230,118,0.1); color: var(--green);">#08</span>
                 </div>
             </div>
         </div>
 
-        <!-- LUCKY NUMBERS SECTION -->
-        <div class="grid-header">
-            <span id="lblSelect">Select Your Number</span>
-            <span style="color: var(--primary);" id="lblPickCount">Pick 1 Number</span>
-        </div>
-        
-        <div class="card" style="padding: 12px; margin-bottom: 5px;">
-            <div class="numbers-grid" id="numsGrid"></div>
+        <!-- 👤 PROFILE PAGE VIEW -->
+        <div id="pageProfile" class="app-page">
+            <div class="profile-header">
+                <div class="avatar">👤</div>
+                <h3>የተጠቃሚ ስም / Customer</h3>
+                <p style="color: var(--sub-text); font-size: 13px;">ID: 7492047</p>
+            </div>
+            <div class="card" style="padding: 5px;">
+                <div class="profile-menu-item"><span>📱 Phone Number</span><span style="color: var(--sub-text);">+251 9...</span></div>
+                <div class="profile-menu-item"><span>💳 Wallet Balance</span><span style="color: var(--green); font-weight: bold;">0.00 ETB</span></div>
+                <div class="profile-menu-item" onclick="alert('Language selection updated!')"><span id="lblLangOpt">🌐 Change Language</span><span>❯</span></div>
+            </div>
         </div>
 
-        <!-- ✨ NEW ADDED BUY BUTTON -->
-        <div class="action-container">
-            <button class="btn-main-action" id="lblBuyBtn" onclick="clickBuyAction()">ቲኬት ግዛ / BUY TICKET</button>
-        </div>
+        <!-- 🧭 BOTTOM NAVIGATION BAR -->
+        <nav class="bottom-nav">
+            <div class="nav-item active" onclick="switchPage('Home', this)">
+                <span class="icon">🏠</span><span id="navHome">Home</span>
+            </div>
+            <div class="nav-item" onclick="switchPage('Tickets', this)">
+                <span class="icon">🎟️</span><span id="navTicketsBtn">Tickets</span>
+            </div>
+            <div class="nav-item" onclick="switchPage('Profile', this)">
+                <span class="icon">👤</span><span id="navProfile">Profile</span>
+            </div>
+        </nav>
     </div>
 
-    <!-- 💳 CHAPA / TELEBIRR PAYMENT MODAL -->
+    <!-- 💳 PAYMENT MODAL -->
     <div class="modal" id="payModal">
         <div class="modal-card">
             <div style="font-size: 40px; margin-bottom: 10px;">💳</div>
-            <h3 style="font-size: 18px; margin-bottom: 5px;" id="lblCheckout">Secure Checkout</h3>
-            <p style="color: var(--sub-text); font-size: 14px;"><span id="lblTktNum">Selected Ticket:</span> <span id="popTkt" style="color: var(--primary); font-weight: bold;">#0</span></p>
-            
-            <div style="background: var(--input-bg); border-radius: 12px; padding: 15px; margin: 15px 0; font-size: 22px; font-weight: bold; color: var(--green);">
-                <span id="popPrice">100</span> ETB
-            </div>
-            
+            <h3 id="lblCheckout">Secure Checkout</h3>
+            <p style="color: var(--sub-text); font-size: 14px;"><span id="lblTktNum">Selected:</span> <span id="popTkt" style="color: var(--primary); font-weight: bold;">#0</span></p>
+            <div style="background: var(--input-bg); border-radius: 12px; padding: 15px; margin: 15px 0; font-size: 22px; font-weight: bold; color: var(--green);"><span id="popPrice">100</span> ETB</div>
             <button class="btn-pay" onclick="paySuccess()" id="lblPayBtn">Pay with Telebirr / Chapa</button>
             <button class="btn-close" onclick="closeModal()" id="lblCancel">Cancel</button>
         </div>
     </div>
 
     <script>
-        let qty = 1;
-        const unitPrice = 100;
-        let selected = [];
-        const soldOut = [5, 17, 23, 45, 62, 81];
-
+        let qty = 1; const unitPrice = 100; let selected = []; const soldOut = [5, 17, 23, 45, 62, 81];
         const dicts = {
-            amharic: { lblTitle: "HP Pavilion ላፕቶፕ", lblTimer: "🔥 የቀረው ጊዜ", lblPriceTxt: "የቲኬት ዋጋ", lblSelect: "የእድል ቁጥርዎን ይምረጡ", lblPickCount: "1 ቁጥር ይምረጡ", lblCheckout: "ደህንነቱ የተጠበቀ ክፍያ", lblTktNum: "የተመረጠ ቲኬት:", lblPayBtn: "በቴሌብር / ጫፓ ይክፈሉ", lblCancel: "ይቅር", lblBuyBtn: "አሁን ግዛ" },
-            english: { lblTitle: "HP Pavilion Laptop", lblTimer: "🔥 TIME REMAINING", lblPriceTxt: "TICKET PRICE", lblSelect: "Select Your Number", lblPickCount: "Pick 1 Number", lblCheckout: "Secure Checkout", lblTktNum: "Selected Ticket:", lblPayBtn: "Pay with Telebirr / Chapa", lblCancel: "Cancel", lblBuyBtn: "BUY TICKET NOW" },
-            oromo: { lblTitle: "HP Pavilion Laptop", lblTimer: "🔥 YEROO HAFE", lblPriceTxt: "GATII TIKEETII", lblSelect: "Lakkoofsa Kee Filadhu", lblPickCount: "Lakkoofsa 1 Filadhu", lblCheckout: "Kaffaltii Amansiisaa", lblTktNum: "Tikeetii Filatame:", lblPayBtn: "Telebirr / Chapa'n Kaffali", lblCancel: "Dhiisi", lblBuyBtn: "TIKEETII BITADHU" }
+            amharic: { lblTitle: "HP Pavilion ላፕቶፕ", lblTimer: "🔥 የቀረው ጊዜ", lblPriceTxt: "የቲኬት ዋጋ", lblSelect: "የእድል ቁጥርዎን ይምረጡ", lblCheckout: "ደህንነቱ የተጠበቀ ክፍያ", lblTktNum: "የተመረጠ ቲኬት:", lblPayBtn: "በቴሌብር / ጫፓ ይክፈሉ", lblCancel: "ይቅር", lblBuyBtn: "አሁን ግዛ", navHome: "ዋና ገጽ", navTicketsBtn: "ቲኬቶቼ", navProfile: "ፕሮፋይል", navTickets: "የገዛኋቸው ቲኬቶች", lblLangOpt: "🌐 ቋንቋ ቀይር" },
+            english: { lblTitle: "HP Pavilion Laptop", lblTimer: "🔥 TIME REMAINING", lblPriceTxt: "TICKET PRICE", lblSelect: "Select Your Number", lblCheckout: "Secure Checkout", lblTktNum: "Selected Ticket:", lblPayBtn: "Pay with Telebirr / Chapa", lblCancel: "Cancel", lblBuyBtn: "BUY TICKET NOW", navHome: "Home", navTicketsBtn: "Tickets", navProfile: "Profile", navTickets: "My Tickets", lblLangOpt: "🌐 Change Language" }
         };
 
-        function onStartClicked() {
-            document.getElementById('startBtn').style.display = 'none';
-            document.getElementById('langContainer').style.display = 'flex';
-        }
-
+        function onStartClicked() { document.getElementById('startBtn').style.display = 'none'; document.getElementById('langContainer').style.display = 'flex'; }
         let currentLang = 'english';
         function enterApp(lang) {
-            currentLang = lang;
-            const dict = dicts[lang];
-            for (let key in dict) {
-                if(document.getElementById(key)) document.getElementById(key).innerText = dict[key];
-            }
-            updateQty(0);
-            document.getElementById('welcomeScreen').style.display = 'none';
-            document.getElementById('mainApp').style.display = 'block';
+            currentLang = lang; const dict = dicts[lang];
+            for (let key in dict) { if(document.getElementById(key)) document.getElementById(key).innerText = dict[key]; }
+            updateQty(0); document.getElementById('welcomeScreen').style.display = 'none'; document.getElementById('mainApp').style.display = 'block';
+        }
+
+        function switchPage(pageId, navEl) {
+            document.querySelectorAll('.app-page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.getElementById('page' + pageId).classList.add('active');
+            navEl.classList.add('active');
         }
 
         function updateQty(amt) {
-            qty += amt;
-            if(qty < 1) qty = 1;
-            if(qty > 5) qty = 5;
+            qty += amt; if(qty < 1) qty = 1; if(qty > 5) qty = 5;
             document.getElementById('qtyDisplay').innerText = qty;
             document.getElementById('priceDisplay').innerText = (qty * unitPrice) + " Birr";
-            
-            const pTxt = currentLang === 'amharic' ? `${qty} ቁጥር ይምረጡ` : currentLang === 'oromo' ? `Lakkoofsa ${qty} Filadhu` : `Pick ${qty} Number(s)`;
-            document.getElementById('lblPickCount').innerText = pTxt;
+            document.getElementById('lblPickCount').innerText = currentLang === 'amharic' ? `${qty} ቁጥር ይምረጡ` : `Pick ${qty} Number(s)`;
             resetCells();
         }
+        function resetCells() { selected = []; document.querySelectorAll('.num-cell').forEach(c => c.classList.remove('selected')); }
 
-        function resetCells() {
-            selected = [];
-            document.querySelectorAll('.num-cell').forEach(c => c.classList.remove('selected'));
-        }
-
-        // Generate Grid
+        // Grid Generation
         const grid = document.getElementById('numsGrid');
         for(let i=1; i<=100; i++) {
-            let cell = document.createElement('div');
-            cell.className = 'num-cell';
-            cell.innerText = i;
-            if(soldOut.includes(i)) {
-                cell.classList.add('sold-out');
-            } else {
-                cell.onclick = () => handleSelect(i, cell);
-            }
+            let cell = document.createElement('div'); cell.className = 'num-cell'; cell.innerText = i;
+            if(soldOut.includes(i)) cell.classList.add('sold-out');
+            else cell.onclick = () => {
+                if(cell.classList.contains('selected')) { selected = selected.filter(n => n !== i); cell.classList.remove('selected'); }
+                else if(selected.length < qty) { selected.push(i); cell.classList.add('selected'); }
+            };
             grid.appendChild(cell);
         }
 
-        function handleSelect(num, el) {
-            if(el.classList.contains('selected')) {
-                selected = selected.filter(n => n !== num);
-                el.classList.remove('selected');
-            } else {
-                if(selected.length < qty) {
-                    selected.push(num);
-                    el.classList.add('selected');
-                }
-            }
-        }
-
         function clickBuyAction() {
-            if(selected.length < qty) {
-                const errMsg = currentLang === 'amharic' ? `እባክዎ መጀመሪያ ${qty} እድለኛ ቁጥር(ችን) ይምረጡ!` : `Please select ${qty} lucky number(s) first!`;
-                alert(errMsg);
-                return;
-            }
-            openModal();
-        }
-
-        function openModal() {
+            if(selected.length < qty) { alert(currentLang === 'amharic' ? `እባክዎ መጀመሪያ ${qty} ቁጥር ይምረጡ!` : `Select ${qty} number(s) first!`); return; }
             document.getElementById('popTkt').innerText = selected.map(n => "#"+n).join(', ');
             document.getElementById('popPrice').innerText = qty * unitPrice;
             document.getElementById('payModal').style.display = 'flex';
         }
+        function closeModal() { document.getElementById('payModal').style.display = 'none'; resetCells(); }
+        function paySuccess() { alert('🎉 Success!'); closeModal(); }
 
-        function closeModal() {
-            document.getElementById('payModal').style.display = 'none';
-            resetCells();
-        }
-
-        function paySuccess() {
-            alert(currentLang === 'amharic' ? '🎉 ክፍያው ተሳክቷል! የእርስዎ ቁጥሮች ተይዘዋል።' : '🎉 Payment Successful! Your lucky numbers are secured.');
-            closeModal();
-        }
-
-        // Timer simulation
-        let secs = 39;
-        setInterval(() => {
-            if(secs <= 0) secs = 60;
-            secs--;
-            document.getElementById('secs').innerText = secs.toString().padStart(2, '0');
-        }, 1000);
+        let secs = 39; setInterval(() => { if(secs <= 0) secs = 60; secs--; document.getElementById('secs').innerText = secs.toString().padStart(2, '0'); }, 1000);
     </script>
 </body>
 </html>
