@@ -45,148 +45,107 @@
             min-height: 100vh;
         }
 
+        /* 🤖 BOT WELCOME SCREEN (START & LANGUAGE) */
+        .bot-welcome-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--bg-color); z-index: 5000;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 30px; text-align: center;
+        }
+
+        .bot-logo { font-size: 32px; font-weight: bold; margin-bottom: 5px; }
+        .bot-logo span { color: var(--accent-gold); }
+        
+        .start-btn {
+            background: linear-gradient(90deg, #ffb800 0%, #ff9900 100%);
+            color: #000; padding: 16px 40px; border-radius: 30px;
+            font-size: 18px; font-weight: bold; border: none; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 184, 0, 0.3); margin-top: 20px;
+        }
+
+        .lang-container { display: none; width: 100%; max-width: 320px; margin-top: 25px; animation: fadeIn 0.4s ease; }
+        .lang-title { font-size: 16px; color: var(--text-sub); margin-bottom: 15px; font-weight: 500; }
+        
+        .lang-btn {
+            width: 100%; padding: 14px; background-color: var(--card-bg);
+            border: 1px solid var(--border-color); color: var(--text-main);
+            border-radius: 12px; font-size: 15px; font-weight: bold;
+            margin-bottom: 10px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .lang-btn:hover, .lang-btn:active { border-color: var(--accent-gold); background: rgba(255,184,0,0.05); }
+
         /* HEADER */
         header {
-            background-color: var(--card-bg);
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            background-color: var(--card-bg); padding: 15px 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 100;
         }
 
         .brand-logo { font-size: 20px; font-weight: bold; }
         .brand-logo span { color: var(--accent-gold); }
         .notification-icon { font-size: 22px; }
 
-        .main-container {
-            flex: 1;
-            padding: 15px;
-            padding-bottom: 90px;
-            max-width: 500px;
-            width: 100%;
-            margin: 0 auto;
-        }
-
+        .main-container { flex: 1; padding: 15px; padding-bottom: 90px; max-width: 500px; width: 100%; margin: 0 auto; }
         .app-page { display: none; animation: fadeIn 0.3s ease; }
         .app-page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 15px;
-            overflow: hidden;
-        }
+        .card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 16px; margin-bottom: 15px; overflow: hidden; }
 
-        /* 💻 HOME: GETACHEW FIKADU STYLE PRODUCT CARD */
+        /* 💻 HOME: HP LAPTOP CARD */
         .product-img-holder {
-            width: 100%;
-            height: 220px;
+            width: 100%; height: 220px;
             background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.4) 100%), url('https://images.unsplash.com/photo-1589561024260-b6de5a702476?auto=format&fit=crop&w=600&q=80') center center/cover;
-            border-radius: 14px;
-            position: relative;
+            border-radius: 14px; position: relative;
         }
 
-        .badge-new {
-            position: absolute;
-            top: 12px; left: 12px;
-            background-color: #128c7e; color: #fff;
-            padding: 4px 10px; border-radius: 6px;
-            font-size: 11px; font-weight: bold; text-transform: uppercase;
-        }
-
+        .badge-new { position: absolute; top: 12px; left: 12px; background-color: #128c7e; color: #fff; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: bold; text-transform: uppercase; }
         .product-title { font-size: 24px; font-weight: 800; margin-top: 12px; }
         .product-meta { color: var(--text-sub); font-size: 14px; margin-bottom: 15px; }
         .rating { color: var(--accent-gold); font-size: 13px; }
 
-        /* 🕒 COUNTDOWN DESIGN (GF STYLE) */
-        .gf-timer-box {
-            background: linear-gradient(135deg, #0e1e17 0%, #0d141a 100%);
-            border: 1px solid rgba(0, 230, 118, 0.2);
-            border-radius: 14px; padding: 15px; margin-top: 15px;
-        }
+        /* 🕒 COUNTDOWN DESIGN */
+        .gf-timer-box { background: linear-gradient(135deg, #0e1e17 0%, #0d141a 100%); border: 1px solid rgba(0, 230, 118, 0.2); border-radius: 14px; padding: 15px; margin-top: 15px; }
         .timer-title { font-size: 12px; font-weight: 700; color: var(--text-sub); letter-spacing: 1px; display: flex; align-items: center; gap: 5px; margin-bottom: 12px; }
         .timer-grid { display: flex; align-items: center; gap: 8px; }
         .t-digit { background-color: var(--input-bg); color: var(--accent-gold); font-size: 20px; font-weight: bold; padding: 8px 10px; border-radius: 8px; min-width: 42px; text-align: center; }
         .t-colon { color: var(--accent-gold); font-weight: bold; font-size: 20px; }
 
         /* 🎫 TICKETS PRICE CONTROL PANEL */
-        .gf-price-panel {
-            background-color: rgba(255, 184, 0, 0.03);
-            border: 1px solid var(--border-color);
-            border-radius: 14px; padding: 15px; margin-top: 15px;
-        }
+        .gf-price-panel { background-color: rgba(255, 184, 0, 0.03); border: 1px solid var(--border-color); border-radius: 14px; padding: 15px; margin-top: 15px; }
         .flex-row { display: flex; justify-content: space-between; align-items: center; }
         .qty-control { display: flex; align-items: center; gap: 15px; }
         .qty-btn { background-color: var(--input-bg); border: none; color: var(--text-main); font-size: 20px; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         .qty-btn.plus { background-color: var(--accent-gold); color: #000; }
         .qty-val { font-size: 18px; font-weight: bold; min-width: 20px; text-align: center; }
 
-        .btn-action {
-            width: 100%; padding: 15px; border-radius: 12px; font-size: 15px; font-weight: bold; border: none; cursor: pointer; margin-top: 15px; display: flex; align-items: center; justify-content: center; gap: 8px;
-        }
+        .btn-action { width: 100%; padding: 15px; border-radius: 12px; font-size: 15px; font-weight: bold; border: none; cursor: pointer; margin-top: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .btn-gold { background: linear-gradient(90deg, #ffb800 0%, #ff9900 100%); color: #000; }
         .btn-outline { background: transparent; border: 1px solid var(--accent-gold); color: var(--accent-gold); }
 
         /* 🔢 LUCKY NUMBERS GRID (1-100) */
-        .numbers-grid {
-            display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px;
-            max-height: 250px; overflow-y: auto; padding: 5px; margin-top: 15px;
-        }
-        .num-cell {
-            background-color: var(--input-bg); border: 1px solid var(--border-color);
-            border-radius: 8px; padding: 12px 0; text-align: center; font-weight: bold; font-size: 14px; cursor: pointer;
-        }
-        .num-cell.selected {
-            background-color: var(--accent-gold);
-            color: #000;
-            border-color: var(--accent-gold);
-        }
-        .num-cell.sold-out {
-            background-color: rgba(34, 46, 53, 0.4);
-            color: rgba(134, 150, 160, 0.3);
-            border-color: transparent;
-            cursor: not-allowed;
-            text-decoration: line-through;
-        }
+        .numbers-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; max-height: 250px; overflow-y: auto; padding: 5px; margin-top: 15px; }
+        .num-cell { background-color: var(--input-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 0; text-align: center; font-weight: bold; font-size: 14px; cursor: pointer; }
+        .num-cell.selected { background-color: var(--accent-gold); color: #000; border-color: var(--accent-gold); }
+        .num-cell.sold-out { background-color: rgba(34, 46, 53, 0.4); color: rgba(134, 150, 160, 0.3); border-color: transparent; cursor: not-allowed; text-decoration: line-through; }
 
         /* 👑 WINNERS LIST */
         .winner-row { display: flex; gap: 15px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border-color); }
-        .winner-row:last-child { border: none; }
 
         /* ⚙️ THEME SWITCHER */
         .theme-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
         .theme-btn { padding: 12px; border-radius: 10px; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); cursor: pointer; font-size: 13px; font-weight: 500; }
         .theme-btn.active { border-color: var(--accent-gold); background: rgba(255,184,0,0.1); }
 
-        /* 💳 PAYMENT OVERLAY & LOADING */
-        .modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85); z-index: 2000; display: none;
-            align-items: center; justify-content: center; padding: 20px;
-        }
+        /* 💳 PAYMENT MODAL */
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px; }
         .modal-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 25px; width: 100%; max-width: 400px; text-align: center; }
         
-        .loader {
-            border: 4px solid var(--border-color);
-            border-top: 4px solid var(--accent-gold);
-            border-radius: 50%; width: 40px; height: 40px;
-            animation: spin 1s linear infinite; margin: 20px auto; display: none;
-        }
+        .loader { border: 4px solid var(--border-color); border-top: 4px solid var(--accent-gold); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 20px auto; display: none; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         /* BOTTOM NAVIGATION */
-        .bottom-nav {
-            position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
-            width: 100%; max-width: 500px; background-color: var(--card-bg);
-            border-top: 1px solid var(--border-color); display: flex; padding: 12px 0; z-index: 1000;
-        }
+        .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 500px; background-color: var(--card-bg); border-top: 1px solid var(--border-color); display: flex; padding: 12px 0; z-index: 1000; }
         .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; color: var(--text-sub); font-size: 11px; background: none; border: none; cursor: pointer; }
         .nav-item .icon { font-size: 22px; margin-bottom: 4px; }
         .nav-item.active { color: var(--accent-gold); }
@@ -194,7 +153,31 @@
 </head>
 <body>
 
-    <!-- TOP BAR -->
+    <!-- 🤖 TELEGRAM BOT WELCOME VIEW -->
+    <div class="bot-welcome-screen" id="botWelcomeView">
+        <div class="bot-logo">Bota<span>Solutions</span></div>
+        <p style="color: var(--text-sub); font-size: 14px; margin-bottom: 10px;">Welcome to official Telegram WebApp</p>
+        
+        <!-- 1. Start Button -->
+        <button class="start-btn" id="startBotBtn" onclick="clickStartButton()">/start</button>
+
+        <!-- 2. Language Options (Hidden until Start is clicked) -->
+        <div class="lang-container" id="langSelectionBox">
+            <div class="lang-title">Choose Your Language / ቋንቋ ይምረጡ</div>
+            
+            <button class="lang-btn" onclick="selectLanguage('amharic')">
+                <span>አማርኛ (Amharic)</span> <span>🇪🇹</span>
+            </button>
+            <button class="lang-btn" onclick="selectLanguage('english')">
+                <span>English</span> <span>🇬🇧</span>
+            </button>
+            <button class="lang-btn" onclick="selectLanguage('oromo')">
+                <span>Afan Oromo</span> <span>🇪🇹</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN APP STRUCTURE -->
     <header>
         <div class="brand-logo">Bota<span>Solutions</span></div>
         <div class="notification-icon">🔔</div>
@@ -208,12 +191,11 @@
                 <div class="product-img-holder"><span class="badge-new">NEW</span></div>
                 <div style="padding: 10px 5px 0 5px;">
                     <span class="rating">⭐⭐⭐⭐⭐ 5.0</span>
-                    <h2 class="product-title">HP Pavilion Laptop</h2>
+                    <h2 class="product-title" id="lblProductTitle">HP Pavilion Laptop</h2>
                     <p class="product-meta">Core i7 • 16GB RAM • 512GB SSD • Sleek Silver</p>
                     
-                    <!-- GF STYLE COUNTDOWN -->
                     <div class="gf-timer-box">
-                        <div class="timer-title">🔥 TIME REMAINING</div>
+                        <div class="timer-title" id="lblTimeRemaining">🔥 TIME REMAINING</div>
                         <div class="timer-grid">
                             <div class="t-digit" id="days">00</div><div class="t-colon">:</div>
                             <div class="t-digit" id="hours">00</div><div class="t-colon">:</div>
@@ -222,11 +204,10 @@
                         </div>
                     </div>
 
-                    <!-- GF STYLE PRICE CONTROL -->
                     <div class="gf-price-panel">
                         <div class="flex-row">
                             <div>
-                                <p style="font-size: 11px; color: var(--text-sub); font-weight: bold;">TICKET PRICE</p>
+                                <p style="font-size: 11px; color: var(--text-sub); font-weight: bold;" id="lblTicketPrice">TICKET PRICE</p>
                                 <h3 style="font-size: 22px; color: var(--accent-gold); font-weight: 800;" id="basePriceDisplay">100 Birr</h3>
                             </div>
                             <div class="qty-control">
@@ -237,7 +218,7 @@
                         </div>
                     </div>
 
-                    <button class="btn-action btn-gold" onclick="switchPage('ticketsPage', document.getElementById('tktNavBtn'))">
+                    <button class="btn-action btn-gold" id="btnChooseNumbers" onclick="switchPage('ticketsPage', document.getElementById('tktNavBtn'))">
                         🎯 Choose Your Lucky Numbers
                     </button>
                 </div>
@@ -246,55 +227,44 @@
 
         <!-- 🎫 2. TICKETS PAGE -->
         <div id="ticketsPage" class="app-page">
-            <h2 style="font-size: 22px; margin-bottom: 5px;">Select Your Number</h2>
-            <p style="color: var(--text-sub); font-size: 14px; margin-bottom: 15px;">Pick <span id="requiredCountText" style="color:var(--accent-gold); font-weight:bold;">1</span> lucky number(s) based on your chosen ticket quantity.</p>
+            <h2 style="font-size: 22px; margin-bottom: 5px;" id="lblSelectNumber">Select Your Number</h2>
+            <p style="color: var(--text-sub); font-size: 14px; margin-bottom: 15px;" id="lblPickDesc">Pick <span id="requiredCountText" style="color:var(--accent-gold); font-weight:bold;">1</span> lucky number(s) based on your chosen ticket quantity.</p>
             
             <div class="card">
                 <div class="flex-row" style="background: var(--input-bg); padding: 12px; border-radius: 10px; margin-bottom: 10px;">
-                    <span style="font-weight: bold;">Selected Numbers:</span>
+                    <span style="font-weight: bold;" id="lblSelectedNumbers">Selected Numbers:</span>
                     <span style="color: var(--accent-gold); font-weight: bold;" id="selectedNumbersDisplay">None</span>
                 </div>
-                
                 <div class="numbers-grid" id="numbersGridContainer"></div>
             </div>
         </div>
 
         <!-- 🎉 3. WINNERS PAGE -->
         <div id="winnersPage" class="app-page">
-            <h2 style="font-size: 22px; margin-bottom: 15px;">Latest Winners 👑</h2>
-            
+            <h2 style="font-size: 22px; margin-bottom: 15px;" id="lblLatestWinners">Latest Winners 👑</h2>
             <div class="card">
-                <!-- Waiting message when there's no live winner yet -->
                 <div id="waitingDrawMessage" style="text-align: center; padding: 20px 0; color: var(--text-sub);">
                     <div style="font-size: 40px; margin-bottom: 10px;">⏳</div>
-                    <p>No live draws yet. Waiting for the campaign countdown to finish...</p>
+                    <p id="lblNoDraws">No live draws yet. Waiting for the campaign countdown to finish...</p>
                 </div>
 
-                <!-- Live Automatic Winner Block (Initially Hidden) -->
                 <div id="liveWinnerBox" style="text-align: center; padding: 10px 0; display: none; animation: fadeIn 0.5s ease-out;">
                     <div style="font-size: 50px; margin-bottom: 5px;">🎉</div>
                     <h3 style="color: var(--accent-gold); font-size: 22px; font-weight: 800;">Getachew Fikadu</h3>
-                    <p style="color: var(--text-sub); margin-top: 5px; font-size: 15px;">Won the: <span style="color: #fff; font-weight: bold;">HP Pavilion Laptop</span></p>
+                    <p style="color: var(--text-sub); margin-top: 5px; font-size: 15px;"><span id="lblWonThe">Won the:</span> <span style="color: #fff; font-weight: bold;">HP Pavilion Laptop</span></p>
                     <div style="background: rgba(0, 230, 118, 0.1); border: 1px dashed var(--green-glow); display: inline-block; padding: 6px 15px; border-radius: 8px; margin-top: 10px; font-weight: bold; color: var(--green-glow);">
                         Lucky Ticket: #45
                     </div>
                     <hr style="border: none; border-top: 1px solid var(--border-color); margin: 20px 0;">
                 </div>
 
-                <h3 style="font-size: 16px; color: var(--text-sub); margin: 10px 0;">Previous System Draws</h3>
+                <h3 style="font-size: 16px; color: var(--text-sub); margin: 10px 0;" id="lblPrevDraws">Previous System Draws</h3>
                 <div id="winnersHistory">
                     <div class="winner-row">
                         <div style="font-size: 28px;">🥇</div>
                         <div>
                             <h4 style="font-size: 15px;">Tariku Kitesa</h4>
                             <p style="color: var(--accent-gold); font-size: 13px;">Won: HP Pavilion Laptop (#24)</p>
-                        </div>
-                    </div>
-                    <div class="winner-row">
-                        <div style="font-size: 28px;">🥈</div>
-                        <div>
-                            <h4 style="font-size: 15px;">Alemu Bekele</h4>
-                            <p style="color: var(--text-sub); font-size: 13px;">Won: 5,000 ETB Bonus (#79)</p>
                         </div>
                     </div>
                 </div>
@@ -308,11 +278,9 @@
                 <h3 style="font-size: 20px;">Tariku Kitesa</h3>
                 <p style="color: var(--text-sub); font-size: 14px;">+251 911 32 5430</p>
             </div>
-
             <div class="card">
-                <h4 style="font-size: 16px; margin-bottom: 4px;">⚙️ Account Settings</h4>
-                <p style="color: var(--text-sub); font-size: 13px; margin-bottom: 15px;">Customize your application preference and theme mode.</p>
-                
+                <h4 style="font-size: 16px; margin-bottom: 4px;" id="lblAccountSettings">⚙️ Account Settings</h4>
+                <p style="color: var(--text-sub); font-size: 13px; margin-bottom: 15px;" id="lblSettingsDesc">Customize your application preference and theme mode.</p>
                 <span style="font-size: 11px; font-weight: bold; color: var(--text-sub); letter-spacing: 0.5px;">DISPLAY THEME</span>
                 <div class="theme-grid">
                     <button id="theme-light" class="theme-btn" onclick="changeTheme('light')">☀️ Light</button>
@@ -324,27 +292,23 @@
 
     </div>
 
-    <!-- 💳 CHAPA / TELEBIRR PAYMENT INTERFACE MODAL -->
+    <!-- 💳 CHAPA / TELEBIRR PAYMENT MODAL -->
     <div class="modal" id="paymentModal">
         <div class="modal-card">
             <div id="paymentContent">
                 <div style="font-size: 45px; margin-bottom: 10px;">💳</div>
-                <h3 style="font-size: 18px; margin-bottom: 8px;">Secure Gateway Checkout</h3>
-                <p style="color: var(--text-sub); font-size: 14px;">Your Selected Ticket(s): <span id="modalTktNum" style="color: var(--accent-gold); font-weight: bold;">#0</span></p>
-                
+                <h3 style="font-size: 18px; margin-bottom: 8px;" id="lblSecureGateway">Secure Gateway Checkout</h3>
+                <p style="color: var(--text-sub); font-size: 14px;"><span id="lblSelectedTktsModal">Your Selected Ticket(s):</span> <span id="modalTktNum" style="color: var(--accent-gold); font-weight: bold;">#0</span></p>
                 <div style="background: var(--input-bg); border-radius: 12px; padding: 15px; margin: 15px 0; font-size: 20px; font-weight: bold; color: var(--green-glow);">
                     Total: <span id="modalTotalPrice">100</span> Birr
                 </div>
-                
-                <button class="btn-action btn-gold" style="margin-top: 0;" onclick="processMockPayment()">Pay with Telebirr / Chapa</button>
-                <button class="btn-action btn-outline" style="margin-top: 8px; padding: 10px;" onclick="closePayment()">Cancel</button>
+                <button class="btn-action btn-gold" style="margin-top: 0;" onclick="processMockPayment()" id="btnPayNow">Pay with Telebirr / Chapa</button>
+                <button class="btn-action btn-outline" style="margin-top: 8px; padding: 10px;" onclick="closePayment()" id="btnCancel">Cancel</button>
             </div>
-            
-            <!-- Hidden Loading Screen inside Modal -->
             <div id="paymentLoading" style="display: none; padding: 20px 0;">
                 <div class="loader" id="payLoader" style="display: block;"></div>
-                <h4 style="margin-top: 10px;">Connecting to Secure API...</h4>
-                <p style="color: var(--text-sub); font-size: 13px; margin-top: 5px;">Please do not close or refresh this window.</p>
+                <h4 id="lblConnecting">Connecting to Secure API...</h4>
+                <p style="color: var(--text-sub); font-size: 13px; margin-top: 5px;" id="lblDoNotClose">Please do not close or refresh this window.</p>
             </div>
         </div>
     </div>
@@ -352,16 +316,16 @@
     <!-- BOTTOM NAVIGATION -->
     <div class="bottom-nav">
         <button class="nav-item active" onclick="switchPage('homePage', this)">
-            <span class="icon">🏠</span><span>Home</span>
+            <span class="icon">🏠</span><span id="navHome">Home</span>
         </button>
         <button id="tktNavBtn" class="nav-item" onclick="switchPage('ticketsPage', this)">
-            <span class="icon">🎫</span><span>Tickets</span>
+            <span class="icon">🎫</span><span id="navTickets">Tickets</span>
         </button>
         <button class="nav-item" onclick="switchPage('winnersPage', this)">
-            <span class="icon">🎉</span><span>Winners</span>
+            <span class="icon">🎉</span><span id="navWinners">Winners</span>
         </button>
         <button class="nav-item" onclick="switchPage('profilePage', this)">
-            <span class="icon">👤</span><span>Profile</span>
+            <span class="icon">👤</span><span id="navProfile">Profile</span>
         </button>
     </div>
 
@@ -370,9 +334,65 @@
         let currentQty = 1;
         const ticketUnitPrice = 100;
         let selectedNumbers = [];
-        
-        // Simulated pre-sold out tickets
         const soldOutTickets = [12, 28, 44, 57, 73, 89];
+
+        // TRANSLATION DICTIONARY
+        const languages = {
+            amharic: {
+                navHome: "ዋና ገፅ", navTickets: "ቲኬቶች", navWinners: "አሸናፊዎች", navProfile: "ፕሮፋይል",
+                lblTimeRemaining: "🔥 የቀረው ጊዜ", lblTicketPrice: "የቲኬት ዋጋ", btnChooseNumbers: "🎯 የእድል ቁጥርዎን ይምረጡ",
+                lblSelectNumber: "ቁጥርዎን ይምረጡ", lblPickDesc: "ከመረጡት የቲኬት ብዛት አንጻር እድለኛ ቁጥር(ዎችን) ይምረጡ።",
+                lblSelectedNumbers: "የተመረጡ ቁጥሮች:", lblLatestWinners: "የመጨረሻ አሸናፊዎች 👑",
+                lblNoDraws: "እስካሁን የወጣ እጣ የለም። የሰዓት ቆጠራው እስኪያልቅ ድረስ በመጠባበቅ ላይ...",
+                lblWonThe: "ያሸነፈው:", lblPrevDraws: "ያለፉ እጣዎች", lblAccountSettings: "⚙️ የመለያ ቅንብሮች",
+                lblSettingsDesc: "የመተግበሪያውን ቀለም እና ምርጫዎች እዚህ ያስተካክሉ።",
+                lblSecureGateway: "ደህንነቱ የተጠበቀ ክፍያ", lblSelectedTktsModal: "የመረጧቸው ቲኬቶች:",
+                btnPayNow: "በቴሌብር / ጫፓ ይክፈሉ", btnCancel: "ይቅር", lblConnecting: "ከክፍያ መስመር ጋር በመገናኘት ላይ...", lblDoNotClose: "እባክዎ ይህንን ገጽ አይዝጉት ወይም አያድሱት።"
+            },
+            english: {
+                navHome: "Home", navTickets: "Tickets", navWinners: "Winners", navProfile: "Profile",
+                lblTimeRemaining: "🔥 TIME REMAINING", lblTicketPrice: "TICKET PRICE", btnChooseNumbers: "🎯 Choose Your Lucky Numbers",
+                lblSelectNumber: "Select Your Number", lblPickDesc: "Pick lucky number(s) based on your chosen ticket quantity.",
+                lblSelectedNumbers: "Selected Numbers:", lblLatestWinners: "Latest Winners 👑",
+                lblNoDraws: "No live draws yet. Waiting for the campaign countdown to finish...",
+                lblWonThe: "Won the:", lblPrevDraws: "Previous System Draws", lblAccountSettings: "⚙️ Account Settings",
+                lblSettingsDesc: "Customize your application preference and theme mode.",
+                lblSecureGateway: "Secure Gateway Checkout", lblSelectedTktsModal: "Your Selected Ticket(s):",
+                btnPayNow: "Pay with Telebirr / Chapa", btnCancel: "Cancel", lblConnecting: "Connecting to Secure API...", lblDoNotClose: "Please do not close or refresh this window."
+            },
+            oromo: {
+                navHome: "Mana", navTickets: "Tikeetii", navWinners: "Moattota", navProfile: "Profaayilii",
+                lblTimeRemaining: "🔥 YEROO HAFE", lblTicketPrice: "GATII TIKEETII", btnChooseNumbers: "🎯 Lakkoofsa Kee Filadhu",
+                lblSelectNumber: "Lakkoofsa Kee Filadhu", lblPickDesc: "Baay'ina tikeetii filatte irratti hundaa'uun lakkoofsa carraa kee filadhu.",
+                lblSelectedNumbers: "Lakkoofsota Filataman:", lblLatestWinners: "Moattota Dhumataa 👑",
+                lblNoDraws: "Hanga ammaatti carraan bahe hin jiru. Hangam yeroon xumuramutti eeggamaa jira...",
+                lblWonThe: "Kan moate:", lblPrevDraws: "Carraawwan Darban", lblAccountSettings: "⚙️ Heera To'annoo",
+                lblSettingsDesc: "Haala fi bifa appilikeeshinii keetii asitti sirreessi.",
+                lblSecureGateway: "Kaffaltii Amansiisaa", lblSelectedTktsModal: "Tikeetii Filatame:",
+                btnPayNow: "Telebirr / Chapa'n Kaffali", btnCancel: "Dhiisi", lblConnecting: "Kaffaltii waliin walqabachaa jira...", lblDoNotClose: "Maaloo fuula kana hin cufiniin ykn hin haaromsin."
+            }
+        };
+
+        // BOT FLOW LOGIC
+        function clickStartButton() {
+            document.getElementById('startBotBtn').style.display = 'none';
+            document.getElementById('langSelectionBox').style.display = 'block';
+        }
+
+        function selectLanguage(lang) {
+            // Apply text translations
+            const dict = languages[lang];
+            for (let key in dict) {
+                const el = document.getElementById(key);
+                if (el) el.innerText = dict[key];
+            }
+            
+            // Hide welcome bot overlay and show the main app
+            document.getElementById('botWelcomeView').style.fadeOut = "0.3s";
+            setTimeout(() => {
+                document.getElementById('botWelcomeView').style.display = 'none';
+            }, 300);
+        }
 
         // PAGINATION CORE
         function switchPage(pageId, element) {
@@ -380,10 +400,7 @@
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
             element.classList.add('active');
-            
-            if(pageId === 'ticketsPage') {
-                resetTicketSelection();
-            }
+            if(pageId === 'ticketsPage') resetTicketSelection();
         }
 
         // QUANTITY CHANGE MANAGER
@@ -391,26 +408,23 @@
             currentQty += amount;
             if(currentQty < 1) currentQty = 1;
             if(currentQty > 5) currentQty = 5; 
-            
             document.getElementById('qtyCount').innerText = currentQty;
             document.getElementById('basePriceDisplay').innerText = (currentQty * ticketUnitPrice) + " Birr";
             document.getElementById('requiredCountText').innerText = currentQty;
         }
 
-        // RESET SELECTION UPON ENTERING PAGE
         function resetTicketSelection() {
             selectedNumbers = [];
             document.getElementById('selectedNumbersDisplay').innerText = "None";
             document.querySelectorAll('.num-cell').forEach(cell => cell.classList.remove('selected'));
         }
 
-        // GENERATE 1 TO 100 TICKETS GRID WITH SOLD-OUT AND SELECTIVE INTERACTION
+        // GENERATE 1 TO 100 TICKETS GRID
         const gridContainer = document.getElementById('numbersGridContainer');
         for (let i = 1; i <= 100; i++) {
             const cell = document.createElement('div');
             cell.className = 'num-cell';
             cell.innerText = i;
-            
             if(soldOutTickets.includes(i)) {
                 cell.classList.add('sold-out');
             } else {
@@ -419,7 +433,6 @@
             gridContainer.appendChild(cell);
         }
 
-        // HANDLE MULTIPLE OR SINGLE SELECTION BASED ON QTY
         function handleNumberClick(num, element) {
             if(element.classList.contains('selected')) {
                 selectedNumbers = selectedNumbers.filter(n => n !== num);
@@ -430,20 +443,15 @@
                     element.classList.add('selected');
                 }
             }
-
             document.getElementById('selectedNumbersDisplay').innerText = selectedNumbers.length > 0 ? selectedNumbers.map(n => "#"+n).join(', ') : "None";
-
-            // When required numbers match selected count, show gateway automatically
             if(selectedNumbers.length === currentQty) {
                 setTimeout(() => { triggerPayment(); }, 300);
             }
         }
 
-        // GATEWAY MODAL MANAGEMENT
         function triggerPayment() {
             document.getElementById('modalTktNum').innerText = selectedNumbers.map(n => "#"+n).join(', ');
             document.getElementById('modalTotalPrice').innerText = currentQty * ticketUnitPrice;
-            
             document.getElementById('paymentContent').style.display = 'block';
             document.getElementById('paymentLoading').style.display = 'none';
             document.getElementById('paymentModal').style.display = 'flex';
@@ -454,11 +462,9 @@
             resetTicketSelection();
         }
 
-        // ANIMATED PAYMENT PROCESSING
         function processMockPayment() {
             document.getElementById('paymentContent').style.display = 'none';
             document.getElementById('paymentLoading').style.display = 'block';
-
             setTimeout(() => {
                 alert('🎉 Payment Successful! Your tickets have been secured successfully.');
                 closePayment();
@@ -466,27 +472,23 @@
             }, 2500); 
         }
 
-        // COUNTDOWN TIMER (FOR LIVE SYSTEM WINNER TRIGGER)
-        let countdownSeconds = 15; // Set to 15 seconds for simulation
+        // COUNTDOWN TIMER
+        let countdownSeconds = 15; 
         function triggerCountdown() {
             if(countdownSeconds <= 0) {
                 document.getElementById('days').innerText = "00";
                 document.getElementById('hours').innerText = "00";
                 document.getElementById('mins').innerText = "00";
                 document.getElementById('secs').innerText = "00";
-                
-                // Automatically reveal new winner on Winners Page when countdown ends
                 document.getElementById('waitingDrawMessage').style.display = 'none';
                 document.getElementById('liveWinnerBox').style.display = 'block';
                 return;
             }
             countdownSeconds--;
-            
             let d = Math.floor(countdownSeconds / (24 * 3600));
             let h = Math.floor((countdownSeconds % (24 * 3600)) / 3600);
             let m = Math.floor((countdownSeconds % 3600) / 60);
             let s = countdownSeconds % 60;
-
             document.getElementById('days').innerText = d.toString().padStart(2, '0');
             document.getElementById('hours').innerText = h.toString().padStart(2, '0');
             document.getElementById('mins').innerText = m.toString().padStart(2, '0');
@@ -494,22 +496,17 @@
         }
         setInterval(triggerCountdown, 1000);
 
-        // THEME CORES
         function changeTheme(mode) {
             document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(`theme-${mode}`).classList.add('active');
-
             if(mode === 'system') {
                 const darkPreference = window.matchMedia('(prefers-color-scheme: dark)').matches;
                 document.documentElement.setAttribute('data-theme', darkPreference ? 'dark' : 'light');
             } else {
                 document.documentElement.setAttribute('data-theme', mode);
             }
-            localStorage.setItem('customer-theme', mode);
         }
-
-        const loadedTheme = localStorage.getItem('customer-theme') || 'dark';
-        changeTheme(loadedTheme);
+        changeTheme('dark');
     </script>
 </body>
 </html>
