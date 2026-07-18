@@ -4,33 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bota Solutions</title>
-    
-    <!-- 🎨 የ CSS ዲዛይን ክፍል (ስታይል) -->
     <style>
+        /* CSS VARIABLES FOR THEMING */
+        :root {
+            --bg-color: #0b141a;
+            --card-bg: #111b21;
+            --text-main: #ffffff;
+            --text-sub: #8696a0;
+            --border-color: #222e35;
+            --accent-gold: #ffb800;
+            --input-bg: #2a3942;
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f0f2f5;
+            --card-bg: #ffffff;
+            --text-main: #111b21;
+            --text-sub: #667781;
+            --border-color: #dadde1;
+            --accent-gold: #e0a200;
+            --input-bg: #f0f2f5;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             -webkit-tap-highlight-color: transparent;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
 
         body {
-            background-color: #0b141a; /* የቦታ ጨለማ ባክግራውንድ */
-            color: #ffffff;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
-        /* 🏆 TOP PREMIUM HEADER */
         header {
-            background-color: #111b21;
+            background-color: var(--card-bg);
             padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #222e35;
+            border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -39,62 +58,138 @@
         .brand-logo {
             font-size: 20px;
             font-weight: bold;
-            color: #ffffff;
             letter-spacing: 0.5px;
         }
 
-        .brand-logo span {
-            color: #ffb800; /* የወርቃማው ቀለም አክሰንት */
-        }
+        .brand-logo span { color: var(--accent-gold); }
 
-        .notification-icon {
-            font-size: 20px;
-            cursor: pointer;
-        }
+        .notification-icon { font-size: 22px; cursor: pointer; }
 
-        /* 📦 MAIN CONTENT CONTAINER */
         .main-container {
             flex: 1;
             padding: 20px;
-            padding-bottom: 90px; /* ከታች ባሩ ጋር እንዳይደራረብ */
+            padding-bottom: 90px;
             max-width: 500px;
             width: 100%;
             margin: 0 auto;
         }
 
-        /* 🚪 APP PAGES (የገጾቹ መታያ መቆጣጠሪያ) */
         .app-page {
             display: none;
             animation: fadeIn 0.25s ease-in-out;
         }
 
-        .app-page.active {
-            display: block;
-        }
+        .app-page.active { display: block; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 📋 PAGES CARDS STYLES */
         .page-title {
             font-size: 24px;
             font-weight: bold;
             margin-bottom: 20px;
-            color: #ffffff;
         }
 
         .card {
-            background-color: #111b21;
-            border: 1px solid #222e35;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
             border-radius: 14px;
             padding: 18px;
             margin-bottom: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
-        /* 📱 BOTTOM NAVIGATION BAR */
+        /* DYNAMIC FORM STYLES */
+        .admin-section {
+            background: rgba(255, 184, 0, 0.05);
+            border: 1px dashed var(--accent-gold);
+            border-radius: 14px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            font-size: 14px;
+            color: var(--accent-gold);
+            margin-bottom: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .form-group { margin-bottom: 12px; }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: var(--input-bg);
+            color: var(--text-main);
+            outline: none;
+            font-size: 14px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            background-color: var(--accent-gold);
+            color: #0b141a;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* TIMER STYLES */
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .time-box {
+            background: var(--input-bg);
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 65px;
+        }
+
+        .time-num {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--accent-gold);
+        }
+
+        .time-lbl { font-size: 11px; color: var(--text-sub); }
+
+        /* THEME SELECTOR BUTTONS */
+        .theme-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .theme-btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: var(--input-bg);
+            color: var(--text-main);
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .theme-btn.active {
+            border-color: var(--accent-gold);
+            background: rgba(255,184,0,0.1);
+        }
+
+        /* BOTTOM NAV BAR */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -102,8 +197,8 @@
             transform: translateX(-50%);
             width: 100%;
             max-width: 500px;
-            background-color: #111b21;
-            border-top: 1px solid #222e35;
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
             display: flex;
             justify-content: space-around;
             padding: 12px 0;
@@ -114,159 +209,235 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: #8696a0;
+            color: var(--text-sub);
             text-decoration: none;
             font-size: 11px;
             font-weight: 500;
             cursor: pointer;
-            transition: color 0.2s;
             background: none;
             border: none;
             width: 22%;
-            outline: none;
         }
 
-        .nav-item .icon {
-            font-size: 22px;
-            margin-bottom: 4px;
-        }
-
-        /* Active Nav State */
-        .nav-item.active {
-            color: #ffb800; /* ወርቃማው ቀለም */
-        }
-
-        /* PROFILE */
-        .profile-header {
-            text-align: center;
-            padding: 15px 0 25px 0;
-        }
-        .profile-avatar {
-            font-size: 65px;
-            margin-bottom: 12px;
-        }
+        .nav-item .icon { font-size: 22px; margin-bottom: 4px; }
+        .nav-item.active { color: var(--accent-gold); }
     </style>
 </head>
 <body>
 
-    <!-- 🏆 TOP HEADER -->
+    <!-- HEADER -->
     <header>
         <div class="brand-logo">Bota<span>Solutions</span></div>
         <div class="notification-icon">🔔</div>
     </header>
 
-    <!-- 📦 MAIN PAGES CONTAINER -->
+    <!-- MAIN PAGES CONTAINER -->
     <div class="main-container">
 
-        <!-- 🏠 1. HOME PAGE -->
+        <!-- 1. HOME PAGE (WITH PRODUCT ADD ACCESS) -->
         <div id="homePage" class="app-page active">
             <h2 class="page-title">Welcome Back 👋</h2>
-            <div class="card">
-                <h3 style="color: #ffb800; margin-bottom: 8px;">🔥 Hot Campaign</h3>
-                <p style="color: #8696a0; font-size: 14px; line-height: 1.5;">Check out the latest exclusive premium tickets available today. Don't miss your chance!</p>
+            
+            <!-- Add Product Form -->
+            <div class="admin-section">
+                <div class="section-subtitle">➕ Add New Product Listing</div>
+                <div class="form-group">
+                    <input type="text" id="prodName" class="form-control" placeholder="Product Name (e.g., iPhone 15 Pro)">
+                </div>
+                <div class="form-group">
+                    <input type="text" id="prodDesc" class="form-control" placeholder="Short Description">
+                </div>
+                <button class="btn-submit" onclick="addProduct()">Publish Product</button>
             </div>
-            <div class="card">
-                <h3>System Status</h3>
-                <p style="color: #8696a0; font-size: 14px; margin-top: 5px;">All features are active and running securely.</p>
+
+            <!-- Container for products -->
+            <div id="productsContainer">
+                <div class="card">
+                    <h3 style="color: var(--accent-gold); margin-bottom: 8px;">🔥 Hot Campaign</h3>
+                    <p style="color: var(--text-sub); font-size: 14px; line-height: 1.5;">Check out the latest exclusive premium tickets available today. Don't miss your chance!</p>
+                </div>
             </div>
         </div>
 
-        <!-- 🎫 2. TICKETS PAGE -->
+        <!-- 2. TICKETS PAGE (WITH TICKET NUMBER ADD ACCESS) -->
         <div id="ticketsPage" class="app-page">
             <h2 class="page-title">My Tickets</h2>
-            <div class="card">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                        <h4 style="font-size: 16px;">Premium Ticket #8921</h4>
-                        <p style="color: #8696a0; font-size: 13px; margin-top: 4px;">Status: Active</p>
-                    </div>
-                    <span style="color: #ffb800; font-weight: bold; font-size: 16px;">100 ETB</span>
+
+            <!-- Add Ticket Form -->
+            <div class="admin-section">
+                <div class="section-subtitle">🎫 Add New Ticket Card</div>
+                <div class="form-group">
+                    <input type="text" id="tktNum" class="form-control" placeholder="Ticket Number (e.g., #9941)">
                 </div>
+                <div class="form-group">
+                    <input type="number" id="tktPrice" class="form-control" placeholder="Price in ETB">
+                </div>
+                <button class="btn-submit" onclick="addTicket()">Add Ticket</button>
             </div>
-            <div class="card" style="opacity: 0.5;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                        <h4 style="font-size: 16px;">Standard Ticket #7432</h4>
-                        <p style="color: #8696a0; font-size: 13px; margin-top: 4px;">Status: Expired</p>
+
+            <!-- Container for tickets -->
+            <div id="ticketsContainer">
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h4 style="font-size: 16px;">Premium Ticket #8921</h4>
+                            <p style="color: var(--text-sub); font-size: 13px; margin-top: 4px;">Status: Active</p>
+                        </div>
+                        <span style="color: var(--accent-gold); font-weight: bold; font-size: 16px;">100 ETB</span>
                     </div>
-                    <span style="color: #8696a0; font-weight: bold; font-size: 16px;">Free</span>
                 </div>
             </div>
         </div>
 
-        <!-- 🎉 3. WINNERS PAGE -->
+        <!-- 3. WINNERS PAGE (WITH SYSTEM LIVE COUNTDOWN) -->
         <div id="winnersPage" class="app-page">
-            <h2 class="page-title">Latest Winners 👑</h2>
+            <h2 class="page-title">Draw Countdown 👑</h2>
+            
+            <div class="card" style="text-align: center;">
+                <h4 style="margin-bottom: 5px;">Next Winner Announcement In:</h4>
+                <div class="countdown-container">
+                    <div class="time-box"><div class="time-num" id="days">02</div><div class="time-lbl">Days</div></div>
+                    <div class="time-box"><div class="time-num" id="hours">14</div><div class="time-lbl">Hours</div></div>
+                    <div class="time-box"><div class="time-num" id="mins">45</div><div class="time-lbl">Mins</div></div>
+                    <div class="time-box"><div class="time-num" id="secs">00</div><div class="time-lbl">Secs</div></div>
+                </div>
+            </div>
+
+            <h3 style="font-size: 18px; margin: 20px 0 10px 0;">Previous Winners</h3>
             <div class="card" style="display: flex; gap: 15px; align-items: center;">
                 <div style="font-size: 32px;">🥇</div>
                 <div>
                     <h4 style="font-size: 16px;">Tariku Kitesa</h4>
-                    <p style="color: #ffb800; font-size: 13px; margin-top: 2px;">Won: Grand Premium Prize</p>
-                </div>
-            </div>
-            <div class="card" style="display: flex; gap: 15px; align-items: center;">
-                <div style="font-size: 32px;">🥈</div>
-                <div>
-                    <h4 style="font-size: 16px;">Alemu Bekele</h4>
-                    <p style="color: #8696a0; font-size: 13px; margin-top: 2px;">Won: 5,000 ETB Wallet Bonus</p>
+                    <p style="color: var(--accent-gold); font-size: 13px; margin-top: 2px;">Won: Grand Premium Prize</p>
                 </div>
             </div>
         </div>
 
-        <!-- 👤 4. PROFILE PAGE -->
+        <!-- 4. PROFILE & SETTINGS PAGE (WITH ACCOUNT SETTINGS EXPANSED & REMOVED LOGOUT) -->
         <div id="profilePage" class="app-page">
-            <div class="profile-header">
-                <div class="profile-avatar">👤</div>
+            <div style="text-align: center; padding: 15px 0 25px 0;">
+                <div style="font-size: 65px; margin-bottom: 12px;">👤</div>
                 <h3 style="font-size: 20px;">Tariku Kitesa</h3>
-                <p style="color: #8696a0; font-size: 14px; margin-top: 4px;">+251 911 32 5430</p>
+                <p style="color: var(--text-sub); font-size: 14px; margin-top: 4px;">+251 911 32 5430</p>
             </div>
-            <div class="card" style="cursor: pointer; font-weight: 500;">
-                ⚙️ Account Settings
-            </div>
-            <div class="card" style="cursor: pointer; color: #ff4444; border-color: rgba(255,68,68,0.2); font-weight: 500;">
-                🚪 Log Out / Switch Account
+
+            <div class="card">
+                <h4 style="margin-bottom: 8px;">⚙️ Account Settings</h4>
+                <p style="color: var(--text-sub); font-size: 13px;">Customize your application preference and theme mode.</p>
+                
+                <!-- Display Theme Controls Directly Here -->
+                <div style="margin-top: 15px;">
+                    <span style="font-size: 13px; font-weight: bold; color: var(--text-sub);">DISPLAY THEME</span>
+                    <div class="theme-options">
+                        <button id="theme-light" class="theme-btn" onclick="setTheme('light')">☀️ Light</button>
+                        <button id="theme-dark" class="theme-btn" onclick="setTheme('dark')">🌙 Dark</button>
+                        <button id="theme-system" class="theme-btn" onclick="setTheme('system')">💻 System</button>
+                    </div>
+                </div>
             </div>
         </div>
 
     </div>
 
-    <!-- 📱 BOTTOM NAVIGATION BAR -->
+    <!-- BOTTOM NAV BAR -->
     <div class="bottom-nav">
         <button class="nav-item active" onclick="switchPage('homePage', this)">
-            <span class="icon">🏠</span>
-            <span>Home</span>
+            <span class="icon">🏠</span><span>Home</span>
         </button>
         <button class="nav-item" onclick="switchPage('ticketsPage', this)">
-            <span class="icon">🎫</span>
-            <span>Tickets</span>
+            <span class="icon">🎫</span><span>Tickets</span>
         </button>
         <button class="nav-item" onclick="switchPage('winnersPage', this)">
-            <span class="icon">🎉</span>
-            <span>Winners</span>
+            <span class="icon">🎉</span><span>Winners</span>
         </button>
         <button class="nav-item" onclick="switchPage('profilePage', this)">
-            <span class="icon">👤</span>
-            <span>Profile</span>
+            <span class="icon">👤</span><span>Profile</span>
         </button>
     </div>
 
-    <!-- ⚡ የ JAVASCRIPT ክፍል (ገጾቹን በፍጥነት የሚቀያይር) -->
+    <!-- SYSTEM JAVASCRIPT -->
     <script>
+        // PAGE SWITCHER
         function switchPage(pageId, element) {
-            // 1. ሁሉንም ገጾች ደብቅ
-            const pages = document.querySelectorAll('.app-page');
-            pages.forEach(page => page.classList.remove('active'));
-
-            // 2. ከሁሉም በተኖች ላይ የወርቃማ ማብሪያውን ቀለም አጥፋ
-            const navItems = document.querySelectorAll('.nav-item');
-            navItems.forEach(item => item.classList.remove('active'));
-
-            // 3. የተመረጠውን ገጽ ብቻ አሳይ
+            document.querySelectorAll('.app-page').forEach(page => page.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
-
-            // 4. ለተጫነው በተን ብቻ ወርቃማውን ቀለም ስጠው
             element.classList.add('active');
         }
+
+        // ADD PRODUCT (HOME)
+        function addProduct() {
+            const name = document.getElementById('prodName').value.trim();
+            const desc = document.getElementById('prodDesc').value.trim();
+            if(!name || !desc) return alert('Please fill in all details');
+
+            const container = document.getElementById('productsContainer');
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `<h3 style="color: var(--accent-gold); margin-bottom: 8px;">📦 ${name}</h3><p style="color: var(--text-sub); font-size: 14px;">${desc}</p>`;
+            container.insertBefore(card, container.firstChild);
+            
+            document.getElementById('prodName').value = '';
+            document.getElementById('prodDesc').value = '';
+        }
+
+        // ADD TICKET
+        function addTicket() {
+            const num = document.getElementById('tktNum').value.trim();
+            const price = document.getElementById('tktPrice').value.trim();
+            if(!num || !price) return alert('Please fill in ticket number and price');
+
+            const container = document.getElementById('ticketsContainer');
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `<div style="display: flex; justify-content: space-between; align-items: center;"><div><h4 style="font-size: 16px;">Premium Ticket ${num}</h4><p style="color: var(--text-sub); font-size: 13px; margin-top: 4px;">Status: Active</p></div><span style="color: var(--accent-gold); font-weight: bold; font-size: 16px;">${price} ETB</span></div>`;
+            container.insertBefore(card, container.firstChild);
+
+            document.getElementById('tktNum').value = '';
+            document.getElementById('tktPrice').value = '';
+        }
+
+        // LIVE COUNTDOWN TIMER (WINNERS)
+        let countdownTime = (2 * 24 * 60 * 60) + (14 * 60 * 60) + (45 * 60); // 2 Days, 14 Hours, 45 Minutes in seconds
+        function updateTimer() {
+            if (countdownTime <= 0) {
+                document.getElementById('days').innerText = "00";
+                document.getElementById('hours').innerText = "00";
+                document.getElementById('mins').innerText = "00";
+                document.getElementById('secs').innerText = "00";
+                return;
+            }
+            countdownTime--;
+            
+            let d = Math.floor(countdownTime / (24 * 3600));
+            let h = Math.floor((countdownTime % (24 * 3600)) / 3600);
+            let m = Math.floor((countdownTime % 3600) / 60);
+            let s = countdownTime % 60;
+
+            document.getElementById('days').innerText = d.toString().padStart(2, '0');
+            document.getElementById('hours').innerText = h.toString().padStart(2, '0');
+            document.getElementById('mins').innerText = m.toString().padStart(2, '0');
+            document.getElementById('secs').innerText = s.toString().padStart(2, '0');
+        }
+        setInterval(updateTimer, 1000);
+
+        // SYSTEM THEME CONTROLLER
+        function setTheme(themeMode) {
+            document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`theme-${themeMode}`).classList.add('active');
+
+            if(themeMode === 'system') {
+                const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', themeMode);
+            }
+            localStorage.setItem('bota-theme', themeMode);
+        }
+
+        // INIT THEME ON LOAD
+        const savedTheme = localStorage.getItem('bota-theme') || 'dark';
+        setTheme(savedTheme);
     </script>
 </body>
 </html>
