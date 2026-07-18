@@ -3,209 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bota Solutions - Admin Dashboard</title>
+    <title>Bota Solutions</title>
     <style>
         :root {
-            --bg-dark: #0b141a;
-            --card-dark: #111b21;
-            --text-white: #ffffff;
-            --text-muted: #8696a0;
-            --accent-gold: #ffb800;
-            --border-color: #222e35;
-            --danger-red: #ff3b30;
-            --success-green: #00e676;
+            --primary: #ffb800;
+            --bg: #090e11;
+            --surface: #151d23;
+            --text: #ffffff;
+            --sub-text: #a0aab2;
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-white);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            margin: 0; padding: 20px;
-        }
-
-        .admin-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .header {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 15px;
-            margin-bottom: 25px;
+            min-height: 100vh;
         }
 
-        .header h1 { font-size: 24px; font-weight: bold; }
-        .header h1 span { color: var(--accent-gold); }
-        .badge-admin { background: var(--danger-red); color: white; padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: bold; }
-
-        /* DASHBOARD CARDS GRID */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px; margin-bottom: 25px;
+        /* 🤖 START PAGE */
+        .glass-card {
+            background: rgba(21, 29, 35, 0.7);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
 
-        .stat-card {
-            background: var(--card-dark);
-            border: 1px solid var(--border-color);
-            border-radius: 12px; padding: 20px;
-        }
-        .stat-card h3 { font-size: 13px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px; }
-        .stat-card p { font-size: 24px; font-weight: bold; color: var(--accent-gold); }
+        h1 { font-size: 28px; margin-bottom: 30px; }
+        h1 span { color: var(--primary); }
 
-        /* MAIN TWO COLUMN LAYOUT */
-        .main-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 20px;
-        }
-
-        .panel {
-            background: var(--card-dark);
-            border: 1px solid var(--border-color);
-            border-radius: 16px; padding: 20px;
+        .btn-start {
+            background: var(--primary);
+            color: #000;
+            padding: 18px 50px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s;
         }
 
-        .panel h2 { font-size: 18px; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; }
+        .btn-start:active { transform: scale(0.95); }
 
-        /* FORM INPUTS */
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 6px; }
-        .form-group input, .form-group select {
-            width: 100%; padding: 12px; background: #2a3942; border: 1px solid var(--border-color);
-            border-radius: 8px; color: white; font-size: 14px; outline: none;
+        /* 🌐 LANGUAGE SELECTION */
+        .lang-grid { display: none; margin-top: 20px; gap: 10px; display: flex; flex-direction: column; }
+        .btn-lang {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            cursor: pointer;
         }
+        .btn-lang:hover { background: var(--primary); color: #000; }
 
-        .btn {
-            width: 100%; padding: 14px; border-radius: 8px; font-size: 15px; font-weight: bold;
-            border: none; cursor: pointer; text-align: center; margin-top: 10px;
-        }
-        .btn-gold { background: var(--accent-gold); color: #000; }
-        .btn-danger { background: var(--danger-red); color: white; }
-
-        /* LIVE DRAW BOX */
-        .draw-box {
-            background: rgba(0, 230, 118, 0.05);
-            border: 1px dashed var(--success-green);
-            border-radius: 12px; padding: 15px; text-align: center; margin-top: 15px;
+        /* 📱 MAIN APP (HIDDEN BY DEFAULT) */
+        #mainApp { display: none; width: 100%; max-width: 500px; padding: 20px; }
+        .product-card {
+            background: var(--surface);
+            padding: 20px;
+            border-radius: 25px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <div class="admin-container">
-        <!-- HEADER -->
-        <div class="header">
-            <div>
-                <h1>Bota<span>Solutions</span> Dashboard</h1>
-                <p style="color: var(--text-muted); font-size: 13px;">Welcome back, System Admin</p>
-            </div>
-            <span class="badge-admin">SECURE ACCESS</span>
+    <!-- START SCREEN -->
+    <div class="glass-card" id="startScreen">
+        <h1>Bota<span>Solutions</span></h1>
+        <button class="btn-start" id="startBtn" onclick="showLangs()">START / ጀምር</button>
+        
+        <div id="langContainer" class="lang-grid" style="display: none;">
+            <button class="btn-lang" onclick="goHome('English')">English</button>
+            <button class="btn-lang" onclick="goHome('Amharic')">አማርኛ</button>
+            <button class="btn-lang" onclick="goHome('Oromo')">Afan Oromo</button>
         </div>
+    </div>
 
-        <!-- OVERVIEW STATS -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <h3>Total Revenue</h3>
-                <p id="statRevenue">14,200 ETB</p>
-            </div>
-            <div class="stat-card">
-                <h3>Tickets Sold</h3>
-                <p id="statTickets">142 / 1000</p>
-            </div>
-            <div class="stat-card">
-                <h3>Active Users</h3>
-                <p>1,240</p>
-            </div>
-        </div>
-
-        <!-- MAIN CONTROLS -->
-        <div class="main-grid">
-            
-            <!-- 1. CAMPAIGN MANAGEMENT -->
-            <div class="panel">
-                <h2>📦 Setup Next Campaign (ዕጣ መለወጫ)</h2>
-                <div class="form-group">
-                    <label>Product Name (የዕቃው ስም)</label>
-                    <input type="text" id="prodName" value="HP Pavilion Laptop">
-                </div>
-                <div class="form-group">
-                    <label>Ticket Price (ETB)</label>
-                    <input type="number" id="prodPrice" value="100">
-                </div>
-                <div class="form-group">
-                    <label>Product Image URL (የምስል ሊንክ)</label>
-                    <input type="text" id="prodImg" value="https://images.unsplash.com/.../laptop">
-                </div>
-                <div class="form-group">
-                    <label>Duration (Hours)</label>
-                    <input type="number" id="prodDuration" value="24">
-                </div>
-                <button class="btn btn-gold" onclick="updateCampaign()">🔄 Update Campaign Settings</button>
-            </div>
-
-            <!-- 2. LIVE DRAW SYSTEM -->
-            <div class="panel">
-                <h2>🎉 Live Draw Controller (እጣ ማውጫ)</h2>
-                <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 15px;">
-                    When the countdown hits zero, choose how to pick the lucky winner.
-                </p>
-                
-                <div class="form-group">
-                    <label>Draw Mode</label>
-                    <select id="drawMode" onchange="toggleManualInput()">
-                        <option value="random">100% Fair Random (በሲስተሙ እጣ ማውጫ)</option>
-                        <option value="manual">Specify Winning Ticket (የፈለጉትን ቁጥር መርጠው ማውጣት)</option>
-                    </select>
-                </div>
-
-                <div class="form-group" id="manualTicketGroup" style="display: none;">
-                    <label>Winning Ticket Number (#)</label>
-                    <input type="number" id="winningTicket" placeholder="e.g. 45" min="1" max="100">
-                </div>
-
-                <button class="btn btn-danger" onclick="executeLiveDraw()">⚡ Trigger Live Draw Now</button>
-
-                <div class="draw-box" id="drawStatusBox" style="display: none;">
-                    <h4 style="color: var(--success-green); margin-bottom: 5px;">Status: Live Draw Completed!</h4>
-                    <p style="font-size: 14px;" id="drawSummary">Winner announced to all bot users.</p>
-                </div>
-            </div>
-
+    <!-- MAIN INTERFACE -->
+    <div id="mainApp">
+        <div class="product-card">
+            <h2>🎉 Welcome!</h2>
+            <p>Select your lucky number below</p>
         </div>
     </div>
 
     <script>
-        function toggleManualInput() {
-            const mode = document.getElementById('drawMode').value;
-            const group = document.getElementById('manualTicketGroup');
-            group.style.display = (mode === 'manual') ? 'block' : 'none';
+        function showLangs() {
+            document.getElementById('startBtn').style.display = 'none';
+            document.getElementById('langContainer').style.display = 'flex';
         }
 
-        function updateCampaign() {
-            const name = document.getElementById('prodName').value;
-            alert(`⚙️ Campaign Updated successfully!\nNew Item: ${name}\nChanges will be reflected instantly across all Telegram Bot user views.`);
-        }
-
-        function executeLiveDraw() {
-            const mode = document.getElementById('drawMode').value;
-            let chosenTicket = Math.floor(Math.random() * 100) + 1;
-
-            if (mode === 'manual') {
-                const tkt = document.getElementById('winningTicket').value;
-                if(!tkt) { alert('Please enter a ticket number first!'); return; }
-                chosenTicket = tkt;
-            }
-
-            document.getElementById('drawStatusBox').style.display = 'block';
-            document.getElementById('drawSummary').innerText = `Ticket #${chosenTicket} has been pushed live to the Winners Page!`;
-            
-            // Here you can integrate with your backend/localStorage to push the data
-            localStorage.setItem('admin_forced_winner_ticket', chosenTicket);
-            alert(`🎉 Success! Ticket #${chosenTicket} is declared the official winner.`);
+        function goHome(lang) {
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('mainApp').style.display = 'block';
+            console.log("Selected Language: " + lang);
         }
     </script>
 </body>
