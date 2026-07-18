@@ -59,29 +59,46 @@
 
         /* 📱 MAIN APP CONTAINER */
         #mainApp { display: none; width: 100%; max-width: 480px; padding: 15px; }
-        header { display: flex; justify-content: space-between; align-items: center; padding: 10px 5px 20px 5px; }
+        header { display: flex; justify-content: flex-start; align-items: center; padding: 10px 5px 20px 5px; }
         .header-logo { font-size: 22px; font-weight: bold; }
         .header-logo span { color: var(--primary); }
 
         /* PAGE VIEWS */
-        .app-page { display: none; animation: fadeIn 0.3s ease; }
+        .app-page { display: none; animation: fadeIn 0.3s ease; min-height: 60vh; }
         .app-page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* EMPTY STATE STYLE */
-        .empty-state {
+        /* PROFILE SPECIFIC */
+        .profile-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
+            height: 60vh;
+            padding: 40px 20px 20px 20px;
             text-align: center;
-            padding: 60px 20px;
+        }
+        .photo-icon {
+            font-size: 80px;
+            background: var(--surface);
+            border: 2px dashed var(--border);
+            width: 140px;
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-bottom: 20px;
             color: var(--sub-text);
         }
-        .empty-icon {
-            font-size: 50px;
-            margin-bottom: 15px;
-            opacity: 0.5;
+        .copyright-text {
+            font-size: 13px;
+            color: var(--sub-text);
+            line-height: 1.6;
+        }
+        .copyright-text span {
+            color: var(--primary);
+            font-weight: 600;
         }
 
         /* 🧭 BOTTOM NAVIGATION BAR */
@@ -115,43 +132,31 @@
 
     <!-- 📱 MAIN APP CONTENT -->
     <div id="mainApp">
+        <!-- HEADER WITH LOGO ON LEFT SIDE -->
         <header>
             <div class="header-logo">Bota<span>Solutions</span></div>
-            <div style="font-size: 20px;">🔔</div>
         </header>
 
         <!-- 🏠 1. HOME PAGE VIEW (EMPTY) -->
-        <div id="pageHome" class="app-page active">
-            <div class="empty-state">
-                <div class="empty-icon">🛍️</div>
-                <p id="emptyHome">No active campaigns available right now.</p>
-            </div>
-        </div>
+        <div id="pageHome" class="app-page active"></div>
 
         <!-- 🎟️ 2. TICKETS PAGE VIEW (EMPTY) -->
-        <div id="pageTickets" class="app-page">
-            <h2 style="margin-bottom: 15px;" id="navTickets">My Tickets</h2>
-            <div class="empty-state">
-                <div class="empty-icon">🎟️</div>
-                <p id="emptyTickets">You haven't purchased any tickets yet.</p>
-            </div>
-        </div>
+        <div id="pageTickets" class="app-page"></div>
 
         <!-- 🏆 3. WINNERS PAGE VIEW (EMPTY) -->
-        <div id="pageWinners" class="app-page">
-            <h2 style="margin-bottom: 15px;" id="navWinners">Recent Winners</h2>
-            <div class="empty-state">
-                <div class="empty-icon">🏆</div>
-                <p id="emptyWinners">No winners announced yet. Stay tuned!</p>
-            </div>
-        </div>
+        <div id="pageWinners" class="app-page"></div>
 
-        <!-- 👤 4. PROFILE PAGE VIEW (EMPTY) -->
+        <!-- 👤 4. PROFILE PAGE VIEW (PHOTO ICON & COPYRIGHT BY TARIKU KITESA) -->
         <div id="pageProfile" class="app-page">
-            <h2 style="margin-bottom: 15px;" id="navProfileTitle">My Profile</h2>
-            <div class="empty-state">
-                <div class="empty-icon">👤</div>
-                <p id="emptyProfile">Please sign in to view your profile setup.</p>
+            <div class="profile-container">
+                <!-- PHOTO ICON -->
+                <div class="photo-icon">🖼️</div>
+                
+                <!-- COPYRIGHT INFO -->
+                <div class="copyright-text">
+                    &copy; 2026 Bota Solutions<br>
+                    Developed by <span>Tariku Kitesa</span>
+                </div>
             </div>
         </div>
 
@@ -174,22 +179,8 @@
 
     <script>
         const dicts = {
-            amharic: { 
-                navHome: "ዋና ገጽ", navTicketsBtn: "ቲኬቶች", navWinnersBtn: "አሸናፊዎች", navProfile: "ፕሮፋይል", 
-                navTickets: "የእኔ ቲኬቶች", navWinners: "የቅርብ ጊዜ አሸናፊዎች", navProfileTitle: "የእኔ ፕሮፋይል",
-                emptyHome: "በአሁኑ ጊዜ የሚገኙ ንቁ ዕድሎች የሉም።",
-                emptyTickets: "እስካሁን ምንም ቲኬት አልገዙም።",
-                emptyWinners: "እስካሁን ይፋ የተደረጉ አሸናፊዎች የሉም።",
-                emptyProfile: "ፕሮፋይልዎን ለማየት እባክዎ መጀመሪያ ይግቡ።"
-            },
-            english: { 
-                navHome: "Home", navTicketsBtn: "Tickets", navWinnersBtn: "Winners", navProfile: "Profile", 
-                navTickets: "My Tickets", navWinners: "Recent Winners", navProfileTitle: "My Profile",
-                emptyHome: "No active campaigns available right now.",
-                emptyTickets: "You haven't purchased any tickets yet.",
-                emptyWinners: "No winners announced yet. Stay tuned!",
-                emptyProfile: "Please sign in to view your profile setup."
-            }
+            amharic: { navHome: "ዋና ገጽ", navTicketsBtn: "ቲኬቶች", navWinnersBtn: "አሸናፊዎች", navProfile: "ፕሮፋይል" },
+            english: { navHome: "Home", navTicketsBtn: "Tickets", navWinnersBtn: "Winners", navProfile: "Profile" }
         };
 
         function onStartClicked() { document.getElementById('startBtn').style.display = 'none'; document.getElementById('langContainer').style.display = 'flex'; }
