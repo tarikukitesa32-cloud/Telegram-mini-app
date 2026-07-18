@@ -4,26 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bota Solutions</title>
-    <!-- Telegram WebApp SDK Script Included -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <link rel="stylesheet" href="style.css?v=18">
+    <link rel="stylesheet" href="style.css?v=19">
 </head>
 <body>
 
-    <!-- 🚪 SIGN UP SCREEN (FIRST TIME USER) -->
+    <!-- 🚪 SIGN UP SCREEN -->
     <div id="signUpScreen" class="auth-screen">
         <div class="auth-card">
             <div class="auth-logo">🏆</div>
             <h2>Create Account</h2>
             <p>Sign up to start participating in the Ekub</p>
-            
             <div class="input-group-field">
                 <label>Full Name</label>
-                <input type="text" id="regFullName" class="standard-text-input" placeholder="Getachew Fikadu">
+                <input type="text" id="regFullName" class="standard-text-input" placeholder="Tariku Kitesa">
             </div>
             <div class="input-group-field">
                 <label>Phone Number</label>
-                <input type="tel" id="regPhone" class="standard-text-input" placeholder="251912345678">
+                <input type="tel" id="regPhone" class="standard-text-input" placeholder="0911325430">
             </div>
             <div class="input-group-field">
                 <label>Create 4-Digit PIN</label>
@@ -33,7 +31,7 @@
         </div>
     </div>
 
-    <!-- 🔑 PIN LOGIN SCREEN (FOR RETURNING USERS) -->
+    <!-- 🔑 PIN LOGIN SCREEN -->
     <div id="loginScreen" class="auth-screen hidden">
         <div class="auth-card">
             <div class="auth-logo">🔒</div>
@@ -48,13 +46,13 @@
 
     <!-- 📱 MAIN APP CONTAINER -->
     <div id="mainAppContainer" class="app-container hidden">
-        <!-- Top App Bar with Dynamic User Profile Name & Language -->
+        <!-- Top App Bar -->
         <div class="app-header">
             <div class="header-user">
                 <div class="header-badge">🏆</div>
                 <div>
-                    <h4 id="headerUserName">Getachew</h4>
-                    <span id="txtPremiumBadge" style="font-size: 11px; color: #8da19c;">User</span>
+                    <h4 id="headerUserName">User</h4>
+                    <span id="txtPremiumBadge" style="font-size: 11px; color: #8da19c;">Member</span>
                 </div>
             </div>
             <div class="header-actions">
@@ -63,7 +61,8 @@
                     <option value="am">አማርኛ</option>
                     <option value="om">Afaan Oromoo</option>
                 </select>
-                <button id="btnAdminAccess" class="icon-btn" style="background:#2a1f06; color:#FFB800;">⚙️ Admin</button>
+                <!-- Admin button (Only shows/works for admin phone) -->
+                <button id="btnAdminAccess" class="icon-btn hidden" style="background:#2a1f06; color:#FFB800;">⚙️ Admin</button>
             </div>
         </div>
 
@@ -73,12 +72,12 @@
                 <div class="promo-image-wrapper">
                     <span id="txtNewBadge" class="featured-badge">NEW</span>
                     <div class="star-rating">⭐⭐⭐⭐⭐ 5.0</div>
-                    <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?w=500" alt="BYD Yuan UP" class="promo-img">
+                    <img id="displayProductImg" src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500" alt="Product Image" class="promo-img">
                 </div>
                 
                 <div class="promo-details">
-                    <h2 class="promo-title">BYD Yuan UP</h2>
-                    <p id="txtPromoSubtitle" class="promo-subtitle">Time Grey Edition</p>
+                    <h2 id="displayProductTitle" class="promo-title">HP EliteBook 840 G8 Laptop</h2>
+                    <p id="displayProductSubtitle" class="promo-subtitle">Intel Core i5 11th Gen | 16GB RAM | 512GB SSD</p>
                     
                     <div class="time-remaining-card">
                         <p id="txtTimeRemaining" class="countdown-label">🔥 TIME REMAINING</p>
@@ -125,40 +124,26 @@
             </div>
         </div>
 
-        <!-- 2. TICKETS & HISTORY TAB -->
+        <!-- 2. TICKETS TAB -->
         <div id="ticketPhase" class="phase-container dynamic-tab hidden">
             <h2 id="txtMyTicketsTitle" class="section-title">My Tickets & History</h2>
             <p id="txtMyTicketsSubtitle" class="section-subtitle">Track your lottery entries</p>
-
             <div class="stats-grid">
                 <div class="stat-card active-card"><h3 id="countActive">0</h3><p id="lblStatActive">Active</p></div>
                 <div class="stat-card pending-card"><h3 id="countPending">0</h3><p id="lblStatPending">Pending</p></div>
                 <div class="stat-card won-card"><h3 id="countWon">0</h3><p id="lblStatWon">Won 🏆</p></div>
                 <div class="stat-card total-card"><h3 id="countTotal">0</h3><p id="lblStatTotal">Total</p></div>
             </div>
-
             <div class="number-selection-section">
-                <h3 id="txtGridSelectionHeading">Select Your Lucky Numbers (Max: <span id="lblMaxAllowed">1</span>)</h3>
+                <h3 id="txtGridSelectionHeading">Select Your Lucky Numbers</h3>
                 <div class="numbers-grid" id="numbersGrid100"></div>
                 <div id="gridWarningMessage" class="grid-warning hidden">⚠️ Selection limit reached.</div>
             </div>
-
-            <div class="history-section" style="margin-top: 15px; text-align: left;">
-                <h3 id="txtHistoryTableHeading" style="font-size: 14px; color: #fff; margin-bottom: 10px;">📜 Ticket Participation Logs</h3>
-                <div class="history-table-wrapper">
-                    <table class="history-table">
-                        <thead>
-                            <tr>
-                                <th id="thRound">Round/Item</th>
-                                <th id="thNumbers">Numbers</th>
-                                <th id="thStatus">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody id="historyTableBody">
-                            <!-- Populated Dynamically -->
-                        </tbody>
-                    </table>
-                </div>
+            <div class="history-section" style="margin-top: 15px;">
+                <table class="history-table">
+                    <thead><tr><th id="thRound">Round/Item</th><th id="thNumbers">Numbers</th><th id="thStatus">Status</th></tr></thead>
+                    <tbody id="historyTableBody"></tbody>
+                </table>
             </div>
         </div>
 
@@ -166,11 +151,7 @@
         <div id="winnersPhase" class="phase-container dynamic-tab hidden">
             <h2 id="txtLatestWinnersTitle" class="section-title">Latest Winners 🏆</h2>
             <div class="winners-list-container">
-                <div class="winner-item">
-                    <div class="winner-avatar">👤</div>
-                    <div class="winner-info"><h4>Bekele Zewdu</h4><p>Phone: 251911****43</p></div>
-                    <div class="winner-prize">Won BYD Car</div>
-                </div>
+                <!-- 🚨 Bekele Zewdu ተወግዷል! ሲስተሙ ራሱ ሲያወጣ ብቻ እዚህ ይገባል -->
                 <div id="txtNoMoreWinners" class="no-more-winners">No more winners announced yet for this week.</div>
             </div>
         </div>
@@ -179,42 +160,58 @@
         <div id="profilePhase" class="phase-container dynamic-tab hidden">
             <h2 id="txtUserProfileTitle" class="section-title">User Profile</h2>
             <div class="profile-card-new">
-                <div class="profile-avatar-large">
-                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" alt="Customer Photo" class="user-photo-img">
-                </div>
-                <h3 id="profileFullName" style="margin-top: 10px; color:#FFB800;">User Name</h3>
+                <h3 id="profileFullName" style="color:#FFB800;">User Name</h3>
             </div>
-
             <div class="phone-display-box">
                 <div class="phone-icon-circle">📞</div>
                 <div class="phone-meta"><span id="txtUserIdentityLabel">User Identity</span><h2 id="profilePhoneOrUsername">Phone Number</h2></div>
             </div>
-
+            <!-- 🚨 የሌላ ሰው copyright እና branding ተወግዷል -->
             <div class="profile-footer-copyright">
-                © 2026 <span id="copyrightName">Bota Solutions</span>. All Rights Reserved. <br>
-                | Designed & Developed by <span style="color:#FFB800;">Qaroo Soft</span>
+                © 2026 <span id="copyrightName">Bota Solutions</span>. All Rights Reserved.
             </div>
         </div>
 
-        <!-- 🛡️ 5. ADMIN CONTROL PANEL TAB (SECRET ACCESS) -->
+        <!-- 🛡️ 5. ADVANCED ADMIN CONTROL PANEL (አዲስ የተጨመረው የቁጥጥር ገጽ) -->
         <div id="adminPhase" class="phase-container dynamic-tab hidden">
             <h2 class="section-title" style="color:#FFB800;">🛡️ Admin Dashboard</h2>
-            <p class="section-subtitle">Approve or Reject user ticket payments</p>
+            <p class="section-subtitle">Manage system products, prices, and end dates</p>
 
-            <div class="history-section" style="margin-top: 15px; text-align: left;">
-                <h3 style="font-size: 14px; color: #fff; margin-bottom: 10px;">Pending Approvals</h3>
+            <!-- 📝 ፎርም፡ የዕቃ ስም፣ ዋጋ እና ቀን መቀያየሪያ -->
+            <div class="number-selection-section" style="background: #0d1e1a; border: 1px solid #1a4237; padding: 15px; margin-bottom: 20px;">
+                <h3 style="color: #FFB800; margin-bottom: 12px;">🔄 Change Active Product Details</h3>
+                
+                <div class="input-group-field">
+                    <label>Product Title</label>
+                    <input type="text" id="inputProdTitle" class="standard-text-input" value="HP EliteBook 840 G8 Laptop">
+                </div>
+                <div class="input-group-field">
+                    <label>Product Subtitle / Specs</label>
+                    <input type="text" id="inputProdSubtitle" class="standard-text-input" value="Core i5 11th Gen | 16GB RAM | 512GB SSD">
+                </div>
+                <div class="input-group-field">
+                    <label>Image URL (Optional)</label>
+                    <input type="text" id="inputProdImg" class="standard-text-input" value="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500">
+                </div>
+                <div class="input-group-field">
+                    <label>Ticket Price (Birr)</label>
+                    <input type="number" id="inputProdPrice" class="standard-text-input" value="3000">
+                </div>
+                <div class="input-group-field">
+                    <label>Due Date: Days Remaining</label>
+                    <input type="number" id="inputProdDays" class="standard-text-input" value="9">
+                </div>
+                
+                <button id="btnSaveAdminChanges" class="quick-pick-btn" style="width:100%; margin-top: 5px;">💾 Save & Update Dashboard</button>
+            </div>
+
+            <!-- የተጠቃሚዎች ክፍያ ማፅደቂያ ጠረጴዛ -->
+            <div class="history-section">
+                <h3 style="font-size: 14px; color: #fff; margin-bottom: 10px;">Pending Ticket Approvals</h3>
                 <div class="history-table-wrapper">
                     <table class="history-table">
-                        <thead>
-                            <tr>
-                                <th>User</th>
-                                <th>Ticket info</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="adminTableBody">
-                            <!-- Incoming purchases show up here for approval -->
-                        </tbody>
+                        <thead><tr><th>User</th><th>Ticket</th><th>Actions</th></tr></thead>
+                        <tbody id="adminTableBody"></tbody>
                     </table>
                 </div>
             </div>
@@ -228,74 +225,39 @@
             <div id="navProfile" class="nav-item"><span class="icon">👤</span><span class="nav-text" id="nvProfile">Profile</span></div>
         </div>
 
-        <!-- ====== COMPLETE YOUR PURCHASE STEP MODAL SYSTEM ====== -->
+        <!-- PURCHASE MODAL WIZARD -->
         <div id="purchaseModal" class="modal-overlay hidden">
             <div class="modal-content">
                 <div class="modal-header">
-                    <div>
-                        <h3 id="txtModalTitleHeading">Complete Your Purchase</h3>
-                        <span id="modalStepLabel" class="step-sublabel">Step 1 of 3</span>
-                    </div>
+                    <div><h3 id="txtModalTitleHeading">Complete Your Purchase</h3><span id="modalStepLabel" class="step-sublabel">Step 1 of 3</span></div>
                     <button id="closeModalBtn" class="close-modal-btn">&times;</button>
                 </div>
-
-                <div class="modal-step-indicator-bar">
-                    <div id="stepLine1" class="step-line active"></div>
-                    <div id="stepLine2" class="step-line"></div>
-                    <div id="stepLine3" class="step-line"></div>
-                </div>
-
-                <!-- STEP 1: REVIEW INFO -->
+                <div class="modal-step-indicator-bar"><div id="stepLine1" class="step-line active"></div><div id="stepLine2" class="step-line"></div><div id="stepLine3" class="step-line"></div></div>
                 <div id="modalStep1" class="modal-step-body">
                     <div class="ekub-summary-card">
-                        <div class="ekub-meta">
-                            <h4>Gech EV Makina Ekub</h4>
-                            <p id="ticketCalcLabel">1 Tickets &times; 3,000 Birr</p>
-                        </div>
+                        <div class="ekub-meta"><h4 id="modalSummaryTitle">HP Laptop Ekub</h4><p id="ticketCalcLabel">1 Tickets</p></div>
                         <h2 id="ticketTotalLabel" class="ekub-price">3,000 Birr</h2>
-                        <span class="ekub-hash">#3268</span>
                     </div>
-                    <div class="input-group-field">
-                        <label id="lblFullNameField">Full Name</label>
-                        <div class="input-wrapper"><input type="text" id="buyerFullName" readonly></div>
-                    </div>
-                    <div class="input-group-field">
-                        <label id="lblPhoneField">Phone Number</label>
-                        <div class="input-wrapper"><input type="text" id="buyerPhone" readonly></div>
-                    </div>
+                    <div class="input-group-field"><label>Full Name</label><div class="input-wrapper"><input type="text" id="buyerFullName" readonly></div></div>
+                    <div class="input-group-field"><label>Phone Number</label><div class="input-wrapper"><input type="text" id="buyerPhone" readonly></div></div>
                 </div>
-
-                <!-- STEP 2: PROOF OF PAYMENT -->
                 <div id="modalStep2" class="modal-step-body hidden">
                     <div class="bank-details-card">
                         <div class="bank-logo-icon">🏦</div>
-                        <div class="bank-meta"><h4>Commercial Bank of Ethiopia</h4><p>Getachew Fikadu Jirata</p></div>
-                        <div class="bank-account-num">1000528139489</div>
+                        <div class="bank-meta"><h4>Commercial Bank of Ethiopia</h4><p>Bota Solutions</p></div>
                     </div>
-                    <label id="lblUploadReceiptHeading" class="field-section-title">Proof of Payment</label>
                     <div class="upload-dropzone" id="uploadZone">
-                        <span class="upload-icon">📤</span>
-                        <h4 id="lblDropzoneTitle">Upload Payment Receipt</h4>
-                        <p id="lblDropzoneSub">Click to simulate upload</p>
-                        <div id="uploadStatusText" style="margin-top:10px; color:#00ffaa; font-size:12px;"></div>
+                        <span class="upload-icon">📤</span><h4 id="lblDropzoneTitle">Upload Payment Receipt</h4><div id="uploadStatusText" style="color:#00ffaa;"></div>
                     </div>
                 </div>
-
-                <!-- STEP 3: SUCCESS CONFIRMATION -->
-                <div id="modalStep3" class="modal-step-body hidden" style="text-align: center; padding: 30px 10px;">
-                    <div class="success-checkmark-circle">🎉</div>
-                    <h2 id="lblSuccessHeading" style="color: #00ffaa; margin-bottom: 10px;">Submitted to Admin!</h2>
-                    <p id="lblSuccessSub" style="color: #8da19c; font-size: 14px;">Your payment verification request is sent to the Admin panel for approval.</p>
+                <div id="modalStep3" class="modal-step-body hidden" style="text-align: center; padding: 20px;">
+                    <div class="success-checkmark-circle">🎉</div><h2 style="color: #00ffaa;">Submitted!</h2><p>Sent to Admin panel for approval.</p>
                 </div>
-
-                <div class="modal-footer-actions">
-                    <button id="modalBackBtn" class="modal-btn-back hidden">Back</button>
-                    <button id="modalContinueBtn" class="modal-btn-continue">Continue &rsaquo;</button>
-                </div>
+                <div class="modal-footer-actions"><button id="modalBackBtn" class="modal-btn-back hidden">Back</button><button id="modalContinueBtn" class="modal-btn-continue">Continue &rsaquo;</button></div>
             </div>
         </div>
     </div>
 
-    <script src="script.js?v=18"></script>
+    <script src="script.js?v=19"></script>
 </body>
 </html>
