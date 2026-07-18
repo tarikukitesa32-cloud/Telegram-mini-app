@@ -125,9 +125,29 @@
         /* NUMBERS SELECTION GRID */
         .grid-header { font-size: 16px; font-weight: bold; margin: 20px 5px 10px 5px; display: flex; justify-content: space-between; }
         .numbers-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; max-height: 240px; overflow-y: auto; padding-right: 2px; }
-        .num-cell { background: var(--input-bg); border: 1px solid var(--border); border-radius: 10px; padding: 14px 0; text-align: center; font-weight: bold; font-size: 14px; cursor: pointer; }
+        .num-cell { background: var(--input-bg); border: 1px solid var(--border); border-radius: 10px; padding: 14px 0; text-align: center; font-weight: bold; font-size: 14px; cursor: pointer; color: var(--text); }
         .num-cell.selected { background: var(--primary); color: #000; border-color: var(--primary); }
         .num-cell.sold-out { background: rgba(34, 46, 53, 0.3); color: rgba(134, 150, 160, 0.2); border-color: transparent; cursor: not-allowed; text-decoration: line-through; }
+
+        /* NEW FIXED ACTION BUTTON */
+        .action-container {
+            margin-top: 20px;
+            padding: 0 5px;
+        }
+        .btn-main-action {
+            width: 100%;
+            background: linear-gradient(90deg, #ffb800 0%, #ff9900 100%);
+            color: #000;
+            padding: 16px;
+            border-radius: 16px;
+            font-size: 16px;
+            font-weight: 800;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 25px rgba(255, 184, 0, 0.25);
+            transition: all 0.2s;
+        }
+        .btn-main-action:active { transform: scale(0.98); opacity: 0.9; }
 
         /* MODAL GATEWAY */
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 99999; display: none; align-items: center; justify-content: center; padding: 20px; }
@@ -138,7 +158,7 @@
 </head>
 <body>
 
-    <!-- 🤖 WELCOME SCREEN (START & LANGUAGE) -->
+    <!-- 🤖 WELCOME SCREEN -->
     <div class="welcome-overlay" id="welcomeScreen">
         <div class="glass-card">
             <div class="brand-title">Bota<span>Solutions</span></div>
@@ -172,7 +192,7 @@
                     <div class="t-digit" id="days">00</div><div class="t-colon">:</div>
                     <div class="t-digit" id="hours">00</div><div class="t-colon">:</div>
                     <div class="t-digit" id="mins">00</div><div class="t-colon">:</div>
-                    <div class="t-digit" id="secs">45</div>
+                    <div class="t-digit" id="secs">39</div>
                 </div>
             </div>
 
@@ -196,8 +216,13 @@
             <span style="color: var(--primary);" id="lblPickCount">Pick 1 Number</span>
         </div>
         
-        <div class="card" style="padding: 12px;">
+        <div class="card" style="padding: 12px; margin-bottom: 5px;">
             <div class="numbers-grid" id="numsGrid"></div>
+        </div>
+
+        <!-- ✨ NEW ADDED BUY BUTTON -->
+        <div class="action-container">
+            <button class="btn-main-action" id="lblBuyBtn" onclick="clickBuyAction()">ቲኬት ግዛ / BUY TICKET</button>
         </div>
     </div>
 
@@ -221,12 +246,12 @@
         let qty = 1;
         const unitPrice = 100;
         let selected = [];
-        const soldOut = [5, 17, 23, 45, 62, 81]; // Simulated sold out numbers
+        const soldOut = [5, 17, 23, 45, 62, 81];
 
         const dicts = {
-            amharic: { lblTitle: "HP Pavilion ላፕቶፕ", lblTimer: "🔥 የቀረው ጊዜ", lblPriceTxt: "የቲኬት ዋጋ", lblSelect: "የእድል ቁጥርዎን ይምረጡ", lblPickCount: "1 ቁጥር ይምረጡ", lblCheckout: "ደህንነቱ የተጠበቀ ክፍያ", lblTktNum: "የተመረጠ ቲኬት:", lblPayBtn: "በቴሌብር / ጫፓ ይክፈሉ", lblCancel: "ይቅር" },
-            english: { lblTitle: "HP Pavilion Laptop", lblTimer: "🔥 TIME REMAINING", lblPriceTxt: "TICKET PRICE", lblSelect: "Select Your Number", lblPickCount: "Pick 1 Number", lblCheckout: "Secure Checkout", lblTktNum: "Selected Ticket:", lblPayBtn: "Pay with Telebirr / Chapa", lblCancel: "Cancel" },
-            oromo: { lblTitle: "HP Pavilion Laptop", lblTimer: "🔥 YEROO HAFE", lblPriceTxt: "GATII TIKEETII", lblSelect: "Lakkoofsa Kee Filadhu", lblPickCount: "Lakkoofsa 1 Filadhu", lblCheckout: "Kaffaltii Amansiisaa", lblTktNum: "Tikeetii Filatame:", lblPayBtn: "Telebirr / Chapa'n Kaffali", lblCancel: "Dhiisi" }
+            amharic: { lblTitle: "HP Pavilion ላፕቶፕ", lblTimer: "🔥 የቀረው ጊዜ", lblPriceTxt: "የቲኬት ዋጋ", lblSelect: "የእድል ቁጥርዎን ይምረጡ", lblPickCount: "1 ቁጥር ይምረጡ", lblCheckout: "ደህንነቱ የተጠበቀ ክፍያ", lblTktNum: "የተመረጠ ቲኬት:", lblPayBtn: "በቴሌብር / ጫፓ ይክፈሉ", lblCancel: "ይቅር", lblBuyBtn: "አሁን ግዛ" },
+            english: { lblTitle: "HP Pavilion Laptop", lblTimer: "🔥 TIME REMAINING", lblPriceTxt: "TICKET PRICE", lblSelect: "Select Your Number", lblPickCount: "Pick 1 Number", lblCheckout: "Secure Checkout", lblTktNum: "Selected Ticket:", lblPayBtn: "Pay with Telebirr / Chapa", lblCancel: "Cancel", lblBuyBtn: "BUY TICKET NOW" },
+            oromo: { lblTitle: "HP Pavilion Laptop", lblTimer: "🔥 YEROO HAFE", lblPriceTxt: "GATII TIKEETII", lblSelect: "Lakkoofsa Kee Filadhu", lblPickCount: "Lakkoofsa 1 Filadhu", lblCheckout: "Kaffaltii Amansiisaa", lblTktNum: "Tikeetii Filatame:", lblPayBtn: "Telebirr / Chapa'n Kaffali", lblCancel: "Dhiisi", lblBuyBtn: "TIKEETII BITADHU" }
         };
 
         function onStartClicked() {
@@ -287,9 +312,15 @@
                     el.classList.add('selected');
                 }
             }
-            if(selected.length === qty) {
-                setTimeout(openModal, 300);
+        }
+
+        function clickBuyAction() {
+            if(selected.length < qty) {
+                const errMsg = currentLang === 'amharic' ? `እባክዎ መጀመሪያ ${qty} እድለኛ ቁጥር(ችን) ይምረጡ!` : `Please select ${qty} lucky number(s) first!`;
+                alert(errMsg);
+                return;
             }
+            openModal();
         }
 
         function openModal() {
@@ -304,12 +335,12 @@
         }
 
         function paySuccess() {
-            alert('🎉 Payment Successful! Your lucky numbers are secured.');
+            alert(currentLang === 'amharic' ? '🎉 ክፍያው ተሳክቷል! የእርስዎ ቁጥሮች ተይዘዋል።' : '🎉 Payment Successful! Your lucky numbers are secured.');
             closeModal();
         }
 
-        // 1-minute loop countdown simulation
-        let secs = 45;
+        // Timer simulation
+        let secs = 39;
         setInterval(() => {
             if(secs <= 0) secs = 60;
             secs--;
