@@ -1,12 +1,37 @@
-/* 🔒 AUTHENTICATION FULL-SCREEN OVERLAY FIX */
+/* ==========================================================================
+   📱 1. GLOBAL RESETS & THEME (የቦቱ ዋና መልክ)
+   ========================================================================== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #0b141a;
+    color: #e9edef;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    min-height: 100vh;
+    background-color: #0b141a;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* ==========================================================================
+   🔒 2. TELEBIRR STYLE AUTH OVERLAYS (የመግቢያ ገጾች ስታይል)
+   ========================================================================== */
 .auth-screen {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: #0b141a; /* የቦቱ ዋናው ጨለማ ባክግራውንድ */
-    z-index: 9999; /* ከሁሉም ገጾች በላይ እንዲሆን ያደርገዋል */
+    background-color: #0b141a; /* ከጀርባ ያለውን ዳሽቦርድ ሙሉ በሙሉ መሸፈኛ */
+    z-index: 99999; /* ከሁሉም ነገር በላይ እንዲሆን */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,39 +39,43 @@
     box-sizing: border-box;
 }
 
-/* 📱 AUTH CARD DESIGN */
+/* 📱 የቴሌብር ካርድ ስታይል (በጨለማ ቲም) */
 .auth-card {
     background-color: #111b21;
     border: 1px solid #222e35;
-    border-radius: 16px;
-    padding: 30px 24px;
+    border-radius: 24px;
+    padding: 35px 24px;
     width: 100%;
-    max-width: 360px; /* በሞባይል ልክ ፍጹም ሆኖ እንዲቀመጥ */
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    max-width: 380px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
     text-align: center;
+    animation: fadeIn 0.3s ease-out;
 }
 
 .auth-logo {
-    font-size: 40px;
-    margin-bottom: 15px;
+    font-size: 50px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
 }
 
 .auth-card h2 {
-    color: #e9edef;
-    margin: 0 0 8px 0;
-    font-size: 22px;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 10px 0;
 }
 
 .auth-card p {
     color: #8696a0;
     font-size: 14px;
-    margin: 0 0 20px 0;
+    margin: 0 0 25px 0;
+    line-height: 1.4;
 }
 
-/* INPUT FIELD STYLES WITHIN AUTH */
+/* 📥 INPUT UI FIELDS (ልክ እንደ ቴሌብር የገቡ ግብዓቶች) */
 .input-group-field {
     text-align: left;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     width: 100%;
 }
 
@@ -54,27 +83,138 @@
     display: block;
     color: #8696a0;
     font-size: 12px;
-    margin-bottom: 5px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .standard-text-input {
     width: 100%;
     background-color: #2a3942;
     border: 1px solid #2a3942;
-    color: #fff;
-    padding: 12px;
-    border-radius: 8px;
-    font-size: 15px;
+    color: #ffffff;
+    padding: 14px 16px;
+    border-radius: 12px;
+    font-size: 16px;
     box-sizing: border-box;
     outline: none;
-    transition: border 0.2s;
+    transition: all 0.25s ease;
 }
 
 .standard-text-input:focus {
-    border: 1px solid #00a884;
+    border-color: #00a884; /* ዋትስአፕ/ቦታ ግሪን */
+    background-color: #32444f;
+    box-shadow: 0 0 0 2px rgba(0, 168, 132, 0.2);
 }
 
-/* UTILITY HIDDEN CLASS */
+/* ==========================================================================
+   🔘 3. PREMIUM BUTTONS & NAVIGATION
+   ========================================================================== */
+.quick-pick-btn {
+    background: linear-gradient(135deg, #ffb800 0%, #e0a200 100%); /* የወርቅ ቀለም */
+    color: #0b141a;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.1s ease, opacity 0.2s ease;
+    box-shadow: 0 4px 12px rgba(255, 184, 0, 0.3);
+}
+
+.quick-pick-btn:active {
+    transform: scale(0.98);
+    opacity: 0.9;
+}
+
+/* 🚪 LOGOUT BUTTON (በፕሮፋይል ገጽ ስር የሚቀመጠው) */
+#btnProfileLogout {
+    background: linear-gradient(135deg, #3d1a1a 0%, #2c1212 100%);
+    border: 1px solid #722323;
+    color: #ff6b6b;
+    padding: 14px 20px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 30px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+#btnProfileLogout:hover {
+    background: #4a1f1f;
+    border-color: #923333;
+}
+
+#btnProfileLogout:active {
+    transform: scale(0.98);
+}
+
+/* ==========================================================================
+   👤 4. PROFILE TAB STYLING
+   ========================================================================== */
+.profile-card-new {
+    background-color: #111b21;
+    border: 1px solid #222e35;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.phone-display-box {
+    display: flex;
+    align-items: center;
+    background-color: #111b21;
+    border: 1px solid #222e35;
+    border-radius: 16px;
+    padding: 15px 20px;
+    gap: 15px;
+}
+
+.phone-icon-circle {
+    width: 45px;
+    height: 45px;
+    background-color: #202c33;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+
+.phone-meta {
+    display: flex;
+    flex-direction: column;
+}
+
+.phone-meta span {
+    color: #8696a0;
+    font-size: 12px;
+}
+
+.phone-meta h2 {
+    margin: 3px 0 0 0;
+    font-size: 18px;
+    color: #e9edef;
+}
+
+/* ==========================================================================
+   🛠️ 5. UTILITY CLASSES
+   ========================================================================== */
 .hidden {
     display: none !important;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
