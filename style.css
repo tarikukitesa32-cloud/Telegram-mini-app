@@ -40,7 +40,7 @@ body {
 .header-user { display: flex; align-items: center; gap: 10px; text-align: left; }
 .header-badge { background: #FFB800; padding: 6px; border-radius: 8px; font-size: 16px; }
 .header-actions { display: flex; align-items: center; gap: 8px; }
-.mini-lang-select { background: #112420; color: #fff; border: 1px solid #193831; padding: 6px; border-radius: 8px; font-size: 12px; }
+.mini-lang-select { background: #112420; color: #fff; border: 1px solid #193831; padding: 6px; border-radius: 8px; font-size: 12px; outline: none; }
 .icon-btn { background: #112420; border: none; color: white; padding: 8px; border-radius: 8px; cursor: pointer; }
 
 /* Dynamic tabs setup */
@@ -49,7 +49,7 @@ body {
 .dynamic-tab::-webkit-scrollbar { width: 0px; }
 .hidden { display: none !important; }
 
-/* Product Cards styled to Screenshot */
+/* Product Cards */
 .product-promo-card {
     background: #000000;
     border-radius: 24px;
@@ -57,6 +57,7 @@ body {
 }
 .promo-image-wrapper {
     background: linear-gradient(180deg, #122420 0%, #000 100%);
+    height: 20px;
     height: 220px;
     position: relative;
     display: flex;
@@ -83,7 +84,7 @@ body {
 .countdown-grid { display: flex; align-items: center; gap: 5px; }
 .time-box { background: #102420; border: 1px solid #1a4237; border-radius: 10px; padding: 6px 0; text-align: center; width: 52px; }
 .time-box span { display: block; font-size: 18px; font-weight: bold; color: #FFB800; }
-.time-box label { font-size: 8px; color: #648079; font-weight: bold; }
+.time-box label { display: block; font-size: 8px; color: #648079; font-weight: bold; margin-top: 2px; }
 .time-colon { font-size: 18px; color: #FFB800; font-weight: bold; padding-bottom: 10px; }
 
 /* Progress indicator styles */
@@ -92,7 +93,7 @@ body {
 .progress-bar { background: #11221f; height: 6px; border-radius: 10px; overflow: hidden; }
 .progress-fill { background: #00cc88; height: 100%; border-radius: 10px; }
 
-/* Bottom Control Panel widget matched precisely to Screenshot */
+/* Bottom Control Panel widget */
 .ticket-control-panel {
     background: #071210;
     border: 1px solid #122d25;
@@ -118,20 +119,35 @@ body {
 .section-title { font-size: 22px; margin-bottom: 5px; text-align: left; }
 .section-subtitle { color: #8da19c; font-size: 13px; margin-bottom: 15px; text-align: left; }
 .search-box-row { display: flex; gap: 8px; margin-bottom: 15px; }
-.search-input { flex: 1; background: #0c1a17; border: 1px solid #16362e; padding: 12px; border-radius: 10px; color: white; }
-.search-btn { background: #FFB800; color: #000; border: none; padding: 0 15px; border-radius: 10px; font-weight: bold; }
+.search-input { flex: 1; background: #0c1a17; border: 1px solid #16362e; padding: 12px; border-radius: 10px; color: white; outline: none; }
+.search-btn { background: #FFB800; color: #000; border: none; padding: 0 15px; border-radius: 10px; font-weight: bold; cursor: pointer; }
+
 .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; margin-bottom: 15px; }
 .stat-card { padding: 8px 4px; border-radius: 10px; text-align: center; background: #0b1a17; }
 .stat-card h3 { font-size: 16px; font-weight: bold; }
 .stat-card p { font-size: 10px; color: #8da19c; }
 .active-card { color: #00ffaa; background: #06241b; }
 .pending-card { color: #FFB800; background: #241f06; }
+.won-card { color: #ffb800; background: #332500; border: 1px solid #ffb800; }
 .total-card { color: #fff; }
 
-.number-selection-section { background: #071210; border-radius: 14px; padding: 12px; text-align: left; }
-.numbers-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; max-height: 150px; overflow-y: auto; }
-.num-cell { background: #0d241f; border: 1px solid #193f35; color: #fff; padding: 8px 0; text-align: center; border-radius: 6px; font-size: 11px; cursor: pointer; }
-.num-cell.selected { background: #FFB800; color: #000; }
+/* Enhanced 1-100 Lucky Grid with Limits */
+.number-selection-section { background: #071210; border-radius: 14px; padding: 12px; text-align: left; margin-bottom: 15px; }
+.number-selection-section h3 { font-size: 13px; color: #fff; margin-bottom: 10px; }
+.numbers-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; max-height: 160px; overflow-y: auto; padding-right: 2px; }
+.num-cell { background: #0d241f; border: 1px solid #193f35; color: #fff; padding: 8px 0; text-align: center; border-radius: 6px; font-size: 12px; cursor: pointer; transition: all 0.2s ease; }
+.num-cell.selected { background: #FFB800; color: #000; font-weight: bold; border-color: #FFB800; box-shadow: 0 0 8px rgba(255,184,0,0.4); }
+.grid-warning { color: #ff5555; font-size: 11px; margin-top: 8px; font-weight: 500; }
+
+/* Advanced Ticket Logs History Table Custom Layout */
+.history-table-wrapper { background: #0b1412; border: 1px solid #142e27; border-radius: 12px; overflow: hidden; }
+.history-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 12px; }
+.history-table th { background: #112621; color: #8da19c; padding: 10px; font-weight: 600; }
+.history-table td { padding: 10px; border-bottom: 1px solid #142e27; color: #e0e0e0; }
+.badge-num { background: #1c3d35; color: #00ffaa; padding: 2px 6px; border-radius: 4px; font-weight: bold; font-family: monospace; }
+.status-tag { font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
+.status-tag.success { background: #1c3a12; color: #55ff55; }
+.status-tag.pending { background: #3a3212; color: #ffcc00; }
 
 /* Profile Tab layout */
 .profile-card-new { background: #091c18; padding: 20px; border-radius: 20px; margin-bottom: 12px; text-align: center; }
@@ -176,7 +192,7 @@ body {
 
 .modal-step-body { width: 100%; }
 
-/* Step 1 Product Info Card custom layout styles */
+/* Step 1 Product Info Card */
 .ekub-summary-card { background: #1a1a1a; padding: 15px; border-radius: 14px; position: relative; margin-bottom: 15px; }
 .ekub-meta h4 { font-size: 15px; color: #fff; margin-bottom: 4px; }
 .ekub-meta p { font-size: 12px; color: #8da19c; }
@@ -191,7 +207,7 @@ body {
 .input-wrapper input { background: transparent; border: none; color: white; width: 100%; font-size: 14px; outline: none; }
 .standard-text-input { width: 100%; background: #161616; border: 1px solid #262626; border-radius: 12px; padding: 12px; color: #fff; font-size: 14px; outline: none; }
 
-/* Step 2 Bank Info row card layout matched to screenshot */
+/* Step 2 Bank Info row card layout */
 .bank-details-card { background: #1a1a1a; border: 1px solid #2a2a2a; padding: 15px; border-radius: 14px; position: relative; margin-bottom: 15px; }
 .bank-logo-icon { position: absolute; top: 15px; left: 15px; background: #2a2412; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 8px; color: #FFB800; font-size: 18px; }
 .bank-meta { margin-left: 50px; }
@@ -200,13 +216,13 @@ body {
 .bank-account-num { position: absolute; top: 22px; right: 15px; font-size: 13px; color: #fff; font-family: monospace; letter-spacing: 0.5px; }
 .field-section-title { font-size: 13px; color: #8da19c; display: block; margin-bottom: 8px; }
 
-/* Upload Receipt dropzone dotted box custom layout styled to screenshot */
+/* Upload Receipt dropzone */
 .upload-dropzone { border: 1.5px dashed #FFB800; background: #181610; border-radius: 14px; padding: 25px; text-align: center; cursor: pointer; }
 .upload-icon { font-size: 24px; color: #FFB800; display: block; margin-bottom: 8px; }
 .upload-dropzone h4 { font-size: 14px; color: white; margin-bottom: 4px; }
 .upload-dropzone p { font-size: 11px; color: #645a40; }
 
-/* Disclaimer warning message layout block matched to screenshot */
+/* Disclaimer warning message layout block */
 .warning-callout-box { background: #24160c; border-radius: 10px; padding: 10px 12px; display: flex; gap: 10px; margin-top: 15px; }
 .warn-icon { color: #ff9900; font-size: 14px; }
 .warning-callout-box p { font-size: 11px; color: #cc8855; line-height: 1.4; }
