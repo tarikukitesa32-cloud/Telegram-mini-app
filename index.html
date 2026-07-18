@@ -1,207 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bota Solutions</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <link rel="stylesheet" href="style.css?v=20">
-</head>
-<body>
-
-    <!-- 📱 1. TELEBIRR STYLE GATEWAY SCREEN (የመጀመሪያው ገጽ) -->
-    <div id="gatewayScreen" class="auth-screen">
-        <div class="auth-card">
-            <div class="auth-logo">📱</div>
-            <h2>Welcome to Bota</h2>
-            <p>Enter your mobile number to check in</p>
-            <div class="input-group-field">
-                <label>Mobile Number</label>
-                <input type="tel" id="gatePhone" class="standard-text-input" placeholder="0911325430" value="0911325430">
-            </div>
-            <button id="btnGateNext" class="quick-pick-btn" style="width:100%; margin-top:10px;">Next</button>
-        </div>
-    </div>
-
-    <!-- 📝 2. REGISTER ADDITIONAL INFO SCREEN -->
-    <div id="signUpScreen" class="auth-screen hidden">
-        <div class="auth-card">
-            <div class="auth-logo">🏆</div>
-            <h2>Create Account</h2>
-            <p>Complete your registration profile</p>
-            <div class="input-group-field">
-                <label>Full Name</label>
-                <input type="text" id="regFullName" class="standard-text-input" placeholder="Tariku Kitesa">
-            </div>
-            <div class="input-group-field">
-                <label>Create 4-Digit PIN</label>
-                <input type="password" id="regPin" class="standard-text-input" placeholder="••••" maxlength="4" inputmode="numeric">
-            </div>
-            <button id="btnSubmitRegister" class="quick-pick-btn" style="width:100%; margin-top:10px;">Sign Up & Start</button>
-        </div>
-    </div>
-
-    <!-- 🔑 3. PIN LOGIN SCREEN -->
-    <div id="loginScreen" class="auth-screen hidden">
-        <div class="auth-card">
-            <div class="auth-logo">🔒</div>
-            <h2 id="loginGreeting">Enter Your PIN</h2>
-            <p>Please verify your identity to continue</p>
-            <div class="input-group-field">
-                <input type="password" id="loginPin" class="standard-text-input" placeholder="••••" maxlength="4" inputmode="numeric" style="text-align:center; font-size:24px; letter-spacing:10px;">
-            </div>
-            <button id="btnSubmitLogin" class="quick-pick-btn" style="width:100%; margin-top:10px;">Unlock App</button>
-        </div>
-    </div>
-
-    <!-- 📱 MAIN APP CONTAINER -->
-    <div id="mainAppContainer" class="app-container hidden">
-        <!-- Top App Bar -->
-        <div class="app-header">
-            <div class="header-user">
-                <div class="header-badge">🏆</div>
-                <div>
-                    <h4 id="headerUserName">User</h4>
-                    <span id="txtPremiumBadge" style="font-size: 11px; color: #8da19c;">Member</span>
-                </div>
-            </div>
-            <div class="header-actions">
-                <select id="langSelect" class="mini-lang-select">
-                    <option value="en" selected>English</option>
-                    <option value="am">አማርኛ</option>
-                    <option value="om">Afaan Oromoo</option>
+<!-- 📱 BOTA PREMIUM SIGN-IN SCREEN -->
+<div id="gatewayScreen" class="auth-screen">
+    <div class="auth-card">
+        
+        <!-- Top Branding Header -->
+        <div class="bota-top-header">
+            <div class="bota-brand-title">Bota Solutions</div>
+            <div class="bota-lang-dropdown">
+                <select id="authLangSelect">
+                    <option value="en" selected>English ▾</option>
+                    <option value="am">አማርኛ ▾</option>
                 </select>
-                <button id="btnAdminAccess" class="icon-btn hidden" style="background:#2a1f06; color:#FFB800;">⚙️ Admin</button>
             </div>
         </div>
-
-        <!-- 1. HOME TAB -->
-        <div id="homePhase" class="phase-container dynamic-tab">
-            <div class="product-promo-card">
-                <div class="promo-image-wrapper">
-                    <span id="txtNewBadge" class="featured-badge">NEW</span>
-                    <div class="star-rating">⭐⭐⭐⭐⭐ 5.0</div>
-                    <img id="displayProductImg" src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500" alt="Product Image" class="promo-img">
-                </div>
-                
-                <div class="promo-details">
-                    <h2 id="displayProductTitle" class="promo-title">HP EliteBook 840 G8 Laptop</h2>
-                    <p id="displayProductSubtitle" class="promo-subtitle">Intel Core i5 11th Gen | 16GB RAM | 512GB SSD</p>
-                    
-                    <div class="time-remaining-card">
-                        <p id="txtTimeRemaining" class="countdown-label">🔥 TIME REMAINING</p>
-                        <div class="countdown-grid">
-                            <div class="time-box"><span id="daysBox">09</span><label id="lblDays">DAYS</label></div>
-                            <span class="time-colon">:</span>
-                            <div class="time-box"><span id="hoursBox">09</span><label id="lblHours">HRS</label></div>
-                            <span class="time-colon">:</span>
-                            <div class="time-box"><span id="minsBox">54</span><label id="lblMins">MIN</label></div>
-                            <span class="time-colon">:</span>
-                            <div class="time-box"><span id="secsBox">20</span><label id="lblSecs">SEC</label></div>
-                        </div>
-                    </div>
-
-                    <div class="progress-container">
-                        <div class="progress-text">
-                            <span id="txtSoldLabel">1,676 sold</span>
-                            <span id="txtFilledPercent" style="color: #00ffaa;">48% filled</span>
-                        </div>
-                        <div class="progress-bar"><div class="progress-fill" style="width: 48%;"></div></div>
-                    </div>
-
-                    <div class="ticket-control-panel">
-                        <div class="ticket-price-row">
-                            <div>
-                                <span id="txtTicketPriceLabel" class="panel-label">TICKET PRICE</span>
-                                <h3 id="txtPanelPriceValue" class="panel-price">3,000 Birr</h3>
-                            </div>
-                            <div class="stepper-container">
-                                <button id="stepMinusBtn" class="step-btn">−</button>
-                                <span id="ticketCountDisplay" class="step-value">1</span>
-                                <button id="stepPlusBtn" class="step-btn">+</button>
-                            </div>
-                        </div>
-
-                        <button id="chooseLuckyBtn" class="choose-lucky-btn">🎯 Choose Your Lucky Numbers</button>
-
-                        <div class="action-grid-buttons">
-                            <button id="quickPickBtn" class="quick-pick-btn">⚡ Quick Pick</button>
-                            <button id="selectBtn" class="select-btn">🛡️ Select</button>
-                        </div>
-                    </div>
-                </div>
+        
+        <!-- Welcome Text / Icon -->
+        <div class="bota-welcome-section">
+            <div class="bota-app-icon">🏆</div>
+            <h2 class="login-heading">Welcome to Bota</h2>
+            <p class="welcome-subtitle">Enter your mobile number to check in</p>
+        </div>
+        
+        <!-- Input Form -->
+        <div class="bota-form-group">
+            <label class="input-label">Mobile Number</label>
+            <div class="bota-input-wrapper">
+                <span class="country-code">+251</span>
+                <input type="tel" id="gatePhone" class="bota-input-field" placeholder="911325430" inputmode="numeric">
             </div>
         </div>
-
-        <!-- 2. TICKETS TAB -->
-        <div id="ticketPhase" class="phase-container dynamic-tab hidden">
-            <h2 id="txtMyTicketsTitle" class="section-title">My Tickets & History</h2>
-            <p id="txtMyTicketsSubtitle" class="section-subtitle">Track your lottery entries</p>
-            <div class="stats-grid">
-                <div class="stat-card active-card"><h3 id="countActive">0</h3><p id="lblStatActive">Active</p></div>
-                <div class="stat-card pending-card"><h3 id="countPending">0</h3><p id="lblStatPending">Pending</p></div>
-                <div class="stat-card won-card"><h3 id="countWon">0</h3><p id="lblStatWon">Won 🏆</p></div>
-                <div class="stat-card total-card"><h3 id="countTotal">0</h3><p id="lblStatTotal">Total</p></div>
-            </div>
-            <div class="number-selection-section">
-                <h3 id="txtGridSelectionHeading">Select Your Lucky Numbers</h3>
-                <div class="numbers-grid" id="numbersGrid100"></div>
-            </div>
-            <div class="history-section" style="margin-top: 15px;">
-                <table class="history-table">
-                    <thead><tr><th id="thRound">Round/Item</th><th id="thNumbers">Numbers</th><th id="thStatus">Status</th></tr></thead>
-                    <tbody id="historyTableBody"></tbody>
-                </table>
-            </div>
+        
+        <!-- Next Button -->
+        <button id="btnGateNext" class="bota-btn-next">Next</button>
+        
+        <!-- Create Account Link -->
+        <div class="bota-register-redirect">
+            Don't have an account? <span id="linkGoToRegister" class="bota-link-gold">Create New Account</span>
         </div>
-
-        <!-- 3. WINNERS TAB -->
-        <div id="winnersPhase" class="phase-container dynamic-tab hidden">
-            <h2 id="txtLatestWinnersTitle" class="section-title">Latest Winners 🏆</h2>
-            <div class="winners-list-container">
-                <div id="txtNoMoreWinners" class="no-more-winners">No more winners announced yet for this week.</div>
-            </div>
+        
+        <!-- Bottom copyright -->
+        <div class="bota-copyright-text">
+            Terms and Conditions<br>
+            © 2026 Bota Solutions. All rights reserved.
         </div>
-
-        <!-- 4. PROFILE TAB -->
-        <div id="profilePhase" class="phase-container dynamic-tab hidden">
-            <h2 id="txtUserProfileTitle" class="section-title">User Profile</h2>
-            <div class="profile-card-new">
-                <h3 id="profileFullName" style="color:#FFB800;">User Name</h3>
-            </div>
-            <div class="phone-display-box">
-                <div class="phone-icon-circle">📞</div>
-                <div class="phone-meta"><span id="txtUserIdentityLabel">User Identity</span><h2 id="profilePhoneOrUsername">Phone Number</h2></div>
-            </div>
-
-            <!-- 🚪 LOGOUT BUTTON (የተጨመረው አዲሱ የመውጫ በተን) -->
-            <button id="btnProfileLogout" class="select-btn" style="background:#3d1a1a; border: 1px solid #722323; color:#ff6b6b; margin-top: 25px; width: 100%;">🚪 Logout / Switch Account</button>
-
-            <div class="profile-footer-copyright" style="margin-top:40px;">
-                © 2026 <span id="copyrightName">Bota Solutions</span>. All Rights Reserved.
-            </div>
-        </div>
-
-        <!-- 🛡️ 5. ADMIN CONTROL PANEL -->
-        <div id="adminPhase" class="phase-container dynamic-tab hidden">
-            <h2 class="section-title" style="color:#FFB800;">🛡️ Admin Dashboard</h2>
-            <p class="section-subtitle">Manage system products, prices, and end dates</p>
-
-            <div class="number-selection-section" style="background: #0d1e1a; border: 1px solid #1a4237; padding: 15px; margin-bottom: 20px;">
-                <h3 style="color: #FFB800; margin-bottom: 12px;">🔄 Change Active Product Details</h3>
-                <div class="input-group-field"><label>Product Title</label><input type="text" id="inputProdTitle" class="standard-text-input" value="HP EliteBook 840 G8 Laptop"></div>
-                <div class="input-group-field"><label>Product Subtitle / Specs</label><input type="text" id="inputProdSubtitle" class="standard-text-input" value="Core i5 11th Gen | 16GB RAM | 512GB SSD"></div>
-                <div class="input-group-field"><label>Image URL (Optional)</label><input type="text" id="inputProdImg" class="standard-text-input" value="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500"></div>
-                <div class="input-group-field"><label>Ticket Price (Birr)</label><input type="number" id="inputProdPrice" class="standard-text-input" value="3000"></div>
-                <div class="input-group-field"><label>Due Date: Days Remaining</label><input type="number" id="inputProdDays" class="standard-text-input" value="9"></div>
-                <button id="btnSaveAdminChanges" class="quick-pick-btn" style="width:100%; margin-top: 5px;">💾 Save & Update Dashboard</button>
-            </div>
-
-            <div class="history-section">
-                <h3 style="font-size: 14px; color: #fff; margin-bottom: 10px;">Pending Ticket Approvals</h3>
-                <table class="history-table"><tbody id="adminTableBody"></tbody></table>
-            </div>
-        </div>
+        
     </div>
-</body>
-</html>
+</div>
