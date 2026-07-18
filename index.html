@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bota Solutions</title>
-    <link rel="stylesheet" href="style.css?v=11">
+    <!-- Telegram WebApp SDK Script Included -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="style.css?v=12">
 </head>
 <body>
 
     <div class="app-container">
-        <!-- Top App Bar with User Profile Name & Language -->
+        <!-- Top App Bar with Dynamic User Profile Name & Language -->
         <div class="app-header">
             <div class="header-user">
                 <div class="header-badge">🏆</div>
                 <div>
-                    <h4 id="headerUserName">Getachew Fikadu</h4>
+                    <h4 id="headerUserName">Getachew</h4>
                     <span style="font-size: 11px; color: #8da19c;">Premium User</span>
                 </div>
             </div>
@@ -62,7 +64,7 @@
                         <div class="progress-bar"><div class="progress-fill" style="width: 48%;"></div></div>
                     </div>
 
-                    <!-- Bottom Ticket Control Panel matched to Screenshot 1 -->
+                    <!-- Bottom Ticket Control Panel matched to Screenshot -->
                     <div class="ticket-control-panel">
                         <div class="ticket-price-row">
                             <div>
@@ -124,23 +126,23 @@
             </div>
         </div>
 
-        <!-- 4. PROFILE TAB -->
+        <!-- 4. PROFILE TAB (Dynamic Name and Info Display) -->
         <div id="profilePhase" class="phase-container dynamic-tab hidden">
             <h2 class="section-title">User Profile</h2>
             <div class="profile-card-new">
                 <div class="profile-avatar-large">
                     <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" alt="Customer Photo" class="user-photo-img">
                 </div>
-                <h3 style="margin-top: 10px; color:#FFB800;">Getachew Fikadu Jirata</h3>
+                <h3 id="profileFullName" style="margin-top: 10px; color:#FFB800;">Getachew Fikadu Jirata</h3>
             </div>
 
             <div class="phone-display-box">
                 <div class="phone-icon-circle">📞</div>
-                <div class="phone-meta"><span>User Phone Number</span><h2>251978893232</h2></div>
+                <div class="phone-meta"><span>User Identity</span><h2 id="profilePhoneOrUsername">251978893232</h2></div>
             </div>
 
             <div class="profile-footer-copyright">
-                © 2026 <span>Getachew Fikadu Jirata</span>. All Rights Reserved. <br>
+                © 2026 <span id="copyrightName">Getachew Fikadu Jirata</span>. All Rights Reserved. <br>
                 | Designed & Developed by <span style="color:#FFB800;">Qaroo Soft</span>
             </div>
         </div>
@@ -191,15 +193,15 @@
                     </div>
 
                     <div class="input-group-field">
-                        <label>Phone Number</label>
+                        <label>Phone Number / Contact</label>
                         <div class="input-wrapper">
                             <span class="input-icon">📞</span>
-                            <input type="tel" id="buyerPhone" value="251978893232" placeholder="Enter phone number">
+                            <input type="text" id="buyerPhone" value="251978893232" placeholder="Enter phone or username">
                         </div>
                     </div>
                 </div>
 
-                <!-- STEP 2: PROOF OF PAYMENT (SCREENSHOT UPLOAD) -->
+                <!-- STEP 2: PROOF OF PAYMENT -->
                 <div id="modalStep2" class="modal-step-body hidden">
                     <div class="bank-details-card">
                         <div class="bank-logo-icon">🏦</div>
@@ -247,6 +249,6 @@
 
     </div>
 
-    <script src="script.js?v=11"></script>
+    <script src="script.js?v=12"></script>
 </body>
 </html>
