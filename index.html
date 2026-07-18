@@ -6,18 +6,55 @@
     <title>Bota Solutions</title>
     <!-- Telegram WebApp SDK Script Included -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <link rel="stylesheet" href="style.css?v=15">
+    <link rel="stylesheet" href="style.css?v=18">
 </head>
 <body>
 
-    <div class="app-container">
+    <!-- 🚪 SIGN UP SCREEN (FIRST TIME USER) -->
+    <div id="signUpScreen" class="auth-screen">
+        <div class="auth-card">
+            <div class="auth-logo">🏆</div>
+            <h2>Create Account</h2>
+            <p>Sign up to start participating in the Ekub</p>
+            
+            <div class="input-group-field">
+                <label>Full Name</label>
+                <input type="text" id="regFullName" class="standard-text-input" placeholder="Getachew Fikadu">
+            </div>
+            <div class="input-group-field">
+                <label>Phone Number</label>
+                <input type="tel" id="regPhone" class="standard-text-input" placeholder="251912345678">
+            </div>
+            <div class="input-group-field">
+                <label>Create 4-Digit PIN</label>
+                <input type="password" id="regPin" class="standard-text-input" placeholder="••••" maxlength="4" inputmode="numeric">
+            </div>
+            <button id="btnSubmitRegister" class="quick-pick-btn" style="width:100%; margin-top:10px;">Sign Up & Start</button>
+        </div>
+    </div>
+
+    <!-- 🔑 PIN LOGIN SCREEN (FOR RETURNING USERS) -->
+    <div id="loginScreen" class="auth-screen hidden">
+        <div class="auth-card">
+            <div class="auth-logo">🔒</div>
+            <h2>Enter Your PIN</h2>
+            <p>Welcome back! Please verify your identity</p>
+            <div class="input-group-field">
+                <input type="password" id="loginPin" class="standard-text-input" placeholder="••••" maxlength="4" inputmode="numeric" style="text-align:center; font-size:24px; letter-spacing:10px;">
+            </div>
+            <button id="btnSubmitLogin" class="quick-pick-btn" style="width:100%; margin-top:10px;">Unlock App</button>
+        </div>
+    </div>
+
+    <!-- 📱 MAIN APP CONTAINER -->
+    <div id="mainAppContainer" class="app-container hidden">
         <!-- Top App Bar with Dynamic User Profile Name & Language -->
         <div class="app-header">
             <div class="header-user">
                 <div class="header-badge">🏆</div>
                 <div>
                     <h4 id="headerUserName">Getachew</h4>
-                    <span id="txtPremiumBadge" style="font-size: 11px; color: #8da19c;">Premium User</span>
+                    <span id="txtPremiumBadge" style="font-size: 11px; color: #8da19c;">User</span>
                 </div>
             </div>
             <div class="header-actions">
@@ -26,11 +63,11 @@
                     <option value="am">አማርኛ</option>
                     <option value="om">Afaan Oromoo</option>
                 </select>
-                <button class="icon-btn">🔔</button>
+                <button id="btnAdminAccess" class="icon-btn" style="background:#2a1f06; color:#FFB800;">⚙️ Admin</button>
             </div>
         </div>
 
-        <!-- 1. HOME TAB (Products Promotion & Ticket Purchase Control) -->
+        <!-- 1. HOME TAB -->
         <div id="homePhase" class="phase-container dynamic-tab">
             <div class="product-promo-card">
                 <div class="promo-image-wrapper">
@@ -64,7 +101,6 @@
                         <div class="progress-bar"><div class="progress-fill" style="width: 48%;"></div></div>
                     </div>
 
-                    <!-- Bottom Ticket Control Panel -->
                     <div class="ticket-control-panel">
                         <div class="ticket-price-row">
                             <div>
@@ -85,7 +121,6 @@
                             <button id="selectBtn" class="select-btn">🛡️ Select</button>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -93,28 +128,21 @@
         <!-- 2. TICKETS & HISTORY TAB -->
         <div id="ticketPhase" class="phase-container dynamic-tab hidden">
             <h2 id="txtMyTicketsTitle" class="section-title">My Tickets & History</h2>
-            <p id="txtMyTicketsSubtitle" class="section-subtitle">Track your lottery entries and winning history</p>
-
-            <div class="search-box-row">
-                <input type="tel" id="ticketPhoneSearch" class="search-input" value="251978893232" placeholder="Enter phone number">
-                <button id="btnSearch" class="search-btn">🔍 Search</button>
-            </div>
+            <p id="txtMyTicketsSubtitle" class="section-subtitle">Track your lottery entries</p>
 
             <div class="stats-grid">
                 <div class="stat-card active-card"><h3 id="countActive">0</h3><p id="lblStatActive">Active</p></div>
                 <div class="stat-card pending-card"><h3 id="countPending">0</h3><p id="lblStatPending">Pending</p></div>
-                <div class="stat-card won-card"><h3 id="countWon">1</h3><p id="lblStatWon">Won 🏆</p></div>
-                <div class="stat-card total-card"><h3 id="countTotal">1</h3><p id="lblStatTotal">Total</p></div>
+                <div class="stat-card won-card"><h3 id="countWon">0</h3><p id="lblStatWon">Won 🏆</p></div>
+                <div class="stat-card total-card"><h3 id="countTotal">0</h3><p id="lblStatTotal">Total</p></div>
             </div>
 
-            <!-- Enhanced Lucky Number Grid Selection -->
             <div class="number-selection-section">
                 <h3 id="txtGridSelectionHeading">Select Your Lucky Numbers (Max: <span id="lblMaxAllowed">1</span>)</h3>
                 <div class="numbers-grid" id="numbersGrid100"></div>
-                <div id="gridWarningMessage" class="grid-warning hidden">⚠️ You can only select numbers matching your purchased ticket count.</div>
+                <div id="gridWarningMessage" class="grid-warning hidden">⚠️ Selection limit reached.</div>
             </div>
 
-            <!-- Advanced Ticket History Log Table -->
             <div class="history-section" style="margin-top: 15px; text-align: left;">
                 <h3 id="txtHistoryTableHeading" style="font-size: 14px; color: #fff; margin-bottom: 10px;">📜 Ticket Participation Logs</h3>
                 <div class="history-table-wrapper">
@@ -127,11 +155,7 @@
                             </tr>
                         </thead>
                         <tbody id="historyTableBody">
-                            <tr>
-                                <td>Round #12 (BYD Yuan)</td>
-                                <td><span class="badge-num">24</span></td>
-                                <td><span class="status-tag success">WON 🏆</span></td>
-                            </tr>
+                            <!-- Populated Dynamically -->
                         </tbody>
                     </table>
                 </div>
@@ -147,11 +171,6 @@
                     <div class="winner-info"><h4>Bekele Zewdu</h4><p>Phone: 251911****43</p></div>
                     <div class="winner-prize">Won BYD Car</div>
                 </div>
-                <div class="winner-item">
-                    <div class="winner-avatar">👤</div>
-                    <div class="winner-info"><h4>Getachew Fikadu (You)</h4><p>Phone: 251978****32</p></div>
-                    <div class="winner-prize" style="color: #FFB800;">Won BYD Yuan</div>
-                </div>
                 <div id="txtNoMoreWinners" class="no-more-winners">No more winners announced yet for this week.</div>
             </div>
         </div>
@@ -163,17 +182,41 @@
                 <div class="profile-avatar-large">
                     <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" alt="Customer Photo" class="user-photo-img">
                 </div>
-                <h3 id="profileFullName" style="margin-top: 10px; color:#FFB800;">Getachew Fikadu Jirata</h3>
+                <h3 id="profileFullName" style="margin-top: 10px; color:#FFB800;">User Name</h3>
             </div>
 
             <div class="phone-display-box">
                 <div class="phone-icon-circle">📞</div>
-                <div class="phone-meta"><span id="txtUserIdentityLabel">User Identity</span><h2 id="profilePhoneOrUsername">251978893232</h2></div>
+                <div class="phone-meta"><span id="txtUserIdentityLabel">User Identity</span><h2 id="profilePhoneOrUsername">Phone Number</h2></div>
             </div>
 
             <div class="profile-footer-copyright">
-                © 2026 <span id="copyrightName">Getachew Fikadu Jirata</span>. All Rights Reserved. <br>
+                © 2026 <span id="copyrightName">Bota Solutions</span>. All Rights Reserved. <br>
                 | Designed & Developed by <span style="color:#FFB800;">Qaroo Soft</span>
+            </div>
+        </div>
+
+        <!-- 🛡️ 5. ADMIN CONTROL PANEL TAB (SECRET ACCESS) -->
+        <div id="adminPhase" class="phase-container dynamic-tab hidden">
+            <h2 class="section-title" style="color:#FFB800;">🛡️ Admin Dashboard</h2>
+            <p class="section-subtitle">Approve or Reject user ticket payments</p>
+
+            <div class="history-section" style="margin-top: 15px; text-align: left;">
+                <h3 style="font-size: 14px; color: #fff; margin-bottom: 10px;">Pending Approvals</h3>
+                <div class="history-table-wrapper">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Ticket info</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminTableBody">
+                            <!-- Incoming purchases show up here for approval -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
@@ -196,7 +239,6 @@
                     <button id="closeModalBtn" class="close-modal-btn">&times;</button>
                 </div>
 
-                <!-- Step Progress Bar Indicator -->
                 <div class="modal-step-indicator-bar">
                     <div id="stepLine1" class="step-line active"></div>
                     <div id="stepLine2" class="step-line"></div>
@@ -213,21 +255,13 @@
                         <h2 id="ticketTotalLabel" class="ekub-price">3,000 Birr</h2>
                         <span class="ekub-hash">#3268</span>
                     </div>
-
                     <div class="input-group-field">
                         <label id="lblFullNameField">Full Name</label>
-                        <div class="input-wrapper">
-                            <span class="input-icon">👤</span>
-                            <input type="text" id="buyerFullName" value="Getachew Fikadu" placeholder="Enter your full name">
-                        </div>
+                        <div class="input-wrapper"><input type="text" id="buyerFullName" readonly></div>
                     </div>
-
                     <div class="input-group-field">
-                        <label id="lblPhoneField">Phone Number / Contact</label>
-                        <div class="input-wrapper">
-                            <span class="input-icon">📞</span>
-                            <input type="text" id="buyerPhone" value="251978893232" placeholder="Enter phone or username">
-                        </div>
+                        <label id="lblPhoneField">Phone Number</label>
+                        <div class="input-wrapper"><input type="text" id="buyerPhone" readonly></div>
                     </div>
                 </div>
 
@@ -235,50 +269,33 @@
                 <div id="modalStep2" class="modal-step-body hidden">
                     <div class="bank-details-card">
                         <div class="bank-logo-icon">🏦</div>
-                        <div class="bank-meta">
-                            <h4>Commercial Bank of Ethiopia</h4>
-                            <p>Getachew Fikadu Jirata</p>
-                        </div>
+                        <div class="bank-meta"><h4>Commercial Bank of Ethiopia</h4><p>Getachew Fikadu Jirata</p></div>
                         <div class="bank-account-num">1000528139489</div>
                     </div>
-
                     <label id="lblUploadReceiptHeading" class="field-section-title">Proof of Payment</label>
                     <div class="upload-dropzone" id="uploadZone">
                         <span class="upload-icon">📤</span>
                         <h4 id="lblDropzoneTitle">Upload Payment Receipt</h4>
-                        <p id="lblDropzoneSub">PNG, JPG up to 10MB</p>
-                        <input type="file" id="fileInputControl" accept="image/*" style="display:none;">
+                        <p id="lblDropzoneSub">Click to simulate upload</p>
                         <div id="uploadStatusText" style="margin-top:10px; color:#00ffaa; font-size:12px;"></div>
-                    </div>
-
-                    <div class="input-group-field" style="margin-top: 15px;">
-                        <label id="lblSenderAccountField">Sender Account Number (Optional)</label>
-                        <input type="text" id="senderAccountInput" class="standard-text-input" placeholder="Account you sent from">
-                    </div>
-
-                    <div class="warning-callout-box">
-                        <span class="warn-icon">⚠️</span>
-                        <p id="lblWarningNoticeText">After transferring the money, upload your payment receipt or transaction screenshot.</p>
                     </div>
                 </div>
 
                 <!-- STEP 3: SUCCESS CONFIRMATION -->
                 <div id="modalStep3" class="modal-step-body hidden" style="text-align: center; padding: 30px 10px;">
                     <div class="success-checkmark-circle">🎉</div>
-                    <h2 id="lblSuccessHeading" style="color: #00ffaa; margin-bottom: 10px;">Submission Successful!</h2>
-                    <p id="lblSuccessSub" style="color: #8da19c; font-size: 14px; line-height: 1.5;">Your payment proof has been uploaded. Administrators will verify it and activate your ticket shortly.</p>
+                    <h2 id="lblSuccessHeading" style="color: #00ffaa; margin-bottom: 10px;">Submitted to Admin!</h2>
+                    <p id="lblSuccessSub" style="color: #8da19c; font-size: 14px;">Your payment verification request is sent to the Admin panel for approval.</p>
                 </div>
 
-                <!-- Modal Bottom Action Control Buttons -->
                 <div class="modal-footer-actions">
                     <button id="modalBackBtn" class="modal-btn-back hidden">Back</button>
                     <button id="modalContinueBtn" class="modal-btn-continue">Continue &rsaquo;</button>
                 </div>
             </div>
         </div>
-
     </div>
 
-    <script src="script.js?v=15"></script>
+    <script src="script.js?v=18"></script>
 </body>
 </html>
