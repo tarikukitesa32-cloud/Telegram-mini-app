@@ -1,4 +1,29 @@
-// Tab Elements
+// ==========================================
+// 1. TELEGRAM WEBAPP API INITIALIZATION
+// ==========================================
+const tg = window.Telegram ? window.Telegram.WebApp : null;
+
+// Fallback user settings if launched outside Telegram
+let currentUserName = "Getachew Fikadu Jirata";
+let currentUserPhone = "251978893232";
+
+if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) {
+    const user = tg.initDataUnsafe.user;
+    // Extract real first name and last name
+    currentUserName = `${user.first_name || ''} ${user.last_name || ''}`.trim() || "Telegram User";
+    
+    // Fallback to username if phone is restricted by Telegram SDK
+    if (user.username) {
+        currentUserPhone = "@" + user.username;
+    }
+    
+    tg.ready();
+    tg.expand(); // Opens WebApp in full-screen window inside telegram
+}
+
+// ==========================================
+// 2. DOM ELEMENTS SELECTORS
+// ==========================================
 const homePhase = document.getElementById('homePhase');
 const ticketPhase = document.getElementById('ticketPhase');
 const winnersPhase = document.getElementById('winnersPhase');
@@ -12,7 +37,7 @@ const navProfile = document.getElementById('navProfile');
 const phases = [homePhase, ticketPhase, winnersPhase, profilePhase];
 const navItems = [navHome, navTicket, navWinners, navProfile];
 
-// Multi-Step Purchase Modal Elements
+// Multi-Step Modal Systems
 const purchaseModal = document.getElementById('purchaseModal');
 const closeModalBtn = document.getElementById('closeModalBtn');
 const modalContinueBtn = document.getElementById('modalContinueBtn');
@@ -27,7 +52,7 @@ const stepLine2 = document.getElementById('stepLine2');
 const stepLine3 = document.getElementById('stepLine3');
 const modalStepLabel = document.getElementById('modalStepLabel');
 
-// Home Interactive Controls
+// Ticket Controls
 const stepMinusBtn = document.getElementById('stepMinusBtn');
 const stepPlusBtn = document.getElementById('stepPlusBtn');
 const ticketCountDisplay = document.getElementById('ticketCountDisplay');
@@ -35,12 +60,12 @@ const chooseLuckyBtn = document.getElementById('chooseLuckyBtn');
 const quickPickBtn = document.getElementById('quickPickBtn');
 const selectBtn = document.getElementById('selectBtn');
 
-// Uploading Control Inputs
+// Upload Nodes
 const uploadZone = document.getElementById('uploadZone');
 const fileInputControl = document.getElementById('fileInputControl');
 const uploadStatusText = document.getElementById('uploadStatusText');
 
-// Ticket State counters
+// Counter Nodes
 const countActive = document.getElementById('countActive');
 const countPending = document.getElementById('countPending');
 const countTotal = document.getElementById('countTotal');
@@ -50,7 +75,37 @@ let ticketCount = 1;
 const pricePerTicket = 3000;
 let currentModalStep = 1;
 
-// Navigation tab functionality
+// ==========================================
+// 3. DYNAMIC USER DATA SYNC ON LOAD
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. Sync Upper Left Header Small Name
+    const headerNameEl = document.getElementById('headerUserName');
+    if (headerNameEl) {
+        headerNameEl.innerText = currentUserName.split(' ')[0]; // Show only first name
+    }
+
+    // 2. Sync Profile Tab Fields
+    const profileNameEl = document.getElementById('profileFullName');
+    if (profileNameEl) profileNameEl.innerText = currentUserName;
+
+    const profilePhoneEl = document.getElementById('profilePhoneOrUsername');
+    if (profilePhoneEl) profilePhoneEl.innerText = currentUserPhone;
+
+    const copyrightNameEl = document.getElementById('copyrightName');
+    if (copyrightNameEl) copyrightNameEl.innerText = currentUserName;
+
+    // 3. Sync Modal Step 1 Input Box Fields
+    const inputNameEl = document.getElementById('buyerFullName');
+    if (inputNameEl) inputNameEl.value = currentUserName;
+
+    const inputPhoneEl = document.getElementById('buyerPhone');
+    if (inputPhoneEl) inputPhoneEl.value = currentUserPhone;
+});
+
+// ==========================================
+// 4. NAVIGATION TAB ROUTER FUNCTIONS
+// ==========================================
 function switchTab(targetPhase, activeNav) {
     phases.forEach(phase => phase.classList.add('hidden'));
     navItems.forEach(item => item.classList.remove('active'));
@@ -66,7 +121,7 @@ navTicket.addEventListener('click', () => {
 navWinners.addEventListener('click', () => switchTab(winnersPhase, navWinners));
 navProfile.addEventListener('click', () => switchTab(profilePhase, navProfile));
 
-// Stepper Logic for tickets count incrementation
+// Stepper Configuration Counts
 stepPlusBtn.addEventListener('click', () => {
     ticketCount++;
     ticketCountDisplay.innerText = ticketCount;
@@ -79,12 +134,13 @@ stepMinusBtn.addEventListener('click', () => {
     }
 });
 
-// Triggering the purchase workflows step overlay popups
+// ==========================================
+// 5. STEP MODAL WIZARD WORKFLOWS
+// ==========================================
 function openPurchaseModalWorkflow() {
     currentModalStep = 1;
     updateModalStepUI();
     
-    // Dynamic recalculations for summary cards inside modal step 1
     const totalCost = ticketCount * pricePerTicket;
     document.getElementById('ticketCalcLabel').innerText = `${ticketCount} Tickets × 3,000 Birr`;
     document.getElementById('ticketTotalLabel').innerText = `${totalCost.toLocaleString()} Birr`;
@@ -101,7 +157,6 @@ selectBtn.addEventListener('click', openPurchaseModalWorkflow);
 
 closeModalBtn.addEventListener('click', () => purchaseModal.classList.add('hidden'));
 
-// Control flows inside purchasing step wizard modal overlays
 modalContinueBtn.addEventListener('click', () => {
     if (currentModalStep === 1) {
         currentModalStep = 2;
@@ -110,7 +165,7 @@ modalContinueBtn.addEventListener('click', () => {
         currentModalStep = 3;
         updateModalStepUI();
         
-        // Simulating receipt validation status updates to Ticket tab layout counter state
+        // Simulating the transaction upload stats
         countPending.innerText = ticketCount;
         countTotal.innerText = ticketCount;
     } else if (currentModalStep === 3) {
@@ -125,7 +180,6 @@ modalBackBtn.addEventListener('click', () => {
     }
 });
 
-// Updating rendering classes visually inside purchase dialog flow steps
 function updateModalStepUI() {
     modalStep1.classList.add('hidden');
     modalStep2.classList.add('hidden');
@@ -158,15 +212,15 @@ function updateModalStepUI() {
     }
 }
 
-// Emulating screenshot uploading features trigger clicks
+// Upload Trigger Interface Emulator
 uploadZone.addEventListener('click', () => fileInputControl.click());
 fileInputControl.addEventListener('change', (e) => {
     if (e.target.files.length > 0) {
-        uploadStatusText.innerText = `📄 ${e.target.files[0].name} selected successfully!`;
+        uploadStatusText.innerText = `📄 ${e.target.files[0].name} selected!`;
     }
 });
 
-// Generating ticket numbers sequence cells 1 to 100 dynamically
+// Generate Grid Sequence 1-100 Nodes Dynamically
 function generateTicketNumbersGrid() {
     if (numbersGrid100.children.length > 0) return;
     for (let i = 1; i <= 100; i++) {
@@ -183,7 +237,7 @@ function generateTicketNumbersGrid() {
     }
 }
 
-// Product countdown live clock configuration setup
+// Ticker Live Countdown Watcher 
 let d = 9, h = 9, m = 54, s = 20;
 setInterval(() => {
     s--;
