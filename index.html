@@ -13,7 +13,6 @@
             --text: #ffffff;
             --sub-text: #8696a0;
             --border: #222e35;
-            --green: #00e676;
         }
 
         * {
@@ -69,69 +68,21 @@
         .app-page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 16px; margin-bottom: 15px; overflow: hidden; }
-        
-        /* 🏠 HOME COMPONENTS - IMPROVED BACKUP IMAGE SYSTEM */
-        .product-img-container {
-            width: 100%;
-            height: 180px;
-            border-radius: 18px;
-            overflow: hidden;
-            position: relative;
-            background: linear-gradient(135deg, #1f2c34 0%, #2a3942 100%);
+        /* EMPTY STATE STYLE */
+        .empty-state {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--sub-text);
         }
-        .product-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
+        .empty-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            opacity: 0.5;
         }
-        .img-fallback {
-            font-size: 60px;
-            z-index: 0;
-            opacity: 0.7;
-        }
-        .badge { position: absolute; top: 12px; left: 12px; background: #128c7e; color: #fff; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: bold; z-index: 2; }
-        
-        .prod-title { font-size: 22px; font-weight: 800; margin-top: 15px; }
-        .timer-box { background: linear-gradient(135deg, #0e1e17 0%, #111b21 100%); border: 1px solid rgba(0, 230, 118, 0.15); border-radius: 16px; padding: 14px; margin-top: 15px; }
-        .timer-grid { display: flex; align-items: center; gap: 6px; }
-        .t-digit { background: var(--input-bg); color: var(--primary); font-size: 18px; font-weight: bold; padding: 6px 10px; border-radius: 8px; }
-        .price-panel { background: rgba(255, 184, 0, 0.02); border: 1px solid var(--border); border-radius: 16px; padding: 15px; margin-top: 15px; display: flex; justify-content: space-between; align-items: center; }
-        .qty-box { display: flex; align-items: center; gap: 12px; }
-        .qty-btn { background: var(--input-bg); border: none; color: white; font-size: 18px; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .qty-btn.plus { background: var(--primary); color: black; font-weight: bold; }
-        
-        .numbers-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; max-height: 200px; overflow-y: auto; }
-        .num-cell { background: var(--input-bg); border: 1px solid var(--border); border-radius: 10px; padding: 12px 0; text-align: center; font-weight: bold; cursor: pointer; color: var(--text); }
-        .num-cell.selected { background: var(--primary); color: #000; }
-        .num-cell.sold-out { background: rgba(34, 46, 53, 0.3); color: rgba(134, 150, 160, 0.2); text-decoration: line-through; cursor: not-allowed; }
-        
-        .btn-main-action { width: 100%; background: linear-gradient(90deg, #ffb800 0%, #ff9900 100%); color: #000; padding: 16px; border-radius: 16px; font-size: 16px; font-weight: 800; border: none; cursor: pointer; margin-top: 5px; }
-
-        /* 🎟️ TICKETS PAGE STYLES */
-        .ticket-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid var(--border); }
-        .ticket-item:last-child { border-bottom: none; }
-        .tkt-badge { background: var(--input-bg); padding: 5px 10px; border-radius: 6px; color: var(--primary); font-weight: bold; }
-
-        /* 🏆 WINNERS PAGE STYLES */
-        .winner-card { display: flex; align-items: center; gap: 15px; padding: 12px; border-bottom: 1px solid var(--border); }
-        .winner-card:last-child { border-bottom: none; }
-        .winner-avatar { width: 45px; height: 45px; background: rgba(255,184,0,0.1); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; }
-        .winner-info { flex: 1; }
-        .winner-lucky-num { background: rgba(0,230,118,0.1); color: var(--green); padding: 4px 8px; border-radius: 6px; font-weight: bold; font-size: 13px; }
-
-        /* 👤 PROFILE PAGE STYLES */
-        .profile-header { text-align: center; padding: 20px 0; }
-        .avatar { width: 80px; height: 80px; background: var(--input-bg); border-radius: 50%; margin: 0 auto 10px auto; display: flex; align-items: center; justify-content: center; font-size: 35px; border: 2px solid var(--primary); }
-        .profile-menu-item { display: flex; justify-content: space-between; padding: 16px; border-bottom: 1px solid var(--border); cursor: pointer; }
-        .profile-menu-item:last-child { border-bottom: none; }
 
         /* 🧭 BOTTOM NAVIGATION BAR */
         .bottom-nav {
@@ -146,12 +97,6 @@
         .nav-item .icon { font-size: 20px; margin-bottom: 4px; transition: transform 0.2s; }
         .nav-item.active { color: var(--primary); }
         .nav-item.active .icon { transform: translateY(-2px); }
-
-        /* MODAL */
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 99999; display: none; align-items: center; justify-content: center; padding: 20px; }
-        .modal-card { background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 25px; width: 100%; max-width: 360px; text-align: center; }
-        .btn-pay { width: 100%; padding: 14px; border-radius: 12px; background: var(--primary); color: #000; border: none; font-weight: bold; margin-top: 15px; cursor: pointer; }
-        .btn-close { width: 100%; padding: 12px; border-radius: 12px; background: transparent; border: 1px solid var(--border); color: var(--sub-text); margin-top: 8px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -175,117 +120,38 @@
             <div style="font-size: 20px;">🔔</div>
         </header>
 
-        <!-- 🏠 1. HOME PAGE VIEW -->
+        <!-- 🏠 1. HOME PAGE VIEW (EMPTY) -->
         <div id="pageHome" class="app-page active">
-            <div class="card">
-                <!-- 📸 STABLE IMAGE + ICON FALLBACK SYSTEM -->
-                <div class="product-img-container">
-                    <span class="badge">LIVE</span>
-                    <div class="img-fallback">💻</div>
-                    <img src="https://i.imgur.com/KzXgZ4L.png" alt="HP Laptop" onerror="this.style.display='none'">
-                </div>
-                
-                <h2 class="prod-title" id="lblTitle">HP Pavilion Laptop</h2>
-                <p style="color: var(--sub-text); font-size: 14px;">Core i7 • 16GB RAM • 512GB SSD</p>
-                
-                <div class="timer-box">
-                    <div style="font-size: 11px; font-weight: 700; color: var(--sub-text);" id="lblTimer">🔥 TIME REMAINING</div>
-                    <div class="timer-grid" style="margin-top: 5px;">
-                        <div class="t-digit">00</div><div>:</div>
-                        <div class="t-digit">00</div><div>:</div>
-                        <div class="t-digit">00</div><div>:</div>
-                        <div class="t-digit" id="secs">53</div>
-                    </div>
-                </div>
-                
-                <div class="price-panel">
-                    <div>
-                        <p style="font-size: 11px; color: var(--sub-text);" id="lblPriceTxt">TICKET PRICE</p>
-                        <h3 style="font-size: 20px; color: var(--primary);" id="priceDisplay">100 Birr</h3>
-                    </div>
-                    <div class="qty-box">
-                        <button class="qty-btn" onclick="updateQty(-1)">-</button>
-                        <span style="font-size: 18px; font-weight: bold;" id="qtyDisplay">1</span>
-                        <button class="qty-btn plus" onclick="updateQty(1)">+</button>
-                    </div>
-                </div>
+            <div class="empty-state">
+                <div class="empty-icon">🛍️</div>
+                <p id="emptyHome">No active campaigns available right now.</p>
             </div>
-            
-            <div style="font-size: 16px; font-weight: bold; margin: 15px 5px 10px 5px; display: flex; justify-content: space-between;">
-                <span id="lblSelect">Select Your Number</span>
-                <span style="color: var(--primary);" id="lblPickCount">Pick 1 Number</span>
-            </div>
-            
-            <div class="card" style="padding: 12px;">
-                <div class="numbers-grid" id="numsGrid"></div>
-            </div>
-            
-            <button class="btn-main-action" id="lblBuyBtn" onclick="clickBuyAction()">BUY TICKET NOW</button>
         </div>
 
-        <!-- 🎟️ 2. TICKETS PAGE VIEW -->
+        <!-- 🎟️ 2. TICKETS PAGE VIEW (EMPTY) -->
         <div id="pageTickets" class="app-page">
             <h2 style="margin-bottom: 15px;" id="navTickets">My Tickets</h2>
-            <div class="card" style="padding: 5px;">
-                <div class="ticket-item">
-                    <div>
-                        <h4 style="font-size: 15px;">HP Pavilion Laptop</h4>
-                        <p style="font-size: 12px; color: var(--sub-text);">Status: Pending Draw</p>
-                    </div>
-                    <span class="tkt-badge">#24</span>
-                </div>
-                <div class="ticket-item">
-                    <div>
-                        <h4 style="font-size: 15px;">HP Pavilion Laptop</h4>
-                        <p style="font-size: 12px; color: var(--sub-text);">Status: Pending Draw</p>
-                    </div>
-                    <span class="tkt-badge">#87</span>
-                </div>
+            <div class="empty-state">
+                <div class="empty-icon">🎟️</div>
+                <p id="emptyTickets">You haven't purchased any tickets yet.</p>
             </div>
         </div>
 
-        <!-- 🏆 3. WINNERS PAGE VIEW -->
+        <!-- 🏆 3. WINNERS PAGE VIEW (EMPTY) -->
         <div id="pageWinners" class="app-page">
             <h2 style="margin-bottom: 15px;" id="navWinners">Recent Winners</h2>
-            <div class="card" style="padding: 5px;">
-                <div class="winner-card">
-                    <div class="winner-avatar">👑</div>
-                    <div class="winner-info">
-                        <h4 style="font-size: 15px;">Abdi Yosef</h4>
-                        <p style="font-size: 12px; color: var(--sub-text);">Item: iPhone 15 Pro Max</p>
-                    </div>
-                    <span class="winner-lucky-num">Lucky #08</span>
-                </div>
-                <div class="winner-card">
-                    <div class="winner-avatar">👑</div>
-                    <div class="winner-info">
-                        <h4 style="font-size: 15px;">Selamawit Tekle</h4>
-                        <p style="font-size: 12px; color: var(--sub-text);">Item: Samsung Ultra S24</p>
-                    </div>
-                    <span class="winner-lucky-num">Lucky #54</span>
-                </div>
-                <div class="winner-card">
-                    <div class="winner-avatar">👑</div>
-                    <div class="winner-info">
-                        <h4 style="font-size: 15px;">Yonas Mulugeta</h4>
-                        <p style="font-size: 12px; color: var(--sub-text);">Item: PlayStation 5</p>
-                    </div>
-                    <span class="winner-lucky-num">Lucky #19</span>
-                </div>
+            <div class="empty-state">
+                <div class="empty-icon">🏆</div>
+                <p id="emptyWinners">No winners announced yet. Stay tuned!</p>
             </div>
         </div>
 
-        <!-- 👤 4. PROFILE PAGE VIEW -->
+        <!-- 👤 4. PROFILE PAGE VIEW (EMPTY) -->
         <div id="pageProfile" class="app-page">
-            <div class="profile-header">
-                <div class="avatar">👤</div>
-                <h3>የተጠቃሚ ስም / Customer</h3>
-                <p style="color: var(--sub-text); font-size: 13px;">ID: 7492047</p>
-            </div>
-            <div class="card" style="padding: 5px;">
-                <div class="profile-menu-item"><span>📱 Phone Number</span><span style="color: var(--sub-text);">+251 9...</span></div>
-                <div class="profile-menu-item"><span>💳 Wallet Balance</span><span style="color: var(--green); font-weight: bold;">0.00 ETB</span></div>
-                <div class="profile-menu-item" onclick="alert('Language updated!')"><span id="lblLangOpt">🌐 Change Language</span><span>❯</span></div>
+            <h2 style="margin-bottom: 15px;" id="navProfileTitle">My Profile</h2>
+            <div class="empty-state">
+                <div class="empty-icon">👤</div>
+                <p id="emptyProfile">Please sign in to view your profile setup.</p>
             </div>
         </div>
 
@@ -306,31 +172,32 @@
         </nav>
     </div>
 
-    <!-- 💳 PAYMENT MODAL -->
-    <div class="modal" id="payModal">
-        <div class="modal-card">
-            <div style="font-size: 40px; margin-bottom: 10px;">💳</div>
-            <h3 id="lblCheckout">Secure Checkout</h3>
-            <p style="color: var(--sub-text); font-size: 14px;"><span id="lblTktNum">Selected:</span> <span id="popTkt" style="color: var(--primary); font-weight: bold;">#0</span></p>
-            <div style="background: var(--input-bg); border-radius: 12px; padding: 15px; margin: 15px 0; font-size: 22px; font-weight: bold; color: var(--green);"><span id="popPrice">100</span> ETB</div>
-            <button class="btn-pay" onclick="paySuccess()" id="lblPayBtn">Pay with Telebirr / Chapa</button>
-            <button class="btn-close" onclick="closeModal()" id="lblCancel">Cancel</button>
-        </div>
-    </div>
-
     <script>
-        let qty = 1; const unitPrice = 100; let selected = []; const soldOut = [5, 17, 23, 45, 62, 81];
         const dicts = {
-            amharic: { lblTitle: "HP Pavilion ላፕቶፕ", lblTimer: "🔥 የቀረው ጊዜ", lblPriceTxt: "የቲኬት ዋጋ", lblSelect: "የእድል ቁጥርዎን ይምረጡ", lblCheckout: "ደህንነቱ የተጠበቀ ክፍያ", lblTktNum: "የተመረጠ ቲኬት:", lblPayBtn: "በቴሌብር / ጫፓ ይክፈሉ", lblCancel: "ይቅር", lblBuyBtn: "አሁን ግዛ", navHome: "ዋና ገጽ", navTicketsBtn: "ቲኬቶች", navWinnersBtn: "አሸናፊዎች", navProfile: "ፕሮፋይል", navTickets: "የእኔ ቲኬቶች", navWinners: "የቅርብ ጊዜ አሸናፊዎች", lblLangOpt: "🌐 ቋንቋ ቀይር" },
-            english: { lblTitle: "HP Pavilion Laptop", lblTimer: "🔥 TIME REMAINING", lblPriceTxt: "TICKET PRICE", lblSelect: "Select Your Number", lblCheckout: "Secure Checkout", lblTktNum: "Selected Ticket:", lblPayBtn: "Pay with Telebirr / Chapa", lblCancel: "Cancel", lblBuyBtn: "BUY TICKET NOW", navHome: "Home", navTicketsBtn: "Tickets", navWinnersBtn: "Winners", navProfile: "Profile", navTickets: "My Tickets", navWinners: "Recent Winners", lblLangOpt: "🌐 Change Language" }
+            amharic: { 
+                navHome: "ዋና ገጽ", navTicketsBtn: "ቲኬቶች", navWinnersBtn: "አሸናፊዎች", navProfile: "ፕሮፋይል", 
+                navTickets: "የእኔ ቲኬቶች", navWinners: "የቅርብ ጊዜ አሸናፊዎች", navProfileTitle: "የእኔ ፕሮፋይል",
+                emptyHome: "በአሁኑ ጊዜ የሚገኙ ንቁ ዕድሎች የሉም።",
+                emptyTickets: "እስካሁን ምንም ቲኬት አልገዙም።",
+                emptyWinners: "እስካሁን ይፋ የተደረጉ አሸናፊዎች የሉም።",
+                emptyProfile: "ፕሮፋይልዎን ለማየት እባክዎ መጀመሪያ ይግቡ።"
+            },
+            english: { 
+                navHome: "Home", navTicketsBtn: "Tickets", navWinnersBtn: "Winners", navProfile: "Profile", 
+                navTickets: "My Tickets", navWinners: "Recent Winners", navProfileTitle: "My Profile",
+                emptyHome: "No active campaigns available right now.",
+                emptyTickets: "You haven't purchased any tickets yet.",
+                emptyWinners: "No winners announced yet. Stay tuned!",
+                emptyProfile: "Please sign in to view your profile setup."
+            }
         };
 
         function onStartClicked() { document.getElementById('startBtn').style.display = 'none'; document.getElementById('langContainer').style.display = 'flex'; }
-        let currentLang = 'english';
+        
         function enterApp(lang) {
-            currentLang = lang; const dict = dicts[lang];
+            const dict = dicts[lang];
             for (let key in dict) { if(document.getElementById(key)) document.getElementById(key).innerText = dict[key]; }
-            updateQty(0); document.getElementById('welcomeScreen').style.display = 'none'; document.getElementById('mainApp').style.display = 'block';
+            document.getElementById('welcomeScreen').style.display = 'none'; document.getElementById('mainApp').style.display = 'block';
         }
 
         function switchPage(pageId, navEl) {
@@ -339,38 +206,6 @@
             document.getElementById('page' + pageId).classList.add('active');
             navEl.classList.add('active');
         }
-
-        function updateQty(amt) {
-            qty += amt; if(qty < 1) qty = 1; if(qty > 5) qty = 5;
-            document.getElementById('qtyDisplay').innerText = qty;
-            document.getElementById('priceDisplay').innerText = (qty * unitPrice) + " Birr";
-            document.getElementById('lblPickCount').innerText = currentLang === 'amharic' ? `${qty} ቁጥር ይምረጡ` : `Pick ${qty} Number(s)`;
-            resetCells();
-        }
-        function resetCells() { selected = []; document.querySelectorAll('.num-cell').forEach(c => c.classList.remove('selected')); }
-
-        // Grid Generation
-        const grid = document.getElementById('numsGrid');
-        for(let i=1; i<=100; i++) {
-            let cell = document.createElement('div'); cell.className = 'num-cell'; cell.innerText = i;
-            if(soldOut.includes(i)) cell.classList.add('sold-out');
-            else cell.onclick = () => {
-                if(cell.classList.contains('selected')) { selected = selected.filter(n => n !== i); cell.classList.remove('selected'); }
-                else if(selected.length < qty) { selected.push(i); cell.classList.add('selected'); }
-            };
-            grid.appendChild(cell);
-        }
-
-        function clickBuyAction() {
-            if(selected.length < qty) { alert(currentLang === 'amharic' ? `እባክዎ መጀመሪያ ${qty} ቁጥር ይምረጡ!` : `Select ${qty} number(s) first!`); return; }
-            document.getElementById('popTkt').innerText = selected.map(n => "#"+n).join(', ');
-            document.getElementById('popPrice').innerText = qty * unitPrice;
-            document.getElementById('payModal').style.display = 'flex';
-        }
-        function closeModal() { document.getElementById('payModal').style.display = 'none'; resetCells(); }
-        function paySuccess() { alert('🎉 Success!'); closeModal(); }
-
-        let secs = 53; setInterval(() => { if(secs <= 0) secs = 60; secs--; document.getElementById('secs').innerText = secs.toString().padStart(2, '0'); }, 1000);
     </script>
 </body>
 </html>
