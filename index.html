@@ -29,7 +29,7 @@
             justify-content: center;
             align-items: flex-start;
             min-height: 100vh;
-            padding-bottom: 80px; /* Space for navigation bar */
+            padding-bottom: 85px;
         }
 
         /* 🤖 WELCOME & LANGUAGE SCREEN */
@@ -71,7 +71,7 @@
 
         .card { background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 16px; margin-bottom: 15px; }
         
-        /* HOME COMPONENTS */
+        /* 🏠 HOME COMPONENTS */
         .product-img {
             width: 100%; height: 200px;
             background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.6) 100%), 
@@ -93,25 +93,35 @@
         .num-cell.sold-out { background: rgba(34, 46, 53, 0.3); color: rgba(134, 150, 160, 0.2); text-decoration: line-through; cursor: not-allowed; }
         .btn-main-action { width: 100%; background: linear-gradient(90deg, #ffb800 0%, #ff9900 100%); color: #000; padding: 16px; border-radius: 16px; font-size: 16px; font-weight: 800; border: none; cursor: pointer; margin-top: 15px; }
 
-        /* 🎟️ MY TICKETS PAGE STYLES */
+        /* 🎟️ TICKETS PAGE STYLES */
         .ticket-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid var(--border); }
+        .ticket-item:last-child { border-bottom: none; }
         .tkt-badge { background: var(--input-bg); padding: 5px 10px; border-radius: 6px; color: var(--primary); font-weight: bold; }
+
+        /* 🏆 WINNERS PAGE STYLES */
+        .winner-card { display: flex; align-items: center; gap: 15px; padding: 12px; border-bottom: 1px solid var(--border); }
+        .winner-card:last-child { border-bottom: none; }
+        .winner-avatar { width: 45px; height: 45px; background: rgba(255,184,0,0.1); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+        .winner-info { flex: 1; }
+        .winner-lucky-num { background: rgba(0,230,118,0.1); color: var(--green); padding: 4px 8px; border-radius: 6px; font-weight: bold; font-size: 13px; }
 
         /* 👤 PROFILE PAGE STYLES */
         .profile-header { text-align: center; padding: 20px 0; }
         .avatar { width: 80px; height: 80px; background: var(--input-bg); border-radius: 50%; margin: 0 auto 10px auto; display: flex; align-items: center; justify-content: center; font-size: 35px; border: 2px solid var(--primary); }
         .profile-menu-item { display: flex; justify-content: space-between; padding: 16px; border-bottom: 1px solid var(--border); cursor: pointer; }
+        .profile-menu-item:last-child { border-bottom: none; }
 
         /* 🧭 BOTTOM NAVIGATION BAR */
         .bottom-nav {
             position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
-            width: 100%; max-width: 480px; height: 70px;
+            width: 100%; max-width: 480px; height: 75px;
             background: #101a20; border-top: 1px solid var(--border);
             display: flex; justify-content: space-around; align-items: center;
             z-index: 999; box-shadow: 0 -5px 20px rgba(0,0,0,0.4);
+            padding: 0 10px;
         }
-        .nav-item { display: flex; flex-direction: column; align-items: center; color: var(--sub-text); cursor: pointer; font-size: 12px; font-weight: 600; text-decoration: none; }
-        .nav-item .icon { font-size: 22px; margin-bottom: 4px; transition: transform 0.2s; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; color: var(--sub-text); cursor: pointer; font-size: 11px; font-weight: 600; text-decoration: none; width: 20%; text-align: center; }
+        .nav-item .icon { font-size: 20px; margin-bottom: 4px; transition: transform 0.2s; }
         .nav-item.active { color: var(--primary); }
         .nav-item.active .icon { transform: translateY(-2px); }
 
@@ -143,7 +153,7 @@
             <div style="font-size: 20px;">🔔</div>
         </header>
 
-        <!-- 🏠 HOME PAGE VIEW -->
+        <!-- 🏠 1. HOME PAGE VIEW -->
         <div id="pageHome" class="app-page active">
             <div class="card">
                 <div class="product-img"><span class="badge">LIVE</span></div>
@@ -180,28 +190,59 @@
             <button class="btn-main-action" id="lblBuyBtn" onclick="clickBuyAction()">BUY TICKET NOW</button>
         </div>
 
-        <!-- 🎟️ MY TICKETS PAGE VIEW -->
+        <!-- 🎟️ 2. TICKETS PAGE VIEW -->
         <div id="pageTickets" class="app-page">
             <h2 style="margin-bottom: 15px;" id="navTickets">My Tickets</h2>
             <div class="card" style="padding: 5px;">
                 <div class="ticket-item">
                     <div>
                         <h4 style="font-size: 15px;">HP Pavilion Laptop</h4>
-                        <p style="font-size: 12px; color: var(--sub-text);">Status: Active Draw</p>
+                        <p style="font-size: 12px; color: var(--sub-text);">Status: Pending Draw</p>
                     </div>
                     <span class="tkt-badge">#24</span>
                 </div>
                 <div class="ticket-item">
                     <div>
-                        <h4 style="font-size: 15px;">iPhone 15 Pro Max</h4>
-                        <p style="font-size: 12px; color: var(--green);">Winner: Lucky #08</p>
+                        <h4 style="font-size: 15px;">HP Pavilion Laptop</h4>
+                        <p style="font-size: 12px; color: var(--sub-text);">Status: Pending Draw</p>
                     </div>
-                    <span class="tkt-badge" style="background: rgba(0,230,118,0.1); color: var(--green);">#08</span>
+                    <span class="tkt-badge">#87</span>
                 </div>
             </div>
         </div>
 
-        <!-- 👤 PROFILE PAGE VIEW -->
+        <!-- 🏆 3. WINNERS PAGE VIEW -->
+        <div id="pageWinners" class="app-page">
+            <h2 style="margin-bottom: 15px;" id="navWinners">Recent Winners</h2>
+            <div class="card" style="padding: 5px;">
+                <div class="winner-card">
+                    <div class="winner-avatar">👑</div>
+                    <div class="winner-info">
+                        <h4 style="font-size: 15px;">Abdi Yosef</h4>
+                        <p style="font-size: 12px; color: var(--sub-text);">Item: iPhone 15 Pro Max</p>
+                    </div>
+                    <span class="winner-lucky-num">Lucky #08</span>
+                </div>
+                <div class="winner-card">
+                    <div class="winner-avatar">👑</div>
+                    <div class="winner-info">
+                        <h4 style="font-size: 15px;">Selamawit Tekle</h4>
+                        <p style="font-size: 12px; color: var(--sub-text);">Item: Samsung Ultra S24</p>
+                    </div>
+                    <span class="winner-lucky-num">Lucky #54</span>
+                </div>
+                <div class="winner-card">
+                    <div class="winner-avatar">👑</div>
+                    <div class="winner-info">
+                        <h4 style="font-size: 15px;">Yonas Mulugeta</h4>
+                        <p style="font-size: 12px; color: var(--sub-text);">Item: PlayStation 5</p>
+                    </div>
+                    <span class="winner-lucky-num">Lucky #19</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 👤 4. PROFILE PAGE VIEW -->
         <div id="pageProfile" class="app-page">
             <div class="profile-header">
                 <div class="avatar">👤</div>
@@ -211,7 +252,7 @@
             <div class="card" style="padding: 5px;">
                 <div class="profile-menu-item"><span>📱 Phone Number</span><span style="color: var(--sub-text);">+251 9...</span></div>
                 <div class="profile-menu-item"><span>💳 Wallet Balance</span><span style="color: var(--green); font-weight: bold;">0.00 ETB</span></div>
-                <div class="profile-menu-item" onclick="alert('Language selection updated!')"><span id="lblLangOpt">🌐 Change Language</span><span>❯</span></div>
+                <div class="profile-menu-item" onclick="alert('Language updated!')"><span id="lblLangOpt">🌐 Change Language</span><span>❯</span></div>
             </div>
         </div>
 
@@ -222,6 +263,9 @@
             </div>
             <div class="nav-item" onclick="switchPage('Tickets', this)">
                 <span class="icon">🎟️</span><span id="navTicketsBtn">Tickets</span>
+            </div>
+            <div class="nav-item" onclick="switchPage('Winners', this)">
+                <span class="icon">🏆</span><span id="navWinnersBtn">Winners</span>
             </div>
             <div class="nav-item" onclick="switchPage('Profile', this)">
                 <span class="icon">👤</span><span id="navProfile">Profile</span>
@@ -244,8 +288,8 @@
     <script>
         let qty = 1; const unitPrice = 100; let selected = []; const soldOut = [5, 17, 23, 45, 62, 81];
         const dicts = {
-            amharic: { lblTitle: "HP Pavilion ላፕቶፕ", lblTimer: "🔥 የቀረው ጊዜ", lblPriceTxt: "የቲኬት ዋጋ", lblSelect: "የእድል ቁጥርዎን ይምረጡ", lblCheckout: "ደህንነቱ የተጠበቀ ክፍያ", lblTktNum: "የተመረጠ ቲኬት:", lblPayBtn: "በቴሌብር / ጫፓ ይክፈሉ", lblCancel: "ይቅር", lblBuyBtn: "አሁን ግዛ", navHome: "ዋና ገጽ", navTicketsBtn: "ቲኬቶቼ", navProfile: "ፕሮፋይል", navTickets: "የገዛኋቸው ቲኬቶች", lblLangOpt: "🌐 ቋንቋ ቀይር" },
-            english: { lblTitle: "HP Pavilion Laptop", lblTimer: "🔥 TIME REMAINING", lblPriceTxt: "TICKET PRICE", lblSelect: "Select Your Number", lblCheckout: "Secure Checkout", lblTktNum: "Selected Ticket:", lblPayBtn: "Pay with Telebirr / Chapa", lblCancel: "Cancel", lblBuyBtn: "BUY TICKET NOW", navHome: "Home", navTicketsBtn: "Tickets", navProfile: "Profile", navTickets: "My Tickets", lblLangOpt: "🌐 Change Language" }
+            amharic: { lblTitle: "HP Pavilion ላፕቶፕ", lblTimer: "🔥 የቀረው ጊዜ", lblPriceTxt: "የቲኬት ዋጋ", lblSelect: "የእድል ቁጥርዎን ይምረጡ", lblCheckout: "ደህንነቱ የተጠበቀ ክፍያ", lblTktNum: "የተመረጠ ቲኬት:", lblPayBtn: "በቴሌብር / ጫፓ ይክፈሉ", lblCancel: "ይቅር", lblBuyBtn: "አሁን ግዛ", navHome: "ዋና ገጽ", navTicketsBtn: "ቲኬቶች", navWinnersBtn: "አሸናፊዎች", navProfile: "ፕሮፋይል", navTickets: "የእኔ ቲኬቶች", navWinners: "የቅርብ ጊዜ አሸናፊዎች", lblLangOpt: "🌐 ቋንቋ ቀይር" },
+            english: { lblTitle: "HP Pavilion Laptop", lblTimer: "🔥 TIME REMAINING", lblPriceTxt: "TICKET PRICE", lblSelect: "Select Your Number", lblCheckout: "Secure Checkout", lblTktNum: "Selected Ticket:", lblPayBtn: "Pay with Telebirr / Chapa", lblCancel: "Cancel", lblBuyBtn: "BUY TICKET NOW", navHome: "Home", navTicketsBtn: "Tickets", navWinnersBtn: "Winners", navProfile: "Profile", navTickets: "My Tickets", navWinners: "Recent Winners", lblLangOpt: "🌐 Change Language" }
         };
 
         function onStartClicked() { document.getElementById('startBtn').style.display = 'none'; document.getElementById('langContainer').style.display = 'flex'; }
