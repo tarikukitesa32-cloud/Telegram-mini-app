@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bota Solutions</title>
-    <link rel="stylesheet" href="style.css?v=10">
+    <link rel="stylesheet" href="style.css?v=11">
 </head>
 <body>
 
@@ -28,29 +28,30 @@
             </div>
         </div>
 
-        <!-- 1. HOME TAB (Products Promotion & Countdown) -->
+        <!-- 1. HOME TAB (Products Promotion & Ticket Purchase Control) -->
         <div id="homePhase" class="phase-container dynamic-tab">
             <div class="product-promo-card">
                 <div class="promo-image-wrapper">
-                    <span class="featured-badge">🔥 Featured</span>
-                    <div class="star-rating">⭐⭐⭐⭐⭐</div>
-                    <!-- BYD Yuan UP Car Image -->
+                    <span class="featured-badge">NEW</span>
+                    <div class="star-rating">⭐⭐⭐⭐⭐ 5.0</div>
                     <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?w=500" alt="BYD Yuan UP" class="promo-img">
                 </div>
                 
                 <div class="promo-details">
                     <h2 class="promo-title">BYD Yuan UP</h2>
-                    <p class="promo-subtitle">Time Grey Edition</p>
+                    <p class="promo-subtitle">Time Grey</p>
                     
-                    <p class="countdown-label">TIME REMAINING</p>
-                    <div class="countdown-grid">
-                        <div class="time-box"><span id="daysBox">09</span><label>DAYS</label></div>
-                        <span class="time-colon">:</span>
-                        <div class="time-box"><span id="hoursBox">10</span><label>HRS</label></div>
-                        <span class="time-colon">:</span>
-                        <div class="time-box"><span id="minsBox">09</span><label>MIN</label></div>
-                        <span class="time-colon">:</span>
-                        <div class="time-box"><span id="secsBox">50</span><label>SEC</label></div>
+                    <div class="time-remaining-card">
+                        <p class="countdown-label">🔥 TIME REMAINING</p>
+                        <div class="countdown-grid">
+                            <div class="time-box"><span id="daysBox">09</span><label>DAYS</label></div>
+                            <span class="time-colon">:</span>
+                            <div class="time-box"><span id="hoursBox">09</span><label>HRS</label></div>
+                            <span class="time-colon">:</span>
+                            <div class="time-box"><span id="minsBox">54</span><label>MIN</label></div>
+                            <span class="time-colon">:</span>
+                            <div class="time-box"><span id="secsBox">20</span><label>SEC</label></div>
+                        </div>
                     </div>
 
                     <div class="progress-container">
@@ -59,24 +60,35 @@
                             <span style="color: #00ffaa;">48% filled</span>
                         </div>
                         <div class="progress-bar"><div class="progress-fill" style="width: 48%;"></div></div>
-                        <p class="tickets-left">1,824 tickets remaining</p>
                     </div>
 
-                    <div class="action-row">
-                        <div class="participants-box">
-                            <span class="part-icon">👥</span>
+                    <!-- Bottom Ticket Control Panel matched to Screenshot 1 -->
+                    <div class="ticket-control-panel">
+                        <div class="ticket-price-row">
                             <div>
-                                <label>PARTICIPANTS</label>
-                                <h3>1,676</h3>
+                                <span class="panel-label">TICKET PRICE</span>
+                                <h3 class="panel-price">3,000 Birr</h3>
+                            </div>
+                            <div class="stepper-container">
+                                <button id="stepMinusBtn" class="step-btn">−</button>
+                                <span id="ticketCountDisplay" class="step-value">1</span>
+                                <button id="stepPlusBtn" class="step-btn">+</button>
                             </div>
                         </div>
-                        <button id="homeBuyTicketBtn" class="buy-ticket-btn">Buy Ticket</button>
+
+                        <button id="chooseLuckyBtn" class="choose-lucky-btn">🎯 Choose Your Lucky Numbers</button>
+
+                        <div class="action-grid-buttons">
+                            <button id="quickPickBtn" class="quick-pick-btn">⚡ Quick Pick</button>
+                            <button id="selectBtn" class="select-btn">🛡️ Select</button>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
 
-        <!-- 2. TICKETS TAB (1-100 Customer Random Selection & Status counters) -->
+        <!-- 2. TICKETS TAB (1-100 Customer Selection) -->
         <div id="ticketPhase" class="phase-container dynamic-tab hidden">
             <h2 class="section-title">My Tickets</h2>
             <p class="section-subtitle">Track your lottery entries</p>
@@ -86,68 +98,35 @@
                 <button class="search-btn">🔍 Search</button>
             </div>
 
-            <!-- Stats Grid -->
             <div class="stats-grid">
-                <div class="stat-card active-card">
-                    <h3 id="countActive">1</h3>
-                    <p>Active</p>
-                </div>
-                <div class="stat-card pending-card">
-                    <h3 id="countPending">0</h3>
-                    <p>Pending</p>
-                </div>
-                <div class="stat-card rejected-card">
-                    <h3 id="countRejected">0</h3>
-                    <p>Rejected</p>
-                </div>
-                <div class="stat-card total-card">
-                    <h3 id="countTotal">1</h3>
-                    <p>Total</p>
-                </div>
+                <div class="stat-card active-card"><h3 id="countActive">0</h3><p>Active</p></div>
+                <div class="stat-card pending-card"><h3 id="countPending">0</h3><p>Pending</p></div>
+                <div class="stat-card rejected-card"><h3>0</h3><p>Rejected</p></div>
+                <div class="stat-card total-card"><h3 id="countTotal">0</h3><p>Total</p></div>
             </div>
 
-            <!-- Random 1-100 Number Selection Grid -->
             <div class="number-selection-section">
-                <h3>Select Your Lucky Ticket Number (1 - 100)</h3>
-                <p style="font-size:12px; color:#8da19c; margin-bottom:10px;">Pick a number or click random</p>
-                <button id="randomPickBtn" class="random-btn">🎲 Random Selection</button>
-                
-                <div class="numbers-grid" id="numbersGrid100">
-                    <!-- 1 to 100 generated by JS -->
-                </div>
+                <h3>Select Your Ticket Number (1 - 100)</h3>
+                <div class="numbers-grid" id="numbersGrid100"></div>
             </div>
         </div>
 
-        <!-- 3. WINNERS LIST TAB -->
+        <!-- 3. WINNERS TAB -->
         <div id="winnersPhase" class="phase-container dynamic-tab hidden">
             <h2 class="section-title">Latest Winners 🏆</h2>
-            <p class="section-subtitle">Real-time lucky winners circle</p>
-
             <div class="winners-list-container">
                 <div class="winner-item">
                     <div class="winner-avatar">👤</div>
-                    <div class="winner-info">
-                        <h4>Bekele Zewdu</h4>
-                        <p>Phone: 251911****43</p>
-                    </div>
+                    <div class="winner-info"><h4>Bekele Zewdu</h4><p>Phone: 251911****43</p></div>
                     <div class="winner-prize">Won BYD Car</div>
-                </div>
-                <div class="winner-item">
-                    <div class="winner-avatar">👤</div>
-                    <div class="winner-info">
-                        <h4>Chaltu Abera</h4>
-                        <p>Phone: 251920****12</p>
-                    </div>
-                    <div class="winner-prize">Won iPhone 15</div>
                 </div>
                 <div class="no-more-winners">No more winners announced yet for this week.</div>
             </div>
         </div>
 
-        <!-- 4. PROFILE TAB (Photo, Phone No, Copyright) -->
+        <!-- 4. PROFILE TAB -->
         <div id="profilePhase" class="phase-container dynamic-tab hidden">
             <h2 class="section-title">User Profile</h2>
-            
             <div class="profile-card-new">
                 <div class="profile-avatar-large">
                     <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" alt="Customer Photo" class="user-photo-img">
@@ -155,46 +134,119 @@
                 <h3 style="margin-top: 10px; color:#FFB800;">Getachew Fikadu Jirata</h3>
             </div>
 
-            <!-- Phone Number Presentation Box -->
             <div class="phone-display-box">
                 <div class="phone-icon-circle">📞</div>
-                <div class="phone-meta">
-                    <span>User Phone Number</span>
-                    <h2 id="profilePhoneVal">251978893232</h2>
-                </div>
+                <div class="phone-meta"><span>User Phone Number</span><h2>251978893232</h2></div>
             </div>
 
-            <button id="logoutBtn" class="logout-btn-new">Logout</button>
-
-            <!-- Copyright and Developer info exactly requested -->
             <div class="profile-footer-copyright">
                 © 2026 <span>Getachew Fikadu Jirata</span>. All Rights Reserved. <br>
                 | Designed & Developed by <span style="color:#FFB800;">Qaroo Soft</span>
             </div>
         </div>
 
-        <!-- BOTTOM NAVIGATION BAR (Home, Tickets, Winners, Profile) -->
+        <!-- BOTTOM NAVIGATION BAR -->
         <div id="navBar" class="bottom-nav">
-            <div id="navHome" class="nav-item active">
-                <span class="icon">🏠</span>
-                Home
-            </div>
-            <div id="navTicket" class="nav-item">
-                <span class="icon">🎫</span>
-                Tickets
-            </div>
-            <div id="navWinners" class="nav-item">
-                <span class="icon">🏆</span>
-                Winners
-            </div>
-            <div id="navProfile" class="nav-item">
-                <span class="icon">👤</span>
-                Profile
+            <div id="navHome" class="nav-item active"><span class="icon">🏠</span>Home</div>
+            <div id="navTicket" class="nav-item"><span class="icon">🎫</span>Tickets</div>
+            <div id="navWinners" class="nav-item"><span class="icon">🏆</span>Winners</div>
+            <div id="navProfile" class="nav-item"><span class="icon">👤</span>Profile</div>
+        </div>
+
+        <!-- ====== COMPLETE YOUR PURCHASE STEP MODAL SYSTEM ====== -->
+        <div id="purchaseModal" class="modal-overlay hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <h3>Complete Your Purchase</h3>
+                        <span id="modalStepLabel" class="step-sublabel">Step 1 of 3</span>
+                    </div>
+                    <button id="closeModalBtn" class="close-modal-btn">&times;</button>
+                </div>
+
+                <!-- Step Progress Bar Indicator -->
+                <div class="modal-step-indicator-bar">
+                    <div id="stepLine1" class="step-line active"></div>
+                    <div id="stepLine2" class="step-line"></div>
+                    <div id="stepLine3" class="step-line"></div>
+                </div>
+
+                <!-- STEP 1: REVIEW INFO -->
+                <div id="modalStep1" class="modal-step-body">
+                    <div class="ekub-summary-card">
+                        <div class="ekub-meta">
+                            <h4>Gech EV Makina Ekub</h4>
+                            <p id="ticketCalcLabel">1 Tickets &times; 3,000 Birr</p>
+                        </div>
+                        <h2 id="ticketTotalLabel" class="ekub-price">3,000 Birr</h2>
+                        <span class="ekub-hash">#3268</span>
+                    </div>
+
+                    <div class="input-group-field">
+                        <label>Full Name</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">👤</span>
+                            <input type="text" id="buyerFullName" value="Getachew Fikadu" placeholder="Enter your full name">
+                        </div>
+                    </div>
+
+                    <div class="input-group-field">
+                        <label>Phone Number</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">📞</span>
+                            <input type="tel" id="buyerPhone" value="251978893232" placeholder="Enter phone number">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 2: PROOF OF PAYMENT (SCREENSHOT UPLOAD) -->
+                <div id="modalStep2" class="modal-step-body hidden">
+                    <div class="bank-details-card">
+                        <div class="bank-logo-icon">🏦</div>
+                        <div class="bank-meta">
+                            <h4>Commercial Bank of Ethiopia</h4>
+                            <p>Getachew Fikadu Jirata</p>
+                        </div>
+                        <div class="bank-account-num">1000528139489</div>
+                    </div>
+
+                    <label class="field-section-title">Proof of Payment</label>
+                    <div class="upload-dropzone" id="uploadZone">
+                        <span class="upload-icon">📤</span>
+                        <h4>Upload Payment Receipt</h4>
+                        <p>PNG, JPG up to 10MB</p>
+                        <input type="file" id="fileInputControl" accept="image/*" style="display:none;">
+                        <div id="uploadStatusText" style="margin-top:10px; color:#00ffaa; font-size:12px;"></div>
+                    </div>
+
+                    <div class="input-group-field" style="margin-top: 15px;">
+                        <label>Sender Account Number (Optional)</label>
+                        <input type="text" id="senderAccountInput" class="standard-text-input" placeholder="Account you sent from">
+                    </div>
+
+                    <div class="warning-callout-box">
+                        <span class="warn-icon">⚠️</span>
+                        <p>After transferring the money, upload your payment receipt or transaction screenshot.</p>
+                    </div>
+                </div>
+
+                <!-- STEP 3: SUCCESS CONFIRMATION -->
+                <div id="modalStep3" class="modal-step-body hidden" style="text-align: center; padding: 30px 10px;">
+                    <div class="success-checkmark-circle">🎉</div>
+                    <h2 style="color: #00ffaa; margin-bottom: 10px;">Submission Successful!</h2>
+                    <p style="color: #8da19c; font-size: 14px; line-height: 1.5;">Your payment proof has been uploaded. Administrators will verify it and activate your ticket shortly.</p>
+                </div>
+
+                <!-- Modal Bottom Action Control Buttons -->
+                <div class="modal-footer-actions">
+                    <button id="modalBackBtn" class="modal-btn-back hidden">Back</button>
+                    <button id="modalContinueBtn" class="modal-btn-continue">Continue &rsaquo;</button>
+                </div>
             </div>
         </div>
 
     </div>
 
-    <script src="script.js?v=10"></script>
+    <script src="script.js?v=11"></script>
 </body>
 </html>
