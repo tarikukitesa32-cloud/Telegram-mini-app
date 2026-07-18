@@ -88,7 +88,7 @@
         .product-img-holder {
             width: 100%;
             height: 220px;
-            background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.4) 100%), url('https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=600&q=80') center center/cover;
+            background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.4) 100%), url('https://images.unsplash.com/photo-1589561024260-b6de5a702476?auto=format&fit=crop&w=600&q=80') center center/cover;
             border-radius: 14px;
             position: relative;
         }
@@ -143,9 +143,20 @@
             background-color: var(--input-bg); border: 1px solid var(--border-color);
             border-radius: 8px; padding: 12px 0; text-align: center; font-weight: bold; font-size: 14px; cursor: pointer;
         }
-        .num-cell:hover { border-color: var(--accent-gold); color: var(--accent-gold); }
+        .num-cell.selected {
+            background-color: var(--accent-gold);
+            color: #000;
+            border-color: var(--accent-gold);
+        }
+        .num-cell.sold-out {
+            background-color: rgba(34, 46, 53, 0.4);
+            color: rgba(134, 150, 160, 0.3);
+            border-color: transparent;
+            cursor: not-allowed;
+            text-decoration: line-through;
+        }
 
-        /* 👑 WINNERS LIST WITHOUT REFRESH TIMER */
+        /* 👑 WINNERS LIST */
         .winner-row { display: flex; gap: 15px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border-color); }
         .winner-row:last-child { border: none; }
 
@@ -154,13 +165,21 @@
         .theme-btn { padding: 12px; border-radius: 10px; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); cursor: pointer; font-size: 13px; font-weight: 500; }
         .theme-btn.active { border-color: var(--accent-gold); background: rgba(255,184,0,0.1); }
 
-        /* 💳 PAYMENT OVERLAY */
+        /* 💳 PAYMENT OVERLAY & LOADING */
         .modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.85); z-index: 2000; display: none;
             align-items: center; justify-content: center; padding: 20px;
         }
         .modal-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 25px; width: 100%; max-width: 400px; text-align: center; }
+        
+        .loader {
+            border: 4px solid var(--border-color);
+            border-top: 4px solid var(--accent-gold);
+            border-radius: 50%; width: 40px; height: 40px;
+            animation: spin 1s linear infinite; margin: 20px auto; display: none;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         /* BOTTOM NAVIGATION */
         .bottom-nav {
@@ -196,10 +215,10 @@
                     <div class="gf-timer-box">
                         <div class="timer-title">🔥 TIME REMAINING</div>
                         <div class="timer-grid">
-                            <div class="t-digit" id="days">01</div><div class="t-colon">:</div>
-                            <div class="t-digit" id="hours">04</div><div class="t-colon">:</div>
-                            <div class="t-digit" id="mins">32</div><div class="t-colon">:</div>
-                            <div class="t-digit" id="secs">19</div>
+                            <div class="t-digit" id="days">00</div><div class="t-colon">:</div>
+                            <div class="t-digit" id="hours">00</div><div class="t-colon">:</div>
+                            <div class="t-digit" id="mins">00</div><div class="t-colon">:</div>
+                            <div class="t-digit" id="secs">15</div>
                         </div>
                     </div>
 
@@ -228,12 +247,12 @@
         <!-- 🎫 2. TICKETS PAGE -->
         <div id="ticketsPage" class="app-page">
             <h2 style="font-size: 22px; margin-bottom: 5px;">Select Your Number</h2>
-            <p style="color: var(--text-sub); font-size: 14px; margin-bottom: 15px;">Pick any number from 1 to 100 to purchase your ticket.</p>
+            <p style="color: var(--text-sub); font-size: 14px; margin-bottom: 15px;">Pick <span id="requiredCountText" style="color:var(--accent-gold); font-weight:bold;">1</span> lucky number(s) based on your chosen ticket quantity.</p>
             
             <div class="card">
                 <div class="flex-row" style="background: var(--input-bg); padding: 12px; border-radius: 10px; margin-bottom: 10px;">
-                    <span style="font-weight: bold;">Total Selected Tickets:</span>
-                    <span style="color: var(--accent-gold); font-weight: bold;" id="tktSummaryQty">1 Ticket</span>
+                    <span style="font-weight: bold;">Selected Numbers:</span>
+                    <span style="color: var(--accent-gold); font-weight: bold;" id="selectedNumbersDisplay">None</span>
                 </div>
                 
                 <div class="numbers-grid" id="numbersGridContainer"></div>
@@ -245,15 +264,24 @@
             <h2 style="font-size: 22px; margin-bottom: 15px;">Latest Winners 👑</h2>
             
             <div class="card">
-                <!-- Live Automatic Winner Block -->
-                <div id="liveWinnerBox" style="text-align: center; padding: 10px 0; display: none;">
-                    <div style="font-size: 50px; margin-bottom: 5px;">🎉 New Winner Drawn!</div>
-                    <h3 style="color: var(--accent-gold); font-size: 22px;" id="liveWinnerName">Getachew Fikadu</h3>
-                    <p style="color: var(--text-sub); margin-top: 5px;">Ticket Number: <span id="liveWinnerTicket" style="font-weight:bold; color:#fff;">#45</span></p>
-                    <hr style="border: none; border-top: 1px solid var(--border-color); margin: 15px 0;">
+                <!-- Waiting message when there's no live winner yet -->
+                <div id="waitingDrawMessage" style="text-align: center; padding: 20px 0; color: var(--text-sub);">
+                    <div style="font-size: 40px; margin-bottom: 10px;">⏳</div>
+                    <p>No live draws yet. Waiting for the campaign countdown to finish...</p>
                 </div>
 
-                <h3 style="font-size: 16px; color: var(--text-sub); margin-bottom: 10px;">Previous System Draws</h3>
+                <!-- Live Automatic Winner Block (Initially Hidden) -->
+                <div id="liveWinnerBox" style="text-align: center; padding: 10px 0; display: none; animation: fadeIn 0.5s ease-out;">
+                    <div style="font-size: 50px; margin-bottom: 5px;">🎉</div>
+                    <h3 style="color: var(--accent-gold); font-size: 22px; font-weight: 800;">Getachew Fikadu</h3>
+                    <p style="color: var(--text-sub); margin-top: 5px; font-size: 15px;">Won the: <span style="color: #fff; font-weight: bold;">HP Pavilion Laptop</span></p>
+                    <div style="background: rgba(0, 230, 118, 0.1); border: 1px dashed var(--green-glow); display: inline-block; padding: 6px 15px; border-radius: 8px; margin-top: 10px; font-weight: bold; color: var(--green-glow);">
+                        Lucky Ticket: #45
+                    </div>
+                    <hr style="border: none; border-top: 1px solid var(--border-color); margin: 20px 0;">
+                </div>
+
+                <h3 style="font-size: 16px; color: var(--text-sub); margin: 10px 0;">Previous System Draws</h3>
                 <div id="winnersHistory">
                     <div class="winner-row">
                         <div style="font-size: 28px;">🥇</div>
@@ -299,16 +327,25 @@
     <!-- 💳 CHAPA / TELEBIRR PAYMENT INTERFACE MODAL -->
     <div class="modal" id="paymentModal">
         <div class="modal-card">
-            <div style="font-size: 45px; margin-bottom: 10px;">💳</div>
-            <h3 style="font-size: 18px; margin-bottom: 8px;">Secure Gateway checkout</h3>
-            <p style="color: var(--text-sub); font-size: 14px;">You have chosen Ticket Number <span id="modalTktNum" style="color: var(--accent-gold); font-weight: bold;">#0</span></p>
-            
-            <div style="background: var(--input-bg); border-radius: 12px; padding: 15px; margin: 15px 0; font-size: 20px; font-weight: bold; color: var(--green-glow);">
-                Total: <span id="modalTotalPrice">100</span> Birr
+            <div id="paymentContent">
+                <div style="font-size: 45px; margin-bottom: 10px;">💳</div>
+                <h3 style="font-size: 18px; margin-bottom: 8px;">Secure Gateway Checkout</h3>
+                <p style="color: var(--text-sub); font-size: 14px;">Your Selected Ticket(s): <span id="modalTktNum" style="color: var(--accent-gold); font-weight: bold;">#0</span></p>
+                
+                <div style="background: var(--input-bg); border-radius: 12px; padding: 15px; margin: 15px 0; font-size: 20px; font-weight: bold; color: var(--green-glow);">
+                    Total: <span id="modalTotalPrice">100</span> Birr
+                </div>
+                
+                <button class="btn-action btn-gold" style="margin-top: 0;" onclick="processMockPayment()">Pay with Telebirr / Chapa</button>
+                <button class="btn-action btn-outline" style="margin-top: 8px; padding: 10px;" onclick="closePayment()">Cancel</button>
             </div>
             
-            <button class="btn-action btn-gold" style="margin-top: 0;" onclick="completePayment()">Pay with Telebirr / Chapa</button>
-            <button class="btn-action btn-outline" style="margin-top: 8px; padding: 10px;" onclick="closePayment()">Cancel</button>
+            <!-- Hidden Loading Screen inside Modal -->
+            <div id="paymentLoading" style="display: none; padding: 20px 0;">
+                <div class="loader" id="payLoader" style="display: block;"></div>
+                <h4 style="margin-top: 10px;">Connecting to Secure API...</h4>
+                <p style="color: var(--text-sub); font-size: 13px; margin-top: 5px;">Please do not close or refresh this window.</p>
+            </div>
         </div>
     </div>
 
@@ -332,6 +369,10 @@
     <script>
         let currentQty = 1;
         const ticketUnitPrice = 100;
+        let selectedNumbers = [];
+        
+        // Simulated pre-sold out tickets
+        const soldOutTickets = [12, 28, 44, 57, 73, 89];
 
         // PAGINATION CORE
         function switchPage(pageId, element) {
@@ -339,50 +380,103 @@
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
             element.classList.add('active');
+            
+            if(pageId === 'ticketsPage') {
+                resetTicketSelection();
+            }
         }
 
         // QUANTITY CHANGE MANAGER
         function alterQty(amount) {
             currentQty += amount;
             if(currentQty < 1) currentQty = 1;
-            if(currentQty > 5) currentQty = 5; // Max 5 tickets limit
+            if(currentQty > 5) currentQty = 5; 
             
             document.getElementById('qtyCount').innerText = currentQty;
             document.getElementById('basePriceDisplay').innerText = (currentQty * ticketUnitPrice) + " Birr";
-            document.getElementById('tktSummaryQty').innerText = currentQty + (currentQty === 1 ? " Ticket" : " Tickets");
+            document.getElementById('requiredCountText').innerText = currentQty;
         }
 
-        // GENERATE 1 TO 100 TICKETS GRID AUTOMATICALLY
+        // RESET SELECTION UPON ENTERING PAGE
+        function resetTicketSelection() {
+            selectedNumbers = [];
+            document.getElementById('selectedNumbersDisplay').innerText = "None";
+            document.querySelectorAll('.num-cell').forEach(cell => cell.classList.remove('selected'));
+        }
+
+        // GENERATE 1 TO 100 TICKETS GRID WITH SOLD-OUT AND SELECTIVE INTERACTION
         const gridContainer = document.getElementById('numbersGridContainer');
         for (let i = 1; i <= 100; i++) {
             const cell = document.createElement('div');
             cell.className = 'num-cell';
             cell.innerText = i;
-            cell.onclick = function() { triggerPayment(i); };
+            
+            if(soldOutTickets.includes(i)) {
+                cell.classList.add('sold-out');
+            } else {
+                cell.onclick = function() { handleNumberClick(i, cell); };
+            }
             gridContainer.appendChild(cell);
         }
 
+        // HANDLE MULTIPLE OR SINGLE SELECTION BASED ON QTY
+        function handleNumberClick(num, element) {
+            if(element.classList.contains('selected')) {
+                selectedNumbers = selectedNumbers.filter(n => n !== num);
+                element.classList.remove('selected');
+            } else {
+                if(selectedNumbers.length < currentQty) {
+                    selectedNumbers.push(num);
+                    element.classList.add('selected');
+                }
+            }
+
+            document.getElementById('selectedNumbersDisplay').innerText = selectedNumbers.length > 0 ? selectedNumbers.map(n => "#"+n).join(', ') : "None";
+
+            // When required numbers match selected count, show gateway automatically
+            if(selectedNumbers.length === currentQty) {
+                setTimeout(() => { triggerPayment(); }, 300);
+            }
+        }
+
         // GATEWAY MODAL MANAGEMENT
-        function triggerPayment(ticketNumber) {
-            document.getElementById('modalTktNum').innerText = "#" + ticketNumber;
+        function triggerPayment() {
+            document.getElementById('modalTktNum').innerText = selectedNumbers.map(n => "#"+n).join(', ');
             document.getElementById('modalTotalPrice').innerText = currentQty * ticketUnitPrice;
+            
+            document.getElementById('paymentContent').style.display = 'block';
+            document.getElementById('paymentLoading').style.display = 'none';
             document.getElementById('paymentModal').style.display = 'flex';
         }
 
         function closePayment() {
             document.getElementById('paymentModal').style.display = 'none';
+            resetTicketSelection();
         }
 
-        function completePayment() {
-            alert('🎉 Payment Successful! Ticket processing complete.');
-            closePayment();
+        // ANIMATED PAYMENT PROCESSING
+        function processMockPayment() {
+            document.getElementById('paymentContent').style.display = 'none';
+            document.getElementById('paymentLoading').style.display = 'block';
+
+            setTimeout(() => {
+                alert('🎉 Payment Successful! Your tickets have been secured successfully.');
+                closePayment();
+                switchPage('homePage', document.querySelectorAll('.nav-item')[0]);
+            }, 2500); 
         }
 
-        // COUNTDOWN TIMER (GF PREMIUM DESIGN)
-        let countdownSeconds = (1 * 24 * 3600) + (4 * 3600) + (32 * 60) + 19; 
+        // COUNTDOWN TIMER (FOR LIVE SYSTEM WINNER TRIGGER)
+        let countdownSeconds = 15; // Set to 15 seconds for simulation
         function triggerCountdown() {
             if(countdownSeconds <= 0) {
-                // Time hits zero: trigger automatic system winner insertion
+                document.getElementById('days').innerText = "00";
+                document.getElementById('hours').innerText = "00";
+                document.getElementById('mins').innerText = "00";
+                document.getElementById('secs').innerText = "00";
+                
+                // Automatically reveal new winner on Winners Page when countdown ends
+                document.getElementById('waitingDrawMessage').style.display = 'none';
                 document.getElementById('liveWinnerBox').style.display = 'block';
                 return;
             }
@@ -400,7 +494,7 @@
         }
         setInterval(triggerCountdown, 1000);
 
-        // SYSTEM LIGHT/DARK INTERACTION DEFINITIONS
+        // THEME CORES
         function changeTheme(mode) {
             document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(`theme-${mode}`).classList.add('active');
@@ -414,7 +508,6 @@
             localStorage.setItem('customer-theme', mode);
         }
 
-        // INITIAL ACTIVE STATE CONFIGURATION
         const loadedTheme = localStorage.getItem('customer-theme') || 'dark';
         changeTheme(loadedTheme);
     </script>
