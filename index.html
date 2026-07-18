@@ -7,108 +7,314 @@
     <style>
         :root {
             --primary: #ffb800;
-            --bg: #090e11;
-            --surface: #151d23;
+            --bg: #0b141a;
+            --surface: #111b21;
+            --input-bg: #2a3942;
             --text: #ffffff;
-            --sub-text: #a0aab2;
+            --sub-text: #8696a0;
+            --border: #222e35;
+            --green: #00e676;
+        }
+
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             background: var(--bg);
             color: var(--text);
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             min-height: 100vh;
         }
 
-        /* 🤖 START PAGE */
+        /* 🤖 START PAGE & LANGUAGE SELECTION */
+        .welcome-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg); display: flex; flex-direction: column;
+            align-items: center; justify-content: center; z-index: 9999;
+            padding: 20px;
+        }
+
         .glass-card {
             background: rgba(21, 29, 35, 0.7);
             backdrop-filter: blur(15px);
-            padding: 40px;
-            border-radius: 30px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            padding: 40px 30px; border-radius: 30px;
+            text-align: center; border: 1px solid rgba(255, 255, 255, 0.08);
+            width: 100%; max-width: 380px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
         }
 
-        h1 { font-size: 28px; margin-bottom: 30px; }
-        h1 span { color: var(--primary); }
+        .brand-title { font-size: 32px; font-weight: bold; margin-bottom: 25px; letter-spacing: -0.5px; }
+        .brand-title span { color: var(--primary); }
 
         .btn-start {
-            background: var(--primary);
-            color: #000;
-            padding: 18px 50px;
-            border-radius: 50px;
-            font-weight: 800;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-            transition: transform 0.3s;
+            background: linear-gradient(90deg, #ffb800 0%, #ff9900 100%);
+            color: #000; padding: 16px 50px; border-radius: 50px;
+            font-weight: 800; font-size: 16px; border: none; cursor: pointer;
+            box-shadow: 0 5px 20px rgba(255, 184, 0, 0.3); transition: transform 0.2s;
         }
+        .btn-start:active { transform: scale(0.96); }
 
-        .btn-start:active { transform: scale(0.95); }
-
-        /* 🌐 LANGUAGE SELECTION */
-        .lang-grid { display: none; margin-top: 20px; gap: 10px; display: flex; flex-direction: column; }
+        .lang-grid { display: none; flex-direction: column; gap: 12px; width: 100%; margin-top: 10px; }
         .btn-lang {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: white;
-            padding: 15px;
-            border-radius: 15px;
-            cursor: pointer;
+            background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border);
+            color: white; padding: 15px 20px; border-radius: 16px;
+            cursor: pointer; font-size: 15px; font-weight: 600;
+            display: flex; justify-content: space-between; align-items: center;
+            transition: all 0.2s;
         }
-        .btn-lang:hover { background: var(--primary); color: #000; }
+        .btn-lang:active { background: var(--primary); color: #000; border-color: var(--primary); }
 
-        /* 📱 MAIN APP (HIDDEN BY DEFAULT) */
-        #mainApp { display: none; width: 100%; max-width: 500px; padding: 20px; }
-        .product-card {
-            background: var(--surface);
-            padding: 20px;
-            border-radius: 25px;
-            text-align: center;
+        /* 📱 MAIN APP INTERFACE */
+        #mainApp {
+            display: none; width: 100%; max-width: 480px;
+            padding: 15px; padding-bottom: 30px;
+            animation: fadeIn 0.4s ease;
         }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 5px 20px 5px;
+        }
+        .header-logo { font-size: 22px; font-weight: bold; }
+        .header-logo span { color: var(--primary); }
+
+        .card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 24px; padding: 16px; margin-bottom: 15px;
+        }
+
+        /* PRODUCT DISPLAY */
+        .product-img {
+            width: 100%; height: 200px;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.6) 100%), 
+                        url('https://images.unsplash.com/photo-1589561024260-b6de5a702476?auto=format&fit=crop&w=600&q=80') center center/cover;
+            border-radius: 18px; position: relative;
+        }
+        .badge { position: absolute; top: 12px; left: 12px; background: #128c7e; color: #fff; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: bold; }
+        
+        .prod-title { font-size: 22px; font-weight: 800; margin-top: 15px; }
+        .prod-desc { color: var(--sub-text); font-size: 14px; margin-top: 4px; }
+
+        /* TIMER BOX */
+        .timer-box {
+            background: linear-gradient(135deg, #0e1e17 0%, #111b21 100%);
+            border: 1px solid rgba(0, 230, 118, 0.15);
+            border-radius: 16px; padding: 14px; margin-top: 15px;
+        }
+        .timer-label { font-size: 11px; font-weight: 700; color: var(--sub-text); letter-spacing: 1px; margin-bottom: 8px; }
+        .timer-grid { display: flex; align-items: center; gap: 6px; }
+        .t-digit { background: var(--input-bg); color: var(--primary); font-size: 18px; font-weight: bold; padding: 6px 10px; border-radius: 8px; min-width: 38px; text-align: center; }
+        .t-colon { color: var(--primary); font-weight: bold; }
+
+        /* QTY & PRICE PANEL */
+        .price-panel {
+            background: rgba(255, 184, 0, 0.02); border: 1px solid var(--border);
+            border-radius: 16px; padding: 15px; margin-top: 15px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .qty-box { display: flex; align-items: center; gap: 12px; }
+        .qty-btn { background: var(--input-bg); border: none; color: white; font-size: 18px; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .qty-btn.plus { background: var(--primary); color: black; font-weight: bold; }
+
+        /* NUMBERS SELECTION GRID */
+        .grid-header { font-size: 16px; font-weight: bold; margin: 20px 5px 10px 5px; display: flex; justify-content: space-between; }
+        .numbers-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; max-height: 240px; overflow-y: auto; padding-right: 2px; }
+        .num-cell { background: var(--input-bg); border: 1px solid var(--border); border-radius: 10px; padding: 14px 0; text-align: center; font-weight: bold; font-size: 14px; cursor: pointer; }
+        .num-cell.selected { background: var(--primary); color: #000; border-color: var(--primary); }
+        .num-cell.sold-out { background: rgba(34, 46, 53, 0.3); color: rgba(134, 150, 160, 0.2); border-color: transparent; cursor: not-allowed; text-decoration: line-through; }
+
+        /* MODAL GATEWAY */
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 99999; display: none; align-items: center; justify-content: center; padding: 20px; }
+        .modal-card { background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 25px; width: 100%; max-width: 360px; text-align: center; }
+        .btn-pay { width: 100%; padding: 14px; border-radius: 12px; font-size: 15px; font-weight: bold; border: none; cursor: pointer; background: var(--primary); color: #000; margin-top: 15px; }
+        .btn-close { width: 100%; padding: 12px; border-radius: 12px; font-size: 14px; background: transparent; border: 1px solid var(--border); color: var(--sub-text); margin-top: 8px; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <!-- START SCREEN -->
-    <div class="glass-card" id="startScreen">
-        <h1>Bota<span>Solutions</span></h1>
-        <button class="btn-start" id="startBtn" onclick="showLangs()">START / ጀምር</button>
-        
-        <div id="langContainer" class="lang-grid" style="display: none;">
-            <button class="btn-lang" onclick="goHome('English')">English</button>
-            <button class="btn-lang" onclick="goHome('Amharic')">አማርኛ</button>
-            <button class="btn-lang" onclick="goHome('Oromo')">Afan Oromo</button>
+    <!-- 🤖 WELCOME SCREEN (START & LANGUAGE) -->
+    <div class="welcome-overlay" id="welcomeScreen">
+        <div class="glass-card">
+            <div class="brand-title">Bota<span>Solutions</span></div>
+            <button class="btn-start" id="startBtn" onclick="onStartClicked()">START / ጀምር</button>
+            
+            <div id="langContainer" class="lang-grid">
+                <button class="btn-lang" onclick="enterApp('amharic')"><span>አማርኛ (Amharic)</span> <span>🇪🇹</span></button>
+                <button class="btn-lang" onclick="enterApp('english')"><span>English</span> <span>🇬🇧</span></button>
+                <button class="btn-lang" onclick="enterApp('oromo')"><span>Afan Oromo</span> <span>🇪🇹</span></button>
+            </div>
         </div>
     </div>
 
-    <!-- MAIN INTERFACE -->
+    <!-- 📱 MAIN APP CONTENT -->
     <div id="mainApp">
-        <div class="product-card">
-            <h2>🎉 Welcome!</h2>
-            <p>Select your lucky number below</p>
+        <header>
+            <div class="header-logo">Bota<span>Solutions</span></div>
+            <div style="font-size: 20px;">🔔</div>
+        </header>
+
+        <!-- PRODUCT CAMPAIGN -->
+        <div class="card">
+            <div class="product-img"><span class="badge">LIVE</span></div>
+            <h2 class="prod-title" id="lblTitle">HP Pavilion Laptop</h2>
+            <p class="prod-desc">Core i7 • 16GB RAM • 512GB SSD</p>
+
+            <!-- TIMEOUT TIMER -->
+            <div class="timer-box">
+                <div class="timer-label" id="lblTimer">🔥 TIME REMAINING</div>
+                <div class="timer-grid">
+                    <div class="t-digit" id="days">00</div><div class="t-colon">:</div>
+                    <div class="t-digit" id="hours">00</div><div class="t-colon">:</div>
+                    <div class="t-digit" id="mins">00</div><div class="t-colon">:</div>
+                    <div class="t-digit" id="secs">45</div>
+                </div>
+            </div>
+
+            <!-- PRICE & QTY PANEL -->
+            <div class="price-panel">
+                <div>
+                    <p style="font-size: 11px; color: var(--sub-text); font-weight: bold;" id="lblPriceTxt">TICKET PRICE</p>
+                    <h3 style="font-size: 20px; color: var(--primary); font-weight: 800;" id="priceDisplay">100 Birr</h3>
+                </div>
+                <div class="qty-box">
+                    <button class="qty-btn" onclick="updateQty(-1)">-</button>
+                    <span style="font-size: 18px; font-weight: bold; min-width: 15px; text-align: center;" id="qtyDisplay">1</span>
+                    <button class="qty-btn plus" onclick="updateQty(1)">+</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- LUCKY NUMBERS SECTION -->
+        <div class="grid-header">
+            <span id="lblSelect">Select Your Number</span>
+            <span style="color: var(--primary);" id="lblPickCount">Pick 1 Number</span>
+        </div>
+        
+        <div class="card" style="padding: 12px;">
+            <div class="numbers-grid" id="numsGrid"></div>
+        </div>
+    </div>
+
+    <!-- 💳 CHAPA / TELEBIRR PAYMENT MODAL -->
+    <div class="modal" id="payModal">
+        <div class="modal-card">
+            <div style="font-size: 40px; margin-bottom: 10px;">💳</div>
+            <h3 style="font-size: 18px; margin-bottom: 5px;" id="lblCheckout">Secure Checkout</h3>
+            <p style="color: var(--sub-text); font-size: 14px;"><span id="lblTktNum">Selected Ticket:</span> <span id="popTkt" style="color: var(--primary); font-weight: bold;">#0</span></p>
+            
+            <div style="background: var(--input-bg); border-radius: 12px; padding: 15px; margin: 15px 0; font-size: 22px; font-weight: bold; color: var(--green);">
+                <span id="popPrice">100</span> ETB
+            </div>
+            
+            <button class="btn-pay" onclick="paySuccess()" id="lblPayBtn">Pay with Telebirr / Chapa</button>
+            <button class="btn-close" onclick="closeModal()" id="lblCancel">Cancel</button>
         </div>
     </div>
 
     <script>
-        function showLangs() {
+        let qty = 1;
+        const unitPrice = 100;
+        let selected = [];
+        const soldOut = [5, 17, 23, 45, 62, 81]; // Simulated sold out numbers
+
+        const dicts = {
+            amharic: { lblTitle: "HP Pavilion ላፕቶፕ", lblTimer: "🔥 የቀረው ጊዜ", lblPriceTxt: "የቲኬት ዋጋ", lblSelect: "የእድል ቁጥርዎን ይምረጡ", lblPickCount: "1 ቁጥር ይምረጡ", lblCheckout: "ደህንነቱ የተጠበቀ ክፍያ", lblTktNum: "የተመረጠ ቲኬት:", lblPayBtn: "በቴሌብር / ጫፓ ይክፈሉ", lblCancel: "ይቅር" },
+            english: { lblTitle: "HP Pavilion Laptop", lblTimer: "🔥 TIME REMAINING", lblPriceTxt: "TICKET PRICE", lblSelect: "Select Your Number", lblPickCount: "Pick 1 Number", lblCheckout: "Secure Checkout", lblTktNum: "Selected Ticket:", lblPayBtn: "Pay with Telebirr / Chapa", lblCancel: "Cancel" },
+            oromo: { lblTitle: "HP Pavilion Laptop", lblTimer: "🔥 YEROO HAFE", lblPriceTxt: "GATII TIKEETII", lblSelect: "Lakkoofsa Kee Filadhu", lblPickCount: "Lakkoofsa 1 Filadhu", lblCheckout: "Kaffaltii Amansiisaa", lblTktNum: "Tikeetii Filatame:", lblPayBtn: "Telebirr / Chapa'n Kaffali", lblCancel: "Dhiisi" }
+        };
+
+        function onStartClicked() {
             document.getElementById('startBtn').style.display = 'none';
             document.getElementById('langContainer').style.display = 'flex';
         }
 
-        function goHome(lang) {
-            document.getElementById('startScreen').style.display = 'none';
+        let currentLang = 'english';
+        function enterApp(lang) {
+            currentLang = lang;
+            const dict = dicts[lang];
+            for (let key in dict) {
+                if(document.getElementById(key)) document.getElementById(key).innerText = dict[key];
+            }
+            updateQty(0);
+            document.getElementById('welcomeScreen').style.display = 'none';
             document.getElementById('mainApp').style.display = 'block';
-            console.log("Selected Language: " + lang);
         }
+
+        function updateQty(amt) {
+            qty += amt;
+            if(qty < 1) qty = 1;
+            if(qty > 5) qty = 5;
+            document.getElementById('qtyDisplay').innerText = qty;
+            document.getElementById('priceDisplay').innerText = (qty * unitPrice) + " Birr";
+            
+            const pTxt = currentLang === 'amharic' ? `${qty} ቁጥር ይምረጡ` : currentLang === 'oromo' ? `Lakkoofsa ${qty} Filadhu` : `Pick ${qty} Number(s)`;
+            document.getElementById('lblPickCount').innerText = pTxt;
+            resetCells();
+        }
+
+        function resetCells() {
+            selected = [];
+            document.querySelectorAll('.num-cell').forEach(c => c.classList.remove('selected'));
+        }
+
+        // Generate Grid
+        const grid = document.getElementById('numsGrid');
+        for(let i=1; i<=100; i++) {
+            let cell = document.createElement('div');
+            cell.className = 'num-cell';
+            cell.innerText = i;
+            if(soldOut.includes(i)) {
+                cell.classList.add('sold-out');
+            } else {
+                cell.onclick = () => handleSelect(i, cell);
+            }
+            grid.appendChild(cell);
+        }
+
+        function handleSelect(num, el) {
+            if(el.classList.contains('selected')) {
+                selected = selected.filter(n => n !== num);
+                el.classList.remove('selected');
+            } else {
+                if(selected.length < qty) {
+                    selected.push(num);
+                    el.classList.add('selected');
+                }
+            }
+            if(selected.length === qty) {
+                setTimeout(openModal, 300);
+            }
+        }
+
+        function openModal() {
+            document.getElementById('popTkt').innerText = selected.map(n => "#"+n).join(', ');
+            document.getElementById('popPrice').innerText = qty * unitPrice;
+            document.getElementById('payModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('payModal').style.display = 'none';
+            resetCells();
+        }
+
+        function paySuccess() {
+            alert('🎉 Payment Successful! Your lucky numbers are secured.');
+            closeModal();
+        }
+
+        // 1-minute loop countdown simulation
+        let secs = 45;
+        setInterval(() => {
+            if(secs <= 0) secs = 60;
+            secs--;
+            document.getElementById('secs').innerText = secs.toString().padStart(2, '0');
+        }, 1000);
     </script>
 </body>
 </html>
