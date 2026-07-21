@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bota Solutions</title>
     
-    <!-- 🎨 1. CSS STYLES (Professional Mobile-First UI) -->
+    <!-- 🎨 CSS STYLES (Professional Mobile-First UI) -->
     <style>
         :root {
             --primary: #ffb800;
@@ -16,15 +16,13 @@
             --text-main: #ffffff;
             --text-muted: #8696a0;
             --border-color: #222e35;
+            --green: #00e676;
             --transition-speed: 0.3s;
         }
 
-        /* Reset & Base Styles */
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
@@ -36,233 +34,74 @@
             align-items: flex-start;
             min-height: 100vh;
             padding-bottom: 90px;
-            overflow-x: hidden;
         }
 
-        /* 🤖 WELCOME & LANGUAGE OVERLAY */
+        /* 🤖 WELCOME SCREEN */
         .welcome-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--bg-main);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            padding: 20px;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--bg-main); display: flex; flex-direction: column;
+            align-items: center; justify-content: center; z-index: 9999; padding: 20px;
             transition: opacity var(--transition-speed) ease;
         }
-
         .glass-card {
-            background: rgba(21, 29, 35, 0.75);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 40px 30px;
-            border-radius: 28px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            width: 100%;
-            max-width: 380px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            background: rgba(21, 29, 35, 0.75); backdrop-filter: blur(20px);
+            padding: 40px 30px; border-radius: 28px; text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.06); width: 100%; max-width: 380px;
         }
-
-        .brand-title {
-            font-size: 34px;
-            font-weight: 800;
-            margin-bottom: 30px;
-            letter-spacing: -0.5px;
-        }
-
-        .brand-title span {
-            color: var(--primary);
-        }
-
+        .brand-title { font-size: 34px; font-weight: 800; margin-bottom: 30px; }
+        .brand-title span { color: var(--primary); }
         .btn-start {
             background: linear-gradient(90deg, var(--primary) 0%, #ff9900 100%);
-            color: #000000;
-            padding: 16px 55px;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(255, 184, 0, 0.3);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            color: #000; padding: 16px 55px; border-radius: 50px; font-size: 16px;
+            font-weight: 700; border: none; cursor: pointer;
         }
-
-        .btn-start:active {
-            transform: scale(0.97);
-        }
-
-        .lang-grid {
-            display: none;
-            flex-direction: column;
-            gap: 14px;
-            width: 100%;
-            margin-top: 10px;
-            animation: fadeIn 0.4s ease forwards;
-        }
-
+        .lang-grid { display: none; flex-direction: column; gap: 14px; width: 100%; margin-top: 10px; }
         .btn-lang {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            padding: 16px 20px;
-            border-radius: 18px;
-            cursor: pointer;
-            font-size: 15px;
-            font-weight: 600;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background var(--transition-speed), border-color var(--transition-speed);
-        }
-
-        .btn-lang:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color);
+            color: var(--text-main); padding: 16px 20px; border-radius: 18px; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
         }
 
         /* 📱 MAIN APPLICATION LAYOUT */
-        #mainApp {
-            display: none;
-            width: 100%;
-            max-width: 480px;
-            padding: 20px 16px;
-            animation: fadeIn 0.5s ease forwards;
-        }
+        #mainApp { display: none; width: 100%; max-width: 480px; padding: 20px 16px; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 10px 4px 25px 4px; border-bottom: 1px solid rgba(255, 255, 255, 0.03); margin-bottom: 20px; }
+        .header-logo { font-size: 24px; font-weight: 800; }
+        .header-logo span { color: var(--primary); }
 
-        header {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            padding: 10px 4px 25px 4px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-            margin-bottom: 20px;
-        }
+        /* Page Views & Cards */
+        .app-page { display: none; }
+        .app-page.active { display: block; animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .card { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 24px; padding: 20px; margin-bottom: 15px; }
 
-        .header-logo {
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-        }
+        /* 🏠 HOME PAGE STYLES */
+        .hero-banner { background: linear-gradient(135deg, #11222c 0%, #172a35 100%); border-radius: 20px; padding: 25px; text-align: center; border: 1px dashed rgba(255, 184, 0, 0.2); }
 
-        .header-logo span {
-            color: var(--primary);
-        }
+        /* 📂 SERVICES PAGE STYLES */
+        .service-item { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--border-color); }
+        .service-item:last-child { border-bottom: none; }
+        .service-icon { font-size: 28px; background: rgba(255, 184, 0, 0.1); width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 14px; color: var(--primary); }
+        .service-details { flex: 1; }
+        .btn-order { background: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); padding: 8px 14px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; }
+        .btn-order:hover { border-color: var(--primary); color: var(--primary); }
 
-        /* Core Page Views Structure */
-        .app-page {
-            display: none;
-            min-height: 55vh;
-        }
-
-        .app-page.active {
-            display: block;
-            animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        /* 💬 SUPPORT PAGE STYLES */
+        .support-btn { width: 100%; background: var(--bg-surface); border: 1px solid var(--border-color); padding: 16px; border-radius: 16px; color: var(--text-main); display: flex; align-items: center; gap: 15px; margin-bottom: 12px; cursor: pointer; text-align: left; }
+        .support-btn:hover { border-color: var(--primary); }
 
         /* 👤 PROFILE & COPYRIGHT CENTER */
-        .profile-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            height: 55vh;
-            padding: 40px 10px 10px 10px;
-            text-align: center;
-        }
+        .profile-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: space-between; height: 50vh; padding: 30px 10px 10px 10px; text-align: center; }
+        .avatar-placeholder { font-size: 64px; background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-input) 100%); border: 2px dashed var(--border-color); width: 120px; height: 120px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--text-muted); }
+        .footer-copyright { font-size: 13px; color: var(--text-muted); letter-spacing: 0.3px; line-height: 1.6; }
+        .footer-copyright span { color: var(--primary); font-weight: 700; }
 
-        .avatar-placeholder {
-            font-size: 72px;
-            background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-input) 100%);
-            border: 2px dashed var(--border-color);
-            width: 130px;
-            height: 130px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            color: var(--text-muted);
-            box-shadow: inset 0 4px 10px rgba(0,0,0,0.3);
-            transition: border-color 0.3s;
-        }
-
-        .avatar-placeholder:hover {
-            border-color: var(--primary);
-        }
-
-        .footer-copyright {
-            font-size: 13px;
-            color: var(--text-muted);
-            letter-spacing: 0.3px;
-            line-height: 1.6;
-        }
-
-        .footer-copyright span {
-            color: var(--primary);
-            font-weight: 700;
-        }
-
-        /* 🧭 PREMIUM BOTTOM NAVIGATION BAR */
-        .bottom-navbar {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 480px;
-            height: 78px;
-            background-color: #0e171d;
-            border-top: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            z-index: 999;
-            box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.5);
-            padding: 0 12px;
-        }
-
-        .nav-link {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 600;
-            width: 22%;
-            text-align: center;
-            gap: 5px;
-            transition: color var(--transition-speed) ease;
-        }
-
-        .nav-link .nav-icon {
-            font-size: 22px;
-            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        /* Active Navigation States */
-        .nav-link.active {
-            color: var(--primary);
-        }
-
-        .nav-link.active .nav-icon {
-            transform: translateY(-4px) scale(1.1);
-        }
+        /* 🧭 NAVIGATION BAR */
+        .bottom-navbar { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; height: 78px; background-color: #0e171d; border-top: 1px solid var(--border-color); display: flex; justify-content: space-around; align-items: center; z-index: 999; padding: 0 12px; }
+        .nav-link { display: flex; flex-direction: column; align-items: center; color: var(--text-muted); cursor: pointer; font-size: 12px; font-weight: 600; width: 22%; text-align: center; gap: 5px; }
+        .nav-link .nav-icon { font-size: 22px; transition: transform 0.2s ease; }
+        .nav-link.active { color: var(--primary); }
+        .nav-link.active .nav-icon { transform: translateY(-4px) scale(1.1); }
     </style>
 </head>
 <body>
@@ -272,7 +111,6 @@
         <div class="glass-card">
             <div class="brand-title">Bota<span>Solutions</span></div>
             <button class="btn-start" id="startBtn" onclick="App.handleStart()">START / ጀምር</button>
-            
             <div id="langContainer" class="lang-grid">
                 <button class="btn-lang" onclick="App.initialize('amharic')"><span>አማርኛ (Amharic)</span> <span>🇪🇹</span></button>
                 <button class="btn-lang" onclick="App.initialize('english')"><span>English</span> <span>🇬🇧</span></button>
@@ -282,27 +120,66 @@
 
     <!-- 📱 MAIN APP LAYOUT CONTAINER -->
     <div id="mainApp">
-        <!-- GLOBAL APP HEADER -->
         <header>
             <div class="header-logo">Bota<span>Solutions</span></div>
+            <div style="font-size: 20px; color: var(--text-muted);">⚡</div>
         </header>
 
-        <!-- 🏠 PAGE 1: HOME (CLEAN STATE) -->
-        <div id="pageHome" class="app-page active"></div>
+        <!-- 🏠 1. HOME PAGE VIEW -->
+        <div id="pageHome" class="app-page active">
+            <div class="hero-banner">
+                <h2 style="color: var(--primary); margin-bottom: 8px;" id="lblWelcome">Welcome to Bota Solutions</h2>
+                <p style="font-size: 14px; color: var(--text-muted);" id="lblSlogan">Your smart hub for automated chat systems, bots, and digital tools.</p>
+            </div>
+        </div>
 
-        <!-- 🎟️ PAGE 2: TICKETS (CLEAN STATE) -->
-        <div id="pageTickets" class="app-page"></div>
+        <!-- 📂 2. SERVICES PAGE VIEW -->
+        <div id="pageServices" class="app-page">
+            <h2 style="margin-bottom: 15px;" id="titleServices">Our Services</h2>
+            <div class="card" style="padding: 0 15px;">
+                <div class="service-item">
+                    <div class="service-icon">🤖</div>
+                    <div class="service-details">
+                        <h4>Telegram Bot Development</h4>
+                        <p style="font-size: 12px; color: var(--text-muted);">Custom shop, utility & raffle bots</p>
+                    </div>
+                    <button class="btn-order" onclick="alert('Order initiated!')">Order</button>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon">⚡</div>
+                    <div class="service-details">
+                        <h4>Chat Automation</h4>
+                        <p style="font-size: 12px; color: var(--text-muted);">24/7 automated account responses</p>
+                    </div>
+                    <button class="btn-order" onclick="alert('Order initiated!')">Order</button>
+                </div>
+            </div>
+        </div>
 
-        <!-- 🏆 PAGE 3: WINNERS (CLEAN STATE) -->
-        <div id="pageWinners" class="app-page"></div>
+        <!-- 💬 3. SUPPORT PAGE VIEW -->
+        <div id="pageSupport" class="app-page">
+            <h2 style="margin-bottom: 15px;" id="titleSupport">Customer Support</h2>
+            <button class="support-btn" onclick="alert('Opening Live Chat...')">
+                <span style="font-size: 24px;">💬</span>
+                <div>
+                    <h4 id="lblLiveChat">Live Chat Support</h4>
+                    <p style="font-size: 12px; color: var(--text-muted);">Talk directly with our team</p>
+                </div>
+            </button>
+            <button class="support-btn" onclick="alert('Opening FAQs...')">
+                <span style="font-size: 24px;">❓</span>
+                <div>
+                    <h4 id="lblFaq">Frequently Asked Questions</h4>
+                    <p style="font-size: 12px; color: var(--text-muted);">Instant answers to common queries</p>
+                </div>
+            </button>
+        </div>
 
-        <!-- 👤 PAGE 4: PROFILE (PHOTO ICON & CUSTOM COPYRIGHT) -->
+        <!-- 👤 4. PROFILE PAGE VIEW -->
         <div id="pageProfile" class="app-page">
             <div class="profile-wrapper">
-                <!-- Clean Circular Photo Icon -->
-                <div class="avatar-placeholder">🖼️</div>
+                <div class="avatar-placeholder">👤</div>
                 
-                <!-- Professional White-Label Footer -->
                 <div class="footer-copyright">
                     &copy; 2026 Bota Solutions<br>
                     Developed by <span>Tariku Kitesa</span>
@@ -315,11 +192,11 @@
             <div class="nav-link active" onclick="App.switchView('Home', this)">
                 <span class="nav-icon">🏠</span><span id="navHome">Home</span>
             </div>
-            <div class="nav-link" onclick="App.switchView('Tickets', this)">
-                <span class="nav-icon">🎟️</span><span id="navTickets">Tickets</span>
+            <div class="nav-link" onclick="App.switchView('Services', this)">
+                <span class="nav-icon">📂</span><span id="navServices">Services</span>
             </div>
-            <div class="nav-link" onclick="App.switchView('Winners', this)">
-                <span class="nav-icon">🏆</span><span id="navWinners">Winners</span>
+            <div class="nav-link" onclick="App.switchView('Support', this)">
+                <span class="nav-icon">💬</span><span id="navSupport">Support</span>
             </div>
             <div class="nav-link" onclick="App.switchView('Profile', this)">
                 <span class="nav-icon">👤</span><span id="navProfile">Profile</span>
@@ -327,45 +204,35 @@
         </nav>
     </div>
 
-    <!-- 📜 2. JAVASCRIPT CODE (Structured & Safe Architecture) -->
+    <!-- 📜 JAVASCRIPT CODE -->
     <script>
-        /**
-         * Core Application Module Object Pattern
-         */
         const App = (() => {
-            // Localization Dictionary
             const localization = {
-                amharic: { navHome: "ዋና ገጽ", navTickets: "ቲኬቶች", navWinners: "አሸናፊዎች", navProfile: "ፕሮፋይል" },
-                english: { navHome: "Home", navTickets: "Tickets", navWinners: "Winners", navProfile: "Profile" }
+                amharic: { 
+                    navHome: "ዋና ገጽ", navServices: "አገልግሎቶች", navSupport: "እርዳታ", navProfile: "ፕሮፋይል",
+                    titleServices: "አገልግሎቶቻችን", titleSupport: "የደንበኞች አገልግሎት",
+                    lblWelcome: "ወደ Bota Solutions እንኳን ደህና መጡ", lblSlogan: "ለአውቶሜሽን፣ ለቦቶች እና ለዲጂታል መሳሪያዎች የእርስዎ ዘመናዊ ማዕከል።",
+                    lblLiveChat: "የቀጥታ ውይይት መስመር", lblFaq: "ተደጋግመው የሚጠየቁ ጥያቄዎች"
+                },
+                english: { 
+                    navHome: "Home", navServices: "Services", navSupport: "Support", navProfile: "Profile",
+                    titleServices: "Our Services", titleSupport: "Customer Support",
+                    lblWelcome: "Welcome to Bota Solutions", lblSlogan: "Your smart hub for automated chat systems, bots, and digital tools.",
+                    lblLiveChat: "Live Chat Support", lblFaq: "Frequently Asked Questions"
+                }
             };
 
-            /**
-             * Handles Start Button Interaction
-             */
             const handleStart = () => {
-                const startBtn = document.getElementById('startBtn');
-                const langContainer = document.getElementById('langContainer');
-                
-                if (startBtn) startBtn.style.display = 'none';
-                if (langContainer) langContainer.style.display = 'flex';
+                document.getElementById('startBtn').style.display = 'none';
+                document.getElementById('langContainer').style.display = 'flex';
             };
 
-            /**
-             * Initializes application based on selected language
-             * @param {string} lang - Selected language identity ('amharic' | 'english')
-             */
             const initialize = (lang) => {
                 const selectedDict = localization[lang] || localization.english;
-                
-                // Translate layout tracking nodes dynamically
                 for (const nodeKey in selectedDict) {
                     const DOMElement = document.getElementById(nodeKey);
-                    if (DOMElement) {
-                        DOMElement.innerText = selectedDict[nodeKey];
-                    }
+                    if (DOMElement) DOMElement.innerText = selectedDict[nodeKey];
                 }
-
-                // Smooth transitional flow display management
                 document.getElementById('welcomeScreen').style.opacity = '0';
                 setTimeout(() => {
                     document.getElementById('welcomeScreen').style.display = 'none';
@@ -373,19 +240,11 @@
                 }, 300);
             };
 
-            /**
-             * Global Routing View Manager
-             * @param {string} targetPageId - Page View identification payload
-             * @param {HTMLElement} currentNavElement - Targeted active navigation click instance
-             */
             const switchView = (targetPageId, currentNavElement) => {
                 if (!currentNavElement || currentNavElement.classList.contains('active')) return;
-
-                // Deactivate all running views & tabs
                 document.querySelectorAll('.app-page').forEach(page => page.classList.remove('active'));
                 document.querySelectorAll('.nav-link').forEach(nav => nav.classList.remove('active'));
                 
-                // Activate the selected target node assets
                 const destinationPage = document.getElementById('page' + targetPageId);
                 if (destinationPage) {
                     destinationPage.classList.add('active');
@@ -393,12 +252,7 @@
                 }
             };
 
-            // Publicly exposed application interface hooks
-            return {
-                handleStart,
-                initialize,
-                switchView
-            };
+            return { handleStart, initialize, switchView };
         })();
     </script>
 </body>
