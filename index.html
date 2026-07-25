@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bota Solutions</title>
     
-    <!-- 🎨 CSS STYLES (Professional Mobile-First UI) -->
+    <!-- 🎨 CSS STYLES (Premium Mobile-First UI) -->
     <style>
         :root {
             --primary: #ffb800;
@@ -54,12 +54,14 @@
             background: linear-gradient(90deg, var(--primary) 0%, #ff9900 100%);
             color: #000; padding: 16px 55px; border-radius: 50px; font-size: 16px;
             font-weight: 700; border: none; cursor: pointer;
+            width: 100%; max-width: 260px;
         }
         .lang-grid { display: none; flex-direction: column; gap: 14px; width: 100%; margin-top: 10px; }
         .btn-lang {
             background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color);
             color: var(--text-main); padding: 16px 20px; border-radius: 18px; cursor: pointer;
             display: flex; justify-content: space-between; align-items: center;
+            font-size: 15px; font-weight: 600;
         }
 
         /* 📱 MAIN APPLICATION LAYOUT */
@@ -83,12 +85,14 @@
         .service-item:last-child { border-bottom: none; }
         .service-icon { font-size: 28px; background: rgba(255, 184, 0, 0.1); width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 14px; color: var(--primary); }
         .service-details { flex: 1; }
-        .btn-order { background: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); padding: 8px 14px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; }
-        .btn-order:hover { border-color: var(--primary); color: var(--primary); }
+        .service-details h4 { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
+        .btn-order { background: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); padding: 8px 16px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: none; transition: all var(--transition-speed); }
+        .btn-order:hover { border-color: var(--primary); color: var(--primary); background: rgba(255, 184, 0, 0.05); }
 
         /* 💬 SUPPORT PAGE STYLES */
-        .support-btn { width: 100%; background: var(--bg-surface); border: 1px solid var(--border-color); padding: 16px; border-radius: 16px; color: var(--text-main); display: flex; align-items: center; gap: 15px; margin-bottom: 12px; cursor: pointer; text-align: left; }
-        .support-btn:hover { border-color: var(--primary); }
+        .support-btn { width: 100%; background: var(--bg-surface); border: 1px solid var(--border-color); padding: 16px; border-radius: 16px; color: var(--text-main); display: flex; align-items: center; gap: 15px; margin-bottom: 12px; cursor: pointer; text-align: left; text-decoration: none; transition: all var(--transition-speed); }
+        .support-btn:hover { border-color: var(--primary); background: rgba(255, 184, 0, 0.02); }
+        .support-btn h4 { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
 
         /* 👤 PROFILE & COPYRIGHT CENTER */
         .profile-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: space-between; height: 50vh; padding: 30px 10px 10px 10px; text-align: center; }
@@ -97,8 +101,8 @@
         .footer-copyright span { color: var(--primary); font-weight: 700; }
 
         /* 🧭 NAVIGATION BAR */
-        .bottom-navbar { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; height: 78px; background-color: #0e171d; border-top: 1px solid var(--border-color); display: flex; justify-content: space-around; align-items: center; z-index: 999; padding: 0 12px; }
-        .nav-link { display: flex; flex-direction: column; align-items: center; color: var(--text-muted); cursor: pointer; font-size: 12px; font-weight: 600; width: 22%; text-align: center; gap: 5px; }
+        .bottom-navbar { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; height: 78px; background-color: #0e171d; border-top: 1px solid var(--border-color); display: flex; justify-content: space-around; align-items: center; z-index: 999; padding: 0 12px; box-shadow: 0 -5px 20px rgba(0,0,0,0.3); }
+        .nav-link { display: flex; flex-direction: column; align-items: center; color: var(--text-muted); cursor: pointer; font-size: 12px; font-weight: 600; width: 22%; text-align: center; gap: 5px; text-decoration: none; }
         .nav-link .nav-icon { font-size: 22px; transition: transform 0.2s ease; }
         .nav-link.active { color: var(--primary); }
         .nav-link.active .nav-icon { transform: translateY(-4px) scale(1.1); }
@@ -122,7 +126,7 @@
     <div id="mainApp">
         <header>
             <div class="header-logo">Bota<span>Solutions</span></div>
-            <div style="font-size: 20px; color: var(--text-muted);">⚡</div>
+            <div style="font-size: 20px; color: var(--primary);">⚡</div>
         </header>
 
         <!-- 🏠 1. HOME PAGE VIEW -->
@@ -140,18 +144,19 @@
                 <div class="service-item">
                     <div class="service-icon">🤖</div>
                     <div class="service-details">
-                        <h4>Telegram Bot Development</h4>
-                        <p style="font-size: 12px; color: var(--text-muted);">Custom shop, utility & raffle bots</p>
+                        <h4 id="srvBotTitle">Telegram Bot Development</h4>
+                        <p style="font-size: 12px; color: var(--text-muted);" id="srvBotDesc">Custom shop, utility & raffle bots</p>
                     </div>
-                    <button class="btn-order" onclick="alert('Order initiated!')">Order</button>
+                    <!-- 🔗 እዚህ ጋር የቴሌግራም ሊንክህን ማስተካከል ትችላለህ -->
+                    <a href="https://t.me/your_telegram_username" target="_blank" class="btn-order" id="btnOrder1">Order</a>
                 </div>
                 <div class="service-item">
                     <div class="service-icon">⚡</div>
                     <div class="service-details">
-                        <h4>Chat Automation</h4>
-                        <p style="font-size: 12px; color: var(--text-muted);">24/7 automated account responses</p>
+                        <h4 id="srvAutoTitle">Chat Automation</h4>
+                        <p style="font-size: 12px; color: var(--text-muted);" id="srvAutoDesc">24/7 automated account responses</p>
                     </div>
-                    <button class="btn-order" onclick="alert('Order initiated!')">Order</button>
+                    <a href="https://t.me/your_telegram_username" target="_blank" class="btn-order" id="btnOrder2">Order</a>
                 </div>
             </div>
         </div>
@@ -159,20 +164,20 @@
         <!-- 💬 3. SUPPORT PAGE VIEW -->
         <div id="pageSupport" class="app-page">
             <h2 style="margin-bottom: 15px;" id="titleSupport">Customer Support</h2>
-            <button class="support-btn" onclick="alert('Opening Live Chat...')">
+            <a href="https://t.me/your_telegram_username" target="_blank" class="support-btn">
                 <span style="font-size: 24px;">💬</span>
                 <div>
                     <h4 id="lblLiveChat">Live Chat Support</h4>
-                    <p style="font-size: 12px; color: var(--text-muted);">Talk directly with our team</p>
+                    <p style="font-size: 12px; color: var(--text-muted);" id="lblLiveChatDesc">Talk directly with our team</p>
                 </div>
-            </button>
-            <button class="support-btn" onclick="alert('Opening FAQs...')">
+            </a>
+            <a href="https://t.me/your_telegram_username" target="_blank" class="support-btn">
                 <span style="font-size: 24px;">❓</span>
                 <div>
                     <h4 id="lblFaq">Frequently Asked Questions</h4>
-                    <p style="font-size: 12px; color: var(--text-muted);">Instant answers to common queries</p>
+                    <p style="font-size: 12px; color: var(--text-muted);" id="lblFaqDesc">Instant answers to common queries</p>
                 </div>
-            </button>
+            </a>
         </div>
 
         <!-- 👤 4. PROFILE PAGE VIEW -->
@@ -211,14 +216,24 @@
                 amharic: { 
                     navHome: "ዋና ገጽ", navServices: "አገልግሎቶች", navSupport: "እርዳታ", navProfile: "ፕሮፋይል",
                     titleServices: "አገልግሎቶቻችን", titleSupport: "የደንበኞች አገልግሎት",
-                    lblWelcome: "ወደ Bota Solutions እንኳን ደህና መጡ", lblSlogan: "ለአውቶሜሽን፣ ለቦቶች እና ለዲጂታል መሳሪያዎች የእርስዎ ዘመናዊ ማዕከል።",
-                    lblLiveChat: "የቀጥታ ውይይት መስመር", lblFaq: "ተደጋግመው የሚጠየቁ ጥያቄዎች"
+                    lblWelcome: "ወደ Bota Solutions እንኳን ደህና መጡ", 
+                    lblSlogan: "ለአውቶሜሽን፣ ለቦቶች እና ለዲጂታል መሳሪያዎች የእርስዎ ዘመናዊ ማዕከል።",
+                    srvBotTitle: "የቴሌግራም ቦት ልማት", srvBotDesc: "የሽያጭ፣ የመገልገያ እና የእጣ ቦቶች ስራ",
+                    srvAutoTitle: "የቻት አውቶሜሽን ሲስተም", srvAutoDesc: "የ24/7 አውቶማቲክ መልዕክት ምላሽ ሰጪ",
+                    lblLiveChat: "የቀጥታ ውይይት መስመር", lblLiveChatDesc: "ከቡድናችን ጋር በቀጥታ ይወያዩ",
+                    lblFaq: "ተደጋግመው የሚጠየቁ ጥያቄዎች", lblFaqDesc: "ለጥያቄዎችዎ ፈጣን ምላሾች",
+                    btnOrder1: "እዘዝ", btnOrder2: "እዘዝ"
                 },
                 english: { 
                     navHome: "Home", navServices: "Services", navSupport: "Support", navProfile: "Profile",
                     titleServices: "Our Services", titleSupport: "Customer Support",
-                    lblWelcome: "Welcome to Bota Solutions", lblSlogan: "Your smart hub for automated chat systems, bots, and digital tools.",
-                    lblLiveChat: "Live Chat Support", lblFaq: "Frequently Asked Questions"
+                    lblWelcome: "Welcome to Bota Solutions", 
+                    lblSlogan: "Your smart hub for automated chat systems, bots, and digital tools.",
+                    srvBotTitle: "Telegram Bot Development", srvBotDesc: "Custom shop, utility & raffle bots",
+                    srvAutoTitle: "Chat Automation", srvAutoDesc: "24/7 automated account responses",
+                    lblLiveChat: "Live Chat Support", lblLiveChatDesc: "Talk directly with our team",
+                    lblFaq: "Frequently Asked Questions", lblFaqDesc: "Instant answers to common queries",
+                    btnOrder1: "Order", btnOrder2: "Order"
                 }
             };
 
