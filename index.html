@@ -1,366 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bota Solutions</title>
-    
-    <style>
-        :root {
-            --primary: #ffb800;
-            --primary-hover: #e0a200;
-            --bg-main: #0b141a;
-            --bg-surface: #111b21;
-            --bg-input: #2a3942;
-            --text-main: #ffffff;
-            --text-muted: #8696a0;
-            --border-color: #222e35;
-            --green: #00e676;
-            --transition-speed: 0.3s;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bota Fashion Store</title>
 
-        * {
-            margin: 0; padding: 0; box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-            padding-bottom: 90px;
-        }
-
-        .welcome-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: var(--bg-main); display: flex; flex-direction: column;
-            align-items: center; justify-content: center; z-index: 9999; padding: 20px;
-            transition: opacity var(--transition-speed) ease;
-        }
-        .glass-card {
-            background: rgba(21, 29, 35, 0.75); backdrop-filter: blur(20px);
-            padding: 40px 30px; border-radius: 28px; text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.06); width: 100%; max-width: 380px;
-        }
-        .brand-title { font-size: 34px; font-weight: 800; margin-bottom: 30px; }
-        .brand-title span { color: var(--primary); }
-        .btn-start {
-            background: linear-gradient(90deg, var(--primary) 0%, #ff9900 100%);
-            color: #000; padding: 16px 55px; border-radius: 50px; font-size: 16px;
-            font-weight: 700; border: none; cursor: pointer;
-        }
-        .lang-grid { display: none; flex-direction: column; gap: 14px; width: 100%; margin-top: 10px; }
-        .btn-lang {
-            background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color);
-            color: var(--text-main); padding: 16px 20px; border-radius: 18px; cursor: pointer;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-
-        #mainApp { display: none; width: 100%; max-width: 480px; padding: 20px 16px; }
-        header { display: flex; justify-content: space-between; align-items: center; padding: 10px 4px 25px 4px; border-bottom: 1px solid rgba(255, 255, 255, 0.03); margin-bottom: 20px; }
-        .header-logo { font-size: 24px; font-weight: 800; }
-        .header-logo span { color: var(--primary); }
-
-        .app-page { display: none; }
-        .app-page.active { display: block; animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .card { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 24px; padding: 20px; margin-bottom: 15px; }
-        .hero-banner { background: linear-gradient(135deg, #11222c 0%, #172a35 100%); border-radius: 20px; padding: 25px; text-align: center; border: 1px dashed rgba(255, 184, 0, 0.2); }
-
-        /* 📂 SERVICES & FORM STYLES */
-        .service-item { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--border-color); }
-        .service-item:last-child { border-bottom: none; }
-        .service-icon { font-size: 28px; background: rgba(255, 184, 0, 0.1); width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 14px; color: var(--primary); }
-        .service-details { flex: 1; }
-        .btn-order { background: var(--primary); border: none; color: #000; padding: 10px 18px; border-radius: 12px; font-size: 14px; font-weight: 700; cursor: pointer; }
-        
-        /* Form Styling */
-        .form-group { margin-bottom: 15px; display: flex; flex-direction: column; gap: 6px; }
-        .form-group label { font-size: 14px; color: var(--text-muted); }
-        .form-group input, .form-group select { background: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); padding: 14px; border-radius: 14px; font-size: 15px; outline: none; }
-        .form-group input:focus, .form-group select:focus { border-color: var(--primary); }
-        .submit-btn { width: 100%; background: linear-gradient(90deg, var(--primary) 0%, #ff9900 100%); color: #000; border: none; padding: 16px; border-radius: 14px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 10px; }
-        #account-details-box { background: rgba(255, 184, 0, 0.08); border-left: 4px solid var(--primary); padding: 15px; border-radius: 10px; margin-top: 10px; font-size: 14px; line-height: 1.5; }
-
-        /* 💬 SUPPORT STYLES */
-        .support-btn { width: 100%; background: var(--bg-surface); border: 1px solid var(--border-color); padding: 16px; border-radius: 16px; color: var(--text-main); display: flex; align-items: center; gap: 15px; margin-bottom: 12px; cursor: pointer; text-align: left; }
-
-        /* 👤 PROFILE */
-        .profile-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: space-between; height: 50vh; padding: 30px 10px 10px 10px; text-align: center; }
-        .avatar-placeholder { font-size: 64px; background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-input) 100%); border: 2px dashed var(--border-color); width: 120px; height: 120px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--text-muted); }
-        .footer-copyright { font-size: 13px; color: var(--text-muted); letter-spacing: 0.3px; line-height: 1.6; }
-        .footer-copyright span { color: var(--primary); font-weight: 700; }
-
-        /* 🧭 NAVBAR */
-        .bottom-navbar { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; height: 78px; background-color: #0e171d; border-top: 1px solid var(--border-color); display: flex; justify-content: space-around; align-items: center; z-index: 999; padding: 0 12px; }
-        .nav-link { display: flex; flex-direction: column; align-items: center; color: var(--text-muted); cursor: pointer; font-size: 12px; font-weight: 600; width: 22%; text-align: center; gap: 5px; }
-        .nav-link .nav-icon { font-size: 22px; transition: transform 0.2s ease; }
-        .nav-link.active { color: var(--primary); }
-        .nav-link.active .nav-icon { transform: translateY(-4px) scale(1.1); }
-    </style>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
+
 <body>
 
-    <!-- 🤖 WELCOME SCREEN -->
-    <div class="welcome-overlay" id="welcomeScreen">
-        <div class="glass-card">
-            <div class="brand-title">Bota<span>Solutions</span></div>
-            <button class="btn-start" id="startBtn" onclick="App.handleStart()">START / ጀምር</button>
-            <div id="langContainer" class="lang-grid">
-                <button class="btn-lang" onclick="App.initialize('amharic')"><span>አማርኛ (Amharic)</span> <span>🇪🇹</span></button>
-                <button class="btn-lang" onclick="App.initialize('english')"><span>English</span> <span>🇬🇧</span></button>
-            </div>
-        </div>
+<header class="header">
+    <h2>Bota Fashion</h2>
+
+    <div class="icons">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <i class="fa-solid fa-cart-shopping"></i>
     </div>
+</header>
 
-    <!-- 📱 MAIN APP CONTAINER -->
-    <div id="mainApp">
-        <header>
-            <div class="header-logo">Bota<span>Solutions</span></div>
-            <div style="font-size: 20px; color: var(--text-muted);">⚡</div>
-        </header>
+<section class="banner">
 
-        <!-- 🏠 1. HOME VIEW -->
-        <div id="pageHome" class="app-page active">
-            <div class="hero-banner">
-                <h2 style="color: var(--primary); margin-bottom: 8px;" id="lblWelcome">Welcome to Bota Solutions</h2>
-                <p style="font-size: 14px; color: var(--text-muted);" id="lblSlogan">Your smart hub for automated chat systems, bots, and digital tools.</p>
-            </div>
-        </div>
+<h1>New Collection 2026</h1>
 
-        <!-- 📂 2. SERVICES VIEW (WITH INTEGRATED ORDER FORM) -->
-        <div id="pageServices" class="app-page">
-            <div id="servicesListSection">
-                <h2 style="margin-bottom: 15px;" id="titleServices">Our Services</h2>
-                <div class="card" style="padding: 0 15px;">
-                    <div class="service-item">
-                        <div class="service-icon">🤖</div>
-                        <div class="service-details">
-                            <h4>Telegram Bot Development</h4>
-                            <p style="font-size: 12px; color: var(--text-muted);">Custom shop, utility & raffle bots</p>
-                        </div>
-                        <button class="btn-order" onclick="App.openOrderForm('Telegram Bot Development')">Order</button>
-                    </div>
-                    <div class="service-item">
-                        <div class="service-icon">⚡</div>
-                        <div class="service-details">
-                            <h4>Chat Automation</h4>
-                            <p style="font-size: 12px; color: var(--text-muted);">24/7 automated account responses</p>
-                        </div>
-                        <button class="btn-order" onclick="App.openOrderForm('Chat Automation')">Order</button>
-                    </div>
-                </div>
-            </div>
+<p>Best Fashion With Affordable Prices</p>
 
-            <!-- Dynamic Order Form Section -->
-            <div id="orderFormSection" class="card" style="display: none;">
-                <h3 style="margin-bottom: 15px; color: var(--primary);" id="lblFormTitle">አገልግሎት ማዘዣ ፎርም</h3>
-                <form id="bota-order-form" onsubmit="App.handleFormSubmit(event)">
-                    <div class="form-group">
-                        <label id="lblFormName">ሙሉ ስም (Full Name)</label>
-                        <input type="text" id="customer-name" placeholder="ስምዎን ያስገቡ" required>
-                    </div>
-                    <div class="form-group">
-                        <label id="lblFormPhone">ስልክ ቁጥር (Phone Number)</label>
-                        <input type="tel" id="customer-phone" placeholder="09........" required>
-                    </div>
-                    <div class="form-group">
-                        <label id="lblFormService">የተመረጠ አገልግሎት (Selected Service)</label>
-                        <input type="text" id="service-type" readonly style="background: rgba(255,255,255,0.05);">
-                    </div>
-                    <div class="form-group">
-                        <label id="lblFormBank">የክፍያ አማራጭ (Select Bank)</label>
-                        <select id="bank-list" required onchange="App.showAccountDetails()">
-                            <option value="" disabled selected>የሚከፍሉበትን ባንክ ይምረጡ</option>
-                            <option value="telebirr">Telebirr (ቴሌብር)</option>
-                            <option value="cbe">Commercial Bank of Ethiopia (ንግድ ባንክ)</option>
-                            <option value="awash">Awash Bank (አዋሽ ባንክ)</option>
-                            <option value="nib">Nib Bank (ንብ ባንክ)</option>
-                            <option value="oromia">Oromia Bank (ኦሮሚያ ባንክ)</option>
-                        </select>
-                    </div>
-                    <div id="account-details-box" style="display: none;">
-                        <p id="account-text" style="font-weight: bold; color: var(--primary);"></p>
-                    </div>
-                    <button type="submit" class="submit-btn" id="btnSubmitOrder">ትዕዛዝ ላክ (Submit Order)</button>
-                    <button type="button" class="submit-btn" style="background: var(--bg-input); color: var(--text-main); margin-top: 8px;" onclick="App.closeOrderForm()" id="btnCancelOrder">ተመለስ</button>
-                </form>
-            </div>
-        </div>
+<button>Shop Now</button>
 
-        <!-- 💬 3. SUPPORT VIEW -->
-        <div id="pageSupport" class="app-page">
-            <h2 style="margin-bottom: 15px;" id="titleSupport">Customer Support</h2>
-            <button class="support-btn" onclick="alert('Opening Live Chat...')">
-                <span style="font-size: 24px;">💬</span>
-                <div>
-                    <h4 id="lblLiveChat">Live Chat Support</h4>
-                    <p style="font-size: 12px; color: var(--text-muted);">Talk directly with our team</p>
-                </div>
-            </button>
-            <button class="support-btn" onclick="alert('Opening FAQs...')">
-                <span style="font-size: 24px;">❓</span>
-                <div>
-                    <h4 id="lblFaq">Frequently Asked Questions</h4>
-                    <p style="font-size: 12px; color: var(--text-muted);">Instant answers to common queries</p>
-                </div>
-            </button>
-        </div>
+</section>
 
-        <!-- 👤 4. PROFILE VIEW -->
-        <div id="pageProfile" class="app-page">
-            <div class="profile-wrapper">
-                <div class="avatar-placeholder">👤</div>
-                <div class="footer-copyright">
-                    &copy; 2026 Bota Solutions<br>
-                    Developed by <span>Tariku Kitesa</span>
-                </div>
-            </div>
-        </div>
+<h2 class="title">Featured Products</h2>
 
-        <!-- 🧭 BOTTOM NAVBAR -->
-        <nav class="bottom-navbar">
-            <div class="nav-link active" onclick="App.switchView('Home', this)">
-                <span class="nav-icon">🏠</span><span id="navHome">Home</span>
-            </div>
-            <div class="nav-link" onclick="App.switchView('Services', this)">
-                <span class="nav-icon">📂</span><span id="navServices">Services</span>
-            </div>
-            <div class="nav-link" onclick="App.switchView('Support', this)">
-                <span class="nav-icon">💬</span><span id="navSupport">Support</span>
-            </div>
-            <div class="nav-link" onclick="App.switchView('Profile', this)">
-                <span class="nav-icon">👤</span><span id="navProfile">Profile</span>
-            </div>
-        </nav>
-    </div>
+<section class="products">
 
-    <!-- 📜 LOGIC & BACKEND CONNECTION INTERACTION -->
-    <script>
-        const App = (() => {
-            const localization = {
-                amharic: { 
-                    navHome: "ዋና ገጽ", navServices: "አገልግሎቶች", navSupport: "እርዳታ", navProfile: "ፕሮፋይል",
-                    titleServices: "አገልግሎቶቻችን", titleSupport: "የደንበኞች አገልግሎት",
-                    lblWelcome: "ወደ Bota Solutions እንኳን ደህና መጡ", lblSlogan: "ለአውቶሜሽን፣ ለቦቶች እና ለዲጂታል መሳሪያዎች የእርስዎ ዘመናዊ ማዕከል።",
-                    lblLiveChat: "የቀጥታ ውይይት መስመር", lblFaq: "ተደጋግመው የሚጠየቁ ጥያቄዎች",
-                    lblFormTitle: "የአገልግሎት ማዘዣ ፎርም", lblFormName: "ሙሉ ስም", lblFormPhone: "ስልክ ቁጥር",
-                    lblFormService: "የተመረጠ አገልግሎት", lblFormBank: "የክፍያ አማራጭ ይምረጡ",
-                    btnSubmitOrder: "ትዕዛዝ ላክ", btnCancelOrder: "ተመለስ"
-                },
-                english: { 
-                    navHome: "Home", navServices: "Services", navSupport: "Support", navProfile: "Profile",
-                    titleServices: "Our Services", titleSupport: "Customer Support",
-                    lblWelcome: "Welcome to Bota Solutions", lblSlogan: "Your smart hub for automated chat systems, bots, and digital tools.",
-                    lblLiveChat: "Live Chat Support", lblFaq: "Frequently Asked Questions",
-                    lblFormTitle: "Service Order Form", lblFormName: "Full Name", lblFormPhone: "Phone Number",
-                    lblFormService: "Selected Service", lblFormBank: "Select Payment Bank",
-                    btnSubmitOrder: "Submit Order", btnCancelOrder: "Cancel"
-                }
-            };
+<div class="card">
 
-            const handleStart = () => {
-                document.getElementById('startBtn').style.display = 'none';
-                document.getElementById('langContainer').style.display = 'flex';
-            };
+<img src="images/shirt1.jpg">
 
-            const initialize = (lang) => {
-                const selectedDict = localization[lang] || localization.english;
-                for (const nodeKey in selectedDict) {
-                    const DOMElement = document.getElementById(nodeKey);
-                    if (DOMElement) DOMElement.innerText = selectedDict[nodeKey];
-                }
-                document.getElementById('welcomeScreen').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('welcomeScreen').style.display = 'none';
-                    document.getElementById('mainApp').style.display = 'block';
-                }, 300);
-            };
+<h3>Premium T-Shirt</h3>
 
-            const switchView = (targetPageId, currentNavElement) => {
-                if (!currentNavElement || currentNavElement.classList.contains('active')) return;
-                document.querySelectorAll('.app-page').forEach(page => page.classList.remove('active'));
-                document.querySelectorAll('.nav-link').forEach(nav => nav.classList.remove('active'));
-                
-                const destinationPage = document.getElementById('page' + targetPageId);
-                if (destinationPage) {
-                    destinationPage.classList.add('active');
-                    currentNavElement.classList.add('active');
-                }
-                closeOrderForm();
-            };
+<p>1,250 ETB</p>
 
-            const openOrderForm = (serviceName) => {
-                document.getElementById('servicesListSection').style.display = 'none';
-                document.getElementById('orderFormSection').style.display = 'block';
-                document.getElementById('service-type').value = serviceName;
-            };
+<button>Add to Cart</button>
 
-            const closeOrderForm = () => {
-                document.getElementById('orderFormSection').style.display = 'none';
-                document.getElementById('servicesListSection').style.display = 'block';
-                document.getElementById('bota-order-form').reset();
-                document.getElementById('account-details-box').style.display = 'none';
-            };
+</div>
 
-            const showAccountDetails = () => {
-                const bankList = document.getElementById('bank-list');
-                const accountBox = document.getElementById('account-details-box');
-                const accountText = document.getElementById('account-text');
-                
-                const accounts = {
-                    'telebirr': 'Telebirr Wallet: 0912345678 (Tariku Kitesa)',
-                    'cbe': 'Commercial Bank of Ethiopia: 1000XXXXXXXXX (Tariku Kitesa)',
-                    'awash': 'Awash Bank: 01320XXXXXXXXX (Tariku Kitesa)',
-                    'nib': 'Nib International Bank: 7000XXXXXXXXX (Tariku Kitesa)',
-                    'oromia': 'Oromia Bank: 101XXXXXXXXXX (Tariku Kitesa)'
-                };
-                
-                const selectedBank = bankList.value;
-                if (accounts[selectedBank]) {
-                    accountText.innerText = accounts[selectedBank];
-                    accountBox.style.display = 'block';
-                } else {
-                    accountBox.style.display = 'none';
-                }
-            };
+<div class="card">
 
-            const handleFormSubmit = async (e) => {
-                e.preventDefault();
-                const orderData = {
-                    name: document.getElementById('customer-name').value,
-                    phone: document.getElementById('customer-phone').value,
-                    service: document.getElementById('service-type').value,
-                    bank: document.getElementById('bank-list').value
-                };
+<img src="images/shoes.jpg">
 
-                try {
-                    // የ Python የጀርባ አድራሻ (Backend URL)
-                    const response = await fetch('http://127.0.0.1:5000/api/order', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(orderData)
-                    });
+<h3>Running Shoes</h3>
 
-                    if (response.ok) {
-                        alert('ትዕዛዝዎ በተሳካ ሁኔታ ተልኳል! በቴሌግራም ያገኙዎታል።');
-                        closeOrderForm();
-                    } else {
-                        alert('ትዕዛዝ መላክ አልተቻለም። እባክዎ እንደገና ይሞክሩ።');
-                    }
-                } catch (error) {
-                    console.error('Error:', error);
-                    alert('ከሲስተሙ ጋር መገናኘት አልተቻለም። የጀርባው ሰርቨር መብራቱን ያረጋግጡ።');
-                }
-            };
+<p>3,800 ETB</p>
 
-            return { handleStart, initialize, switchView, openOrderForm, closeOrderForm, showAccountDetails, handleFormSubmit };
-        })();
-    </script>
+<button>Add to Cart</button>
+
+</div>
+
+<div class="card">
+
+<img src="images/jacket.jpg">
+
+<h3>Winter Jacket</h3>
+
+<p>4,500 ETB</p>
+
+<button>Add to Cart</button>
+
+</div>
+
+<div class="card">
+
+<img src="images/bag.jpg">
+
+<h3>Leather Bag</h3>
+
+<p>2,700 ETB</p>
+
+<button>Add to Cart</button>
+
+</div>
+
+</section>
+
+<nav class="bottom-nav">
+
+<a href="#">
+<i class="fa-solid fa-house"></i>
+<span>Home</span>
+</a>
+
+<a href="#">
+<i class="fa-solid fa-shirt"></i>
+<span>Products</span>
+</a>
+
+<a href="#">
+<i class="fa-solid fa-cart-shopping"></i>
+<span>Cart</span>
+</a>
+
+<a href="#">
+<i class="fa-solid fa-user"></i>
+<span>Profile</span>
+</a>
+
+</nav>
+
+<script src="script.js"></script>
+
 </body>
 </html>
