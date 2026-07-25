@@ -1,178 +1,167 @@
-/* 🔒 FULL-SCREEN BOTA DARK CONTAINER */
-.auth-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #0b141a; /* የቦታ ዋናው ጥቁር ባክግራውንድ */
-    z-index: 99999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
-.auth-card {
-    width: 100%;
-    max-width: 450px;
-    height: 100%;
-    background-color: #111b21; /* የውስጠኛው ካርድ ጥቁር ቀለም */
-    padding: 30px 25px;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    position: relative;
-    border: 1px solid #222e35;
+body{
+    background:#111;
+    color:#fff;
+    padding-bottom:80px;
 }
 
-/* BRAND HEADER */
-.bota-top-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 40px;
+.header{
+    background:#000;
+    color:#FFD700;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 20px;
+    position:sticky;
+    top:0;
+    z-index:100;
 }
 
-.bota-brand-title {
-    color: #ffffff;
-    font-weight: bold;
-    font-size: 18px;
-    letter-spacing: 0.5px;
+.header h2{
+    font-size:24px;
 }
 
-.bota-lang-dropdown select {
-    border: 1px solid #222e35;
-    background: #202c33;
-    font-size: 13px;
-    font-weight: 500;
-    color: #e9edef;
-    outline: none;
-    cursor: pointer;
-    padding: 4px 8px;
-    border-radius: 6px;
+.icons i{
+    font-size:22px;
+    margin-left:20px;
+    cursor:pointer;
 }
 
-/* WELCOME TEXTS & ICON */
-.bota-welcome-section {
-    margin-bottom: 35px;
-    text-align: center;
+.banner{
+    margin:20px;
+    padding:40px 20px;
+    border-radius:15px;
+    text-align:center;
+    background:linear-gradient(135deg,#FFD700,#ff9800);
+    color:#000;
 }
 
-.bota-app-icon {
-    font-size: 45px;
-    margin-bottom: 15px;
+.banner h1{
+    font-size:32px;
 }
 
-.login-heading {
-    color: #ffffff;
-    font-size: 24px;
-    margin: 0;
-    font-weight: bold;
+.banner p{
+    margin:15px 0;
+    font-size:18px;
 }
 
-.welcome-subtitle {
-    color: #8696a0;
-    font-size: 14px;
-    margin: 8px 0 0 0;
+.banner button{
+    background:#000;
+    color:#FFD700;
+    border:none;
+    padding:12px 25px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
 }
 
-/* INPUT INPUT FIELD */
-.bota-form-group {
-    margin-bottom: 30px;
-    text-align: left;
+.title{
+    margin:20px;
+    color:#FFD700;
 }
 
-.input-label {
-    display: block;
-    color: #8696a0;
-    font-size: 12px;
-    font-weight: 600;
-    margin-bottom: 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:20px;
+    padding:20px;
 }
 
-.bota-input-wrapper {
-    display: flex;
-    align-items: center;
-    background-color: #2a3942;
-    border: 1px solid #2a3942;
-    border-radius: 12px;
-    padding: 0 15px;
-    height: 52px;
-    transition: border 0.2s;
+.card{
+    background:#1c1c1c;
+    border-radius:12px;
+    overflow:hidden;
+    text-align:center;
+    transition:.3s;
 }
 
-.bota-input-wrapper:focus-within {
-    border-color: #ffb800; /* ሲነካ ወርቃማ ቀለም እንዲበራ */
+.card:hover{
+    transform:translateY(-5px);
 }
 
-.country-code {
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: 600;
-    margin-right: 12px;
+.card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
 }
 
-.bota-input-field {
-    flex: 1;
-    background: transparent;
-    border: none;
-    outline: none;
-    font-size: 16px;
-    color: #ffffff;
+.card h3{
+    margin-top:10px;
 }
 
-/* GOLDEN PREMIUM BUTTON */
-.bota-btn-next {
-    background: linear-gradient(135deg, #ffb800 0%, #e0a200 100%);
-    color: #0b141a;
-    border: none;
-    border-radius: 12px;
-    height: 50px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 10px;
-    box-shadow: 0 4px 12px rgba(255, 184, 0, 0.2);
-    transition: transform 0.1s ease;
+.card p{
+    color:#FFD700;
+    margin:10px 0;
+    font-weight:bold;
 }
 
-.bota-btn-next:active {
-    transform: scale(0.98);
+.card button{
+    width:90%;
+    margin-bottom:15px;
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    background:#FFD700;
+    color:#000;
+    cursor:pointer;
+    font-weight:bold;
 }
 
-/* CREATE ACCOUNT LINK */
-.bota-register-redirect {
-    margin-top: 25px;
-    font-size: 14px;
-    color: #8696a0;
-    text-align: center;
+.card button:hover{
+    background:#ff9800;
 }
 
-.bota-link-gold {
-    color: #ffb800;
-    font-weight: bold;
-    cursor: pointer;
-    margin-left: 5px;
-    text-decoration: underline;
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:#000;
+    display:flex;
+    justify-content:space-around;
+    padding:12px 0;
 }
 
-/* COPYRIGHT */
-.bota-copyright-text {
-    position: absolute;
-    bottom: 20px;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    font-size: 11px;
-    color: #667781;
-    line-height: 1.6;
+.bottom-nav a{
+    color:#FFD700;
+    text-decoration:none;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    font-size:14px;
 }
 
-.hidden {
-    display: none !important;
+.bottom-nav i{
+    font-size:22px;
+    margin-bottom:5px;
+}
+
+@media(max-width:768px){
+
+.banner h1{
+    font-size:26px;
+}
+
+.products{
+    grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media(max-width:480px){
+
+.products{
+    grid-template-columns:1fr;
+}
+
+.header h2{
+    font-size:20px;
+}
+
 }
