@@ -165,3 +165,174 @@ body{
 }
 
 }
+/* ===========================
+   ADMIN DASHBOARD
+=========================== */
+
+.login-container{
+    width:90%;
+    max-width:400px;
+    margin:60px auto;
+    background:#1b1b1b;
+    padding:30px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 0 15px rgba(255,193,7,.3);
+}
+
+.login-container h1{
+    color:#FFC107;
+    margin-bottom:10px;
+}
+
+.login-container h2{
+    color:#fff;
+    margin-bottom:20px;
+}
+
+.login-container input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+}
+
+.login-container button{
+    width:100%;
+    padding:12px;
+    background:#FFC107;
+    color:#000;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.login-container button:hover{
+    background:#ffb300;
+}
+
+.admin-header{
+    background:#000;
+    color:#FFC107;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 20px;
+}
+
+.admin-header button{
+    background:#FFC107;
+    color:#000;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.dashboard{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:20px;
+    padding:20px;
+}
+
+.card{
+    background:#1d1d1d;
+    border-radius:12px;
+    text-align:center;
+    padding:20px;
+}
+
+.card h2{
+    color:#FFC107;
+}
+
+.card p{
+    font-size:28px;
+    color:white;
+    margin-top:10px;
+}
+
+.add-product{
+    background:#1b1b1b;
+    margin:20px;
+    padding:20px;
+    border-radius:12px;
+}
+
+.add-product h2{
+    color:#FFC107;
+    margin-bottom:15px;
+}
+
+.add-product input{
+    width:100%;
+    padding:12px;
+    margin-bottom:12px;
+    border:none;
+    border-radius:8px;
+}
+
+.add-product button{
+    width:100%;
+    padding:12px;
+    background:#FFC107;
+    color:#000;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.products{
+    padding:20px;
+}
+
+#productList{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.product-card{
+    background:#1d1d1d;
+    padding:15px;
+    border-radius:12px;
+    text-align:center;
+}
+
+.product-card img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+.product-card h3{
+    color:white;
+    margin-top:10px;
+}
+
+.product-card p{
+    color:#FFC107;
+    font-weight:bold;
+}
+
+.product-card button{
+    width:100%;
+    margin-top:10px;
+    padding:10px;
+    background:red;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.product-card button:hover{
+    background:#cc0000;
+}
