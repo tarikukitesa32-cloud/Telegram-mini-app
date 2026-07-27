@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bota Solutions - Raffle Hub</title>
+    <title>Bota Solutions - Raffle & Ticket Hub</title>
+    
+    <!-- 🎨 1. CSS STYLES (ዲዛይን እና ቀለማት) -->
     <style>
         :root {
             --primary: #ffb800;
@@ -41,7 +43,7 @@
             padding: 16px;
         }
 
-        /* 🔝 HEADER */
+        /* 🔝 HEADER DESIGN */
         header {
             display: flex;
             justify-content: space-between;
@@ -80,11 +82,11 @@
             color: var(--text-muted);
         }
 
-        /* 📄 PAGES GLOBAL */
+        /* 📄 PAGES HUB CONTROL */
         .app-page { display: none; }
         .app-page.active { display: block; }
 
-        /* 🏠 HOME PAGE & CARDS */
+        /* 🏠 HOME VIEW & CARDS */
         .raffle-card {
             background: linear-gradient(180deg, var(--bg-card) 0%, #0c151a 100%);
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -139,7 +141,7 @@
             margin-bottom: 20px;
         }
 
-        /* ⏱️ TIMER SYSTEM */
+        /* ⏱️ LIVE COUNTDOWN TIMER */
         .time-label {
             font-size: 12px;
             color: var(--text-muted);
@@ -180,7 +182,7 @@
             font-size: 20px;
         }
 
-        /* 📊 PROGRESS & STATS */
+        /* 📊 PROGRESS BARS */
         .progress-container {
             margin-bottom: 20px;
         }
@@ -227,7 +229,7 @@
             color: var(--text-muted);
         }
 
-        /* 🎫 TICKETS INTERACTION PAGE */
+        /* 🎫 TICKET ACTIONS & PICKERS */
         .ticket-price-box {
             display: flex;
             justify-content: space-between;
@@ -283,7 +285,7 @@
             gap: 12px;
         }
 
-        /* 🔘 BUTTONS */
+        /* 🔘 INTERACTIVE BUTTONS */
         .btn-main {
             width: 100%;
             background: linear-gradient(90deg, var(--primary) 0%, #ff9900 100%);
@@ -297,18 +299,19 @@
             box-shadow: 0 4px 15px rgba(255, 184, 0, 0.2);
             text-align: center;
         }
-        .btn-secondary {
+        .btn-main.btn-secondary {
             background: var(--bg-input);
             color: var(--text-main);
             border: 1px solid var(--border-color);
+            box-shadow: none;
         }
-        .btn-green {
+        .btn-main.btn-green {
             background: var(--green);
             color: #000;
             box-shadow: 0 4px 15px rgba(0, 230, 118, 0.2);
         }
 
-        /* 🔍 TRACKING / SEARCH SYSTEM */
+        /* 🔍 TICKET SEARCH & COUNTERS */
         .search-box-container {
             display: flex;
             gap: 10px;
@@ -377,7 +380,7 @@
             color: var(--primary);
         }
 
-        /* 👤 PROFILE VIEW */
+        /* 👤 USER PROFILE VIEW */
         .profile-container {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -409,7 +412,7 @@
             font-weight: bold;
         }
 
-        /* 🧭 NAVIGATION BAR */
+        /* 🧭 NAVIGATION SYSTEM BAR */
         .bottom-navbar {
             position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
             width: 100%; max-width: 480px; height: 78px;
@@ -437,7 +440,7 @@
 <body>
 
     <div id="mainApp">
-        <!-- 🔝 TOP BAR -->
+        <!-- 🔝 TOP MENU BAR -->
         <header>
             <div class="header-brand">
                 <div class="header-logo-box">🏆</div>
@@ -450,20 +453,20 @@
             </div>
         </header>
 
-        <!-- 🏠 1. HOME VIEW -->
+        <!-- 🏠 1. HOME VIEW SECTION -->
         <div id="pageHome" class="app-page active">
             <div class="raffle-card">
                 <div class="image-container">
-                    <!-- እዚህ ጋር ያንተን መኪና ምስል ሊንክ ማስገባት ትችላለህ -->
+                    <!-- ዋናው የመኪና ምስል -->
                     <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&q=80&w=600" alt="BYD Yuan UP" onerror="this.src='https://placehold.co/600x400/151e24/ffb800?text=BYD+Yuan+UP'">
                     <div class="badge-featured">🔥 Featured</div>
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <div class="stars">⭐⭐⭐⭐• 5.0</div>
                 </div>
                 <div class="raffle-details">
                     <h2 class="product-title">BYD Yuan UP</h2>
                     <p class="product-subtitle">Time Grey</p>
                     
-                    <div class="time-label">Time Remaining</div>
+                    <div class="time-label">⏱️ Time Remaining</div>
                     <div class="timer-grid">
                         <div class="time-box"><span class="time-val" id="days">00</span><span class="time-unit">DAYS</span></div>
                         <div class="timer-divider">:</div>
@@ -499,9 +502,8 @@
             </div>
         </div>
 
-        <!-- 🎫 2. TICKETS VIEW (INTERACTIVE PURCHASE & HISTORY) -->
+        <!-- 🎫 2. TICKETS INTERACTION VIEW -->
         <div id="pageTickets" class="app-page">
-            <!-- Purchase Tool Section -->
             <div id="purchaseSection">
                 <h3 style="margin-bottom: 15px;">Select Number of Tickets</h3>
                 <div class="ticket-price-box">
@@ -533,7 +535,7 @@
 
             <hr style="border: none; height: 1px; background: var(--border-color); margin: 30px 0;">
 
-            <!-- Status Check System -->
+            <!-- Ticket Finder Dashboard -->
             <div>
                 <h3 style="margin-bottom: 5px;">My Tickets</h3>
                 <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">Track your lottery entries</p>
@@ -544,20 +546,20 @@
                 </div>
 
                 <div class="status-grid">
-                    <div class="status-card"><div class="status-num">0</div><div class="status-lbl">Active</div></div>
-                    <div class="status-card"><div class="status-num pending">0</div><div class="status-lbl">Pending</div></div>
-                    <div class="status-card"><div class="status-num total">0</div><div class="status-lbl">Total</div></div>
+                    <div class="status-card"><div class="status-num" id="activeCount">0</div><div class="status-lbl">Active</div></div>
+                    <div class="status-card"><div class="status-num pending" id="pendingCount">0</div><div class="status-lbl">Pending</div></div>
+                    <div class="status-card"><div class="status-num total" id="totalCount">0</div><div class="status-lbl">Total</div></div>
                 </div>
 
-                <div class="empty-state">
+                <div class="empty-state" id="ticketsEmptyState">
                     <div class="empty-icon">🎫</div>
                     <h4>No tickets purchased yet</h4>
-                    <p style="font-size: 13px; margin-top: 5px;">Enter your phone number above to check your tickets</p>
+                    <p style="font-size: 13px; margin-top: 5px;">Enter your phone number to check your history</p>
                 </div>
             </div>
         </div>
 
-        <!-- 👤 3. PROFILE VIEW -->
+        <!-- 👤 3. USER PROFILE VIEW -->
         <div id="pageProfile" class="app-page">
             <div class="profile-container">
                 <div class="profile-icon-box">📞</div>
@@ -573,7 +575,7 @@
             </div>
         </div>
 
-        <!-- 🧭 BOTTOM NAVIGATION BAR -->
+        <!-- 🧭 BOT NAVIGATION BOTTOM MENU -->
         <nav class="bottom-navbar">
             <div class="nav-link active" onclick="Navigation.switchTab('Home', this)">
                 <span class="nav-icon">🏠</span><span>Home</span>
@@ -587,9 +589,9 @@
         </nav>
     </div>
 
-    <!-- 📜 INTERACTION JAVASCRIPT LOGIC -->
+    <!-- 📜 2. JAVASCRIPT SCRIPTS (ተንቀሳቃሽ አመክንዮዎች) -->
     <script>
-        // 1. Navigation Controller
+        // Tab Page Switching Engine
         const Navigation = (() => {
             const switchTab = (tabName, element) => {
                 document.querySelectorAll('.app-page').forEach(page => page.classList.remove('active'));
@@ -607,7 +609,7 @@
             return { switchTab, goToTickets };
         })();
 
-        // 2. Raffle Purchase & Ticket Tool System
+        // Tickets Interactive System
         const Raffle = (() => {
             let count = 1;
             const pricePerTicket = 3000;
@@ -631,7 +633,18 @@
 
             const processPurchase = () => {
                 const chosenNum = document.getElementById('luckyNumberDisplay').innerText;
-                alert(`የመረጡት ቁጥር: ${chosenNum}\nጠቅላላ ዋጋ: ${(count * pricePerTicket).toLocaleString()} Birr\nበትክክል ለመግዛት የክፍያ ሂደቱን ይጨርሱ!`);
+                
+                // Backend Dashboard UI Updates Demo
+                document.getElementById('activeCount').innerText = count;
+                document.getElementById('totalCount').innerText = count;
+                document.getElementById('ticketsEmptyState').innerHTML = `
+                    <div style="background: rgba(0,230,118,0.05); border: 1px solid var(--border-color); padding: 15px; border-radius: 12px; text-align: left;">
+                        <p style="color:var(--green); font-weight:bold;">🎉 Ticket Verified Successful!</p>
+                        <p style="font-size:13px; margin-top:4px;">Number: <b>#${chosenNum}</b> | Quantity: <b>${count}</b></p>
+                    </div>
+                `;
+                
+                alert(`ትኬት በተሳካ ሁኔታ ተመርጧል!\nቁጥር: #${chosenNum}\nጠቅላላ ዋጋ: ${(count * pricePerTicket).toLocaleString()} Birr`);
             };
 
             const checkTickets = () => {
@@ -640,14 +653,14 @@
                     alert('እባክዎ መጀመሪያ ስልክ ቁጥር ያስገቡ!');
                     return;
                 }
-                alert(`${phone} ላይ የተመዘገበ ትኬት አልተገኘም!`);
+                alert(`${phone} ላይ የተመዘገበ ምንም የቆየ ትኬት የለም!`);
             };
 
             return { updateCount, generateLuckyNumber, quickPick, processPurchase, checkTickets };
         })();
 
-        // 3. Countdown Timer Simulator
-        const StartTimer = () => {
+        // Live Countdown Clock Engine
+        const StartCountdown = () => {
             let hours = 15, minutes = 2, seconds = 42;
             setInterval(() => {
                 seconds--;
@@ -660,7 +673,7 @@
             }, 1000);
         };
 
-        window.onload = StartTimer;
+        window.onload = StartCountdown;
     </script>
 </body>
 </html>
